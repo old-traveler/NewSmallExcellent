@@ -1,5 +1,7 @@
 package com.hyc.newsmallexcellent.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LoginActionBean {
 
   /**
@@ -15,10 +17,10 @@ public class LoginActionBean {
   private int id;
   private String accountname;
   private String password;
-  private String role;
+  @SerializedName("role") private String nickname;
   private int isAuthentication;
   private int status;
-  private Object remark;
+  @SerializedName("remark") private String headUrl;
 
   public int getId() {
     return id;
@@ -44,13 +46,6 @@ public class LoginActionBean {
     this.password = password;
   }
 
-  public String getRole() {
-    return role;
-  }
-
-  public void setRole(String role) {
-    this.role = role;
-  }
 
   public int getIsAuthentication() {
     return isAuthentication;
@@ -68,11 +63,19 @@ public class LoginActionBean {
     this.status = status;
   }
 
-  public Object getRemark() {
-    return remark;
+  public String getNickname() {
+    return nickname;
   }
 
-  public void setRemark(Object remark) {
-    this.remark = remark;
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
+  }
+
+  public String getHeadUrl() {
+    return headUrl;
+  }
+
+  public void setHeadUrl(String headUrl) {
+    this.headUrl = headUrl;
   }
 }

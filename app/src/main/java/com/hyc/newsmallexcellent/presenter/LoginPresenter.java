@@ -17,6 +17,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
           new BaseRequestConsumer<LoginActionBean>(mvpView) {
             @Override
             protected void onRequestSuccess(LoginActionBean data) {
+              userModel.cacheUserInfo(data);
               mvpView.onLoginSuccess();
             }
           },mvpView));

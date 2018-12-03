@@ -3,7 +3,9 @@ package com.hyc.newsmallexcellent.model;
 import com.hyc.newsmallexcellent.base.interfaces.ILoading;
 import com.hyc.newsmallexcellent.base.rx.BaseErrorConsumer;
 import com.hyc.newsmallexcellent.base.rx.BaseRequestConsumer;
+import com.hyc.newsmallexcellent.bean.LoginActionBean;
 import com.hyc.newsmallexcellent.helper.RequestHelper;
+import com.hyc.newsmallexcellent.helper.SpCacheHelper;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -32,4 +34,16 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(consumer, new BaseErrorConsumer(iLoading));
   }
+
+  public void cacheUserInfo(LoginActionBean bean){
+    SpCacheHelper.withBuilder()
+        .withInt("user_id",bean.getId())
+        .withString("accountname",bean.getAccountname())
+        .withString("nickname",bean.getNickname())
+        .withInt("isAuthentication",bean.getIsAuthentication())
+        .withInt("status",bean.getStatus())
+        .withString("headUrl",bean.getHeadUrl())
+        .commit();
+  }
+
 }
