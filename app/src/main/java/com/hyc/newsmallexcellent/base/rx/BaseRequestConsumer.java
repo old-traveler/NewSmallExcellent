@@ -3,11 +3,19 @@ package com.hyc.newsmallexcellent.base.rx;
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.base.helper.ToastHelper;
 import com.hyc.newsmallexcellent.base.interfaces.ILoading;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.functions.Consumer;
 
 public abstract class BaseRequestConsumer<D> implements Consumer<BaseRequestBean<D>> {
 
   private ILoading iLoading;
+
+  private List list;
+
+  private ArrayList arrayList = (ArrayList)list;
 
   public BaseRequestConsumer(ILoading iLoading){
     this.iLoading = iLoading;

@@ -115,10 +115,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
   static class TimingHandler extends Handler{
 
     private WeakReference<Button> buttonWeakReference;
-
-    TimingHandler(Button button){
-      buttonWeakReference = new WeakReference<>(button);
-    }
+    TimingHandler(Button button){ buttonWeakReference = new WeakReference<>(button); }
 
     @Override
     public void handleMessage(Message msg) {
