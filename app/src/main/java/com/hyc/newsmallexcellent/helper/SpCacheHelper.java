@@ -5,13 +5,13 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.hyc.newsmallexcellent.SmallExcellentApplication;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.schedulers.Schedulers;
 
 public class SpCacheHelper {
 
-  public static EditorBuilder withBuilder(){
-    return new EditorBuilder();
-  }
+  public static EditorBuilder withBuilder(){ return new EditorBuilder(); }
 
   public static class EditorBuilder{
 
@@ -58,11 +58,21 @@ public class SpCacheHelper {
     return SmallExcellentApplication.getContext().getSharedPreferences("helper", Context.MODE_PRIVATE);
   }
 
-  public static void putClassIntoSp(String key, Object object) {
-    Observable.create(emitter -> {
-      String json = new Gson().toJson(object);
-      getEditor().putString(key, json).commit();
-    }).subscribeOn(Schedulers.io()).subscribe();
+  public static void putClassIntoSp(final String key, final Object object) {
+    Observable.create(new ObservableOnSubscribe<Object>() {
+      @Override
+      public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+        String json = new Gson().toJson(object);
+        getEditor().putString(key, json).commit();
+      }
+    }).subscribeOn(Schedulers.io());
+    Observable.create(new ObservableOnSubscribe<Object>() {
+      @Override
+      public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+        String json = new Gson().toJson(object);
+        getEditor().putString(key, json).commit();
+      }
+    }).subscribe();
   }
 
   public static void deleteClassFromSp(String key){

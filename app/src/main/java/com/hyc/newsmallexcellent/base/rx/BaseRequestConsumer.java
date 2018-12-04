@@ -13,10 +13,6 @@ public abstract class BaseRequestConsumer<D> implements Consumer<BaseRequestBean
 
   private ILoading iLoading;
 
-  private List list;
-
-  private ArrayList arrayList = (ArrayList)list;
-
   public BaseRequestConsumer(ILoading iLoading){
     this.iLoading = iLoading;
   }

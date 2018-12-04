@@ -25,6 +25,7 @@ public class BasePresenter<V> {
     }
   }
 
+
   public void addDisposable(Disposable disposable){
     if (disposableManager == null){
       disposableManager = new DisposableManager();
