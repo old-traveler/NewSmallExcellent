@@ -3,6 +3,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ public class ChangePasswordActivity extends BaseMvpActivity<ChangePasswordPresen
         ButterKnife.bind(this);
         super.onCreate(savedInstanceState);
         setToolBarTitle("修改密码");
+        Log.d("TAG","123123");
     }
 
     @Override
