@@ -1,36 +1,31 @@
 package com.hyc.newsmallexcellent.model;
-import com.hyc.newsmallexcellent.base.interfaces.ILoading;
-import com.hyc.newsmallexcellent.base.rx.BaseErrorConsumer;
-import com.hyc.newsmallexcellent.base.rx.BaseRequestConsumer;
+import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
+import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.helper.RequestHelper;
 import com.hyc.newsmallexcellent.helper.SpCacheHelper;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class UserModel {
 
-  public Disposable verificationUserPhone(String account, BaseRequestConsumer consumer,
-      ILoading iLoading) {
+  public Observable<BaseRequestBean<Object>> verificationUserPhone(String account) {
     return RequestHelper.getRequestApi().sendVerificationCode(account)
         .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(consumer, new BaseErrorConsumer(iLoading));
+        .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Disposable register(String account, String password, String code, BaseRequestConsumer consumer, ILoading iLoading) {
+  public Observable<BaseRequestBean<Object>> register(String account, String password, String code) {
     return RequestHelper.getRequestApi().register(account, password, code)
         .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(consumer, new BaseErrorConsumer(iLoading));
+        .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Disposable login(String account,String password,BaseRequestConsumer consumer,ILoading iLoading){
+  public Observable<BaseRequestBean<LoginActionBean>> login(String account,String password){
     return RequestHelper.getRequestApi().login(account,password)
         .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(consumer, new BaseErrorConsumer(iLoading));
+        .observeOn(AndroidSchedulers.mainThread());
   }
 
   public void cacheUserInfo(LoginActionBean bean){
@@ -44,14 +39,28 @@ public class UserModel {
         .commit();
   }
 
-  public Disposable changePassword(int id, String oldPwd, String newPwd, BaseRequestConsumer consumer,ILoading iLoading){
+  public Observable<BaseRequestBean<Object>> changePassword(int id, String oldPwd, String newPwd){
     return RequestHelper.getRequestApi().change(id,oldPwd,newPwd)
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(consumer,new BaseErrorConsumer(iLoading));
+            .observeOn(AndroidSchedulers.mainThread());
   }
 
   public int getCurUserId(){
     return SpCacheHelper.getInt("user_id");
   }
+
+  public Observable<BaseRequestBean<ResumeInfoBean>> getUserResumeInfo(int id){
+    return RequestHelper.getRequestApi().getUserResumeInfo(id)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public boolean isCurUser(int id){
+    return getCurUserId() == id;
+  }
+
+  public String getCurHeadUrl(){
+    return SpCacheHelper.getString("headUrl");
+  }
+
 }
