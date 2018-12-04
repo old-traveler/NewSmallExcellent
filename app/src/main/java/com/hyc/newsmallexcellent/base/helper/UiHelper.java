@@ -2,7 +2,9 @@ package com.hyc.newsmallexcellent.base.helper;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.IBinder;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.SmallExcellentApplication;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
@@ -78,11 +82,17 @@ public class UiHelper {
     }
   }
 
+  public static void loadNotEmptyString(EditText editText,String data){
+    if (!TextUtils.isEmpty(data)){
+      editText.setText(data);
+    }
+  }
 
 
-  //public static Drawable getDefaultPlaceholder() {
-  //  return HelperApplication.getContext().getResources().getDrawable(R.drawable.bg_placeholder);
-  //}
+
+  public static Drawable getDefaultPlaceholder() {
+    return SmallExcellentApplication.getContext().getResources().getDrawable(R.drawable.bg_placeholder);
+  }
 
 
 

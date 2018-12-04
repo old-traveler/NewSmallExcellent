@@ -148,4 +148,9 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompat
     }
   }
 
+  public Bundle getDataBundle(){
+    Bundle bundle = getIntent().getExtras();
+    return bundle == null ? new Bundle() : bundle;
+  }
+
 }

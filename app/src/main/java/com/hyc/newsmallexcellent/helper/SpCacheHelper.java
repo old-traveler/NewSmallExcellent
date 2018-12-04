@@ -98,7 +98,7 @@ public class SpCacheHelper {
     getEditor().putInt(key,data).commit();
   }
 
-  public static long getInt(String key){
+  public static int getInt(String key){
     return getSharedPreferences().getInt(key,0);
   }
 

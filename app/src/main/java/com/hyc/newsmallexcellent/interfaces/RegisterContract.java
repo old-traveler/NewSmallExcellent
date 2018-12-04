@@ -4,7 +4,7 @@ import com.hyc.newsmallexcellent.base.interfaces.ILoading;
 
 public interface RegisterContract {
 
-  public interface IRegisterPresenter{
+  public interface IRegisterPresenter {
 
     void sendVerificationCode();
 
