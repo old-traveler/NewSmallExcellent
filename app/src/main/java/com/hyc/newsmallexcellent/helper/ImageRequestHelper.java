@@ -3,6 +3,7 @@ package com.hyc.newsmallexcellent.helper;
 import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -26,6 +27,7 @@ public class ImageRequestHelper {
         .load(uri)
         .apply(new RequestOptions().placeholder(UiHelper.getDefaultPlaceholder()))
         .into(imageView);
+    Log.d("YJ",uri.toString());
   }
 
   public static void loadImage(Context context, int resId, ImageView imageView) {

@@ -4,6 +4,17 @@
   package="com.hyc.newsmallexcellent">
 
   <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <uses-permission android:name="android.permission.VIBRATE" />
+  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
 
   <application
     android:name=".SmallExcellentApplication"
@@ -14,16 +25,23 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".view.LoginActivity">
+    <activity android:name=".view.ResumeActivity"
+      android:windowSoftInputMode="adjustPan">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-     <activity android:name=".view.RegisterActivity"></activity>
-    <activity android:name=".view.MainActivity"></activity>
-    <activity android:name=".view.ChangePasswordActivity"></activity>
+     <activity android:name=".view.RegisterActivity"/>
+    <activity android:name=".view.LoginActivity"/>
+    <activity android:name=".view.ChangePasswordActivity"/>
+    <activity
+      android:name="com.yalantis.ucrop.UCropActivity"
+      android:screenOrientation="portrait"
+      android:theme="@style/AppTheme" />
   </application>
+
+
 
 </manifest>

@@ -57,7 +57,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
   @Override
   public void onLoginSuccess() {
-    startActivity(new Intent(this,ChangePasswordActivity.class));
+    startActivity(new Intent(this,MainActivity.class));
     finish();
   }
 

@@ -6,7 +6,13 @@ import com.hyc.newsmallexcellent.helper.RequestHelper;
 import com.hyc.newsmallexcellent.helper.SpCacheHelper;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.util.Map;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class UserModel {
 
@@ -62,5 +68,23 @@ public class UserModel {
   public String getCurHeadUrl(){
     return SpCacheHelper.getString("headUrl");
   }
+
+  public Observable<BaseRequestBean<String>> uploadImage(Map<String,Object> map){
+    File file = new File((String) map.get("headPhoto"));
+    RequestBody requestFile =
+        RequestBody.create(MediaType.parse("multipart/form-data"), file);
+    MultipartBody.Part body =
+        MultipartBody.Part.createFormData("uploadFile", file.getName(), requestFile);
+    return RequestHelper.getRequestApi().uploadImage(body)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<Object>> updateUserResume(Map<String,Object> map,int id,int userId){
+    return RequestHelper.getRequestApi().updateResume(id,userId,map)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
 
 }

@@ -1,5 +1,6 @@
 package com.hyc.newsmallexcellent.interfaces;
 
+import android.support.v4.app.FragmentActivity;
 import com.hyc.newsmallexcellent.base.interfaces.ILoading;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import java.util.Map;
@@ -11,6 +12,8 @@ public interface ResumeContract {
     void fetchResumeData();
 
     void changeResumeData();
+
+    void requestPermission(FragmentActivity fragmentActivity);
 
   }
 
@@ -25,6 +28,12 @@ public interface ResumeContract {
     Map<String,Object> getResumeInfo();
 
     void enableEditResume();
+
+    void requestPermissionSuccess();
+
+    void requestPermissionFail();
+
+    void onSuccessChangeResume();
 
   }
 
