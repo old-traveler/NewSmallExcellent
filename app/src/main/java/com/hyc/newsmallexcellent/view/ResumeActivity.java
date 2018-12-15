@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +22,6 @@ import com.hyc.newsmallexcellent.base.helper.UiHelper;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.helper.ImageRequestHelper;
 import com.hyc.newsmallexcellent.interfaces.ResumeContract;
-import com.hyc.newsmallexcellent.model.UserModel;
 import com.hyc.newsmallexcellent.presenter.ResumePresenter;
 import com.hyc.newsmallexcellent.util.Constans;
 import com.hyc.newsmallexcellent.util.Glide4Engine;
@@ -106,7 +104,7 @@ public class ResumeActivity extends BaseMvpActivity<ResumePresenter>
 
   @Override
   public int getResumeUserId() {
-    return new UserModel().getCurUserId();
+    return getDataBundle().getInt("user_id");
   }
 
   @Override

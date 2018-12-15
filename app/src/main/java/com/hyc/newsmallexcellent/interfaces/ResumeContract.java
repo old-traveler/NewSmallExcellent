@@ -36,6 +36,4 @@ public interface ResumeContract {
     void onSuccessChangeResume();
 
   }
-
-
 }

@@ -48,4 +48,25 @@ public interface NetApiService {
   Observable<BaseRequestBean<Object>> updateResume(@Query("id") int id,
       @Query("userId") int userId, @FieldMap
       Map<String, Object> params);
+
+  @GET("job/addJob.do")
+  Observable<BaseRequestBean<Object>> release(@Query("id") int id, // 发布人id
+                                              @Query("jobTitle") String jobTitle, // 工作名字
+                                              @Query("jobDescribe") String jobDescribe, // 工作描述
+                                              @Query("jobCategory") String jobCategory, // 工作类别
+                                              @Query("jobSalary") String jobSalary, // 薪水
+                                              @Query("jobSalaryUnit") String jobSalaryUnit, // 薪水单位
+                                              @Query("jobCount") int jobCount, // 职位数量
+                                              @Query("workingHours") String workingHours, // 工作时段
+                                              @Query("workingDays") String workingDays, // 工作天数
+                                              @Query("contact") String contact, // 联系人
+                                              @Query("telephone") String telephone, // 联系电话
+                                              @Query("cDate") String cDate, // 截止日期
+                                              @Query("issuePlace") String issuePlace); // 工作地方
+
+  @GET("category/addCategory.do")
+  Observable<BaseRequestBean<Object>> jobsClassification(@Query("category") String category);
+
+  @GET("category/delCategory.do")
+  Observable<BaseRequestBean<Object>> deleteClassification(@Query("category") String category);
 }

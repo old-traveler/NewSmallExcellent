@@ -7,7 +7,7 @@ import com.hyc.newsmallexcellent.interfaces.ChangePasswordContract;
 import com.hyc.newsmallexcellent.model.UserModel;
 
 public class ChangePasswordPresenter extends BasePresenter<ChangePasswordContract.View>
-    implements ChangePasswordContract.ChangePresenter {
+        implements ChangePasswordContract.ChangePresenter {
 
   private UserModel userModel = new UserModel();
 
@@ -16,8 +16,7 @@ public class ChangePasswordPresenter extends BasePresenter<ChangePasswordContrac
     if (mvpView.verificationInput()) {
       mvpView.showLoadingView();
       addDisposable(userModel.changePassword(userModel.getCurUserId(), mvpView.getOldPassword(),
-          mvpView.getNewPassword()).subscribe(new BaseRequestConsumer<Object>(mvpView) {
-
+              mvpView.getNewPassword()).subscribe(new BaseRequestConsumer<Object>(mvpView) {
         @Override
         protected void onRequestSuccess(Object data) {
           mvpView.onChangeSuccess();

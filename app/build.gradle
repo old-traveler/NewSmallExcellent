@@ -42,4 +42,8 @@ dependencies {
   annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
   implementation 'com.zhihu.android:matisse:0.5.2-beta3'
   implementation 'com.github.yalantis:ucrop:2.2.2'
+  implementation files('libs/AMap3DMap_6.5.0_AMapNavi_6.4.0_AMapLocation_4.3.0_20181016.jar')
+  implementation files('libs/Msc.jar')
+  implementation files('libs/AMap_Search_V5.5.0_20171107.jar')
+  implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
 }

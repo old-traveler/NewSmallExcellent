@@ -1,9 +1,7 @@
 package com.hyc.newsmallexcellent.view;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +13,8 @@ import com.hyc.newsmallexcellent.presenter.ChangePasswordPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-public class ChangePasswordActivity extends BaseMvpActivity<ChangePasswordPresenter> implements ChangePasswordContract.View {
+public class ChangePasswordActivity extends BaseMvpActivity<ChangePasswordPresenter>
+        implements ChangePasswordContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -23,18 +22,18 @@ public class ChangePasswordActivity extends BaseMvpActivity<ChangePasswordPresen
     EditText etOldPasswordChangePassword;
     @BindView(R.id.et_new_password_change_password)
     EditText etNewPasswordChangePassword;
+
     @BindView(R.id.et_confirm_password_config_password)
     EditText etConfirmPasswordConfigPassword;
     @BindView(R.id.btn_change_password)
     Button btnChangePassword;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_change_password);
         ButterKnife.bind(this);
         super.onCreate(savedInstanceState);
         setToolBarTitle("修改密码");
-        Log.d("TAG","123123");
     }
 
     @Override
@@ -67,9 +66,7 @@ public class ChangePasswordActivity extends BaseMvpActivity<ChangePasswordPresen
     }
 
     @Override
-    public void onChangeSuccess() {
-
-    }
+    public void onChangeSuccess() { }
 
     @OnClick(R.id.btn_change_password)
     public void onViewClicked(View view) {

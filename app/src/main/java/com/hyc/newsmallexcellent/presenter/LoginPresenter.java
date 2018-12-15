@@ -1,7 +1,5 @@
 package com.hyc.newsmallexcellent.presenter;
 
-import android.util.Log;
-
 import com.hyc.newsmallexcellent.base.BasePresenter;
 import com.hyc.newsmallexcellent.base.rx.BaseErrorConsumer;
 import com.hyc.newsmallexcellent.base.rx.BaseRequestConsumer;
@@ -20,7 +18,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.View>
       mvpView.showLoadingView();
       addDisposable(userModel.login(mvpView.getUsername(), mvpView.getPassword())
           .subscribe(new BaseRequestConsumer<LoginActionBean>(mvpView) {
-
             @Override
             protected void onRequestSuccess(LoginActionBean data) {
               mvpView.onLoginSuccess();

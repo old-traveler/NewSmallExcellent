@@ -152,5 +152,4 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompat
     Bundle bundle = getIntent().getExtras();
     return bundle == null ? new Bundle() : bundle;
   }
-
 }

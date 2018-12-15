@@ -5,6 +5,7 @@ import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.helper.RequestHelper;
 import com.hyc.newsmallexcellent.helper.SpCacheHelper;
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -51,18 +52,31 @@ public class UserModel {
             .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public int getCurUserId(){
-    return SpCacheHelper.getInt("user_id");
-  }
-
   public Observable<BaseRequestBean<ResumeInfoBean>> getUserResumeInfo(int id){
     return RequestHelper.getRequestApi().getUserResumeInfo(id)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
+  public Observable<BaseRequestBean<Object>>postJob(int id, String jobTitlem, String jobDescribe, String jobCategory,
+                                                     String jobSalary, String jobSalaryUnit, int jobCount,
+                                                     String workingHours, String workingDays, String contact,
+                                                     String telephone, String cDate, String issuePlace){
+    return RequestHelper.getRequestApi().release(id,jobTitlem,jobDescribe,
+            jobCategory,jobSalary,jobSalaryUnit,jobCount,workingHours,workingDays,
+            contact,telephone,cDate,issuePlace)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread());
+  }
+
+
+
   public boolean isCurUser(int id){
     return getCurUserId() == id;
+  }
+
+  public int getCurUserId(){
+    return SpCacheHelper.getInt("user_id");
   }
 
   public String getCurHeadUrl(){
