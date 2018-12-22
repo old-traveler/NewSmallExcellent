@@ -3,6 +3,7 @@ package com.hyc.newsmallexcellent.net;
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
+import com.hyc.newsmallexcellent.bean.UploadImageBean;
 import io.reactivex.Observable;
 import java.util.Map;
 import okhttp3.MultipartBody;
@@ -41,7 +42,7 @@ public interface NetApiService {
 
   @Multipart
   @POST("pic/uploadPhoto.do")
-  Observable<BaseRequestBean<String>> uploadImage(@Part MultipartBody.Part uploadFile);
+  Observable<BaseRequestBean<UploadImageBean>> uploadImage(@Part MultipartBody.Part uploadFile);
 
   @FormUrlEncoded
   @POST("resume/updateResume.do")

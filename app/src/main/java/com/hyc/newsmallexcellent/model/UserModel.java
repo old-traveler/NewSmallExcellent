@@ -2,6 +2,7 @@ package com.hyc.newsmallexcellent.model;
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
+import com.hyc.newsmallexcellent.bean.UploadImageBean;
 import com.hyc.newsmallexcellent.helper.RequestHelper;
 import com.hyc.newsmallexcellent.helper.SpCacheHelper;
 import io.reactivex.Observable;
@@ -83,7 +84,7 @@ public class UserModel {
     return SpCacheHelper.getString("headUrl");
   }
 
-  public Observable<BaseRequestBean<String>> uploadImage(Map<String,Object> map){
+  public Observable<BaseRequestBean<UploadImageBean>> uploadImage(Map<String,Object> map){
     File file = new File((String) map.get("headPhoto"));
     RequestBody requestFile =
         RequestBody.create(MediaType.parse("multipart/form-data"), file);

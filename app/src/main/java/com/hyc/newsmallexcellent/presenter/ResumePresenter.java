@@ -4,10 +4,10 @@ import android.Manifest;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import com.hyc.newsmallexcellent.base.BasePresenter;
-import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.base.rx.BaseErrorConsumer;
 import com.hyc.newsmallexcellent.base.rx.BaseRequestConsumer;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
+import com.hyc.newsmallexcellent.bean.UploadImageBean;
 import com.hyc.newsmallexcellent.interfaces.ResumeContract;
 import com.hyc.newsmallexcellent.model.UserModel;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -18,7 +18,7 @@ public class ResumePresenter extends BasePresenter<ResumeContract.IView> impleme
 
   private UserModel userModel = new UserModel();
 
-  private int resumeId;
+  private int resumeId = -1;
 
   @Override
   public void fetchResumeData() {
@@ -46,6 +46,9 @@ public class ResumePresenter extends BasePresenter<ResumeContract.IView> impleme
 
   @Override
   public void changeResumeData() {
+    if (resumeId == -1){
+      return;
+    }
     Map<String, Object> map = mvpView.getResumeInfo();
     if (TextUtils.isEmpty((String) map.get("headPhoto"))) {
       map.remove("headPhoto");
@@ -54,18 +57,12 @@ public class ResumePresenter extends BasePresenter<ResumeContract.IView> impleme
     }
     mvpView.showLoadingView();
     addDisposable(userModel.uploadImage(map)
-        .subscribe(new BaseRequestConsumer<String>(mvpView) {
+        .subscribe(new BaseRequestConsumer<UploadImageBean>(mvpView) {
 
           @Override
-          public void accept(BaseRequestBean<String> baseRequestBean) throws Exception {
-            super.accept(baseRequestBean);
-            map.put("headPhoto", baseRequestBean.getMsg());
+          protected void onRequestSuccess(UploadImageBean data) {
+            map.put("headPhoto", data.getUrl());
             updateResume(map);
-          }
-
-          @Override
-          protected void onRequestSuccess(String data) {
-
           }
         }, new BaseErrorConsumer(mvpView)));
   }
