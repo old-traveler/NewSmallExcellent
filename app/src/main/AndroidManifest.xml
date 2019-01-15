@@ -13,27 +13,27 @@
   <uses-permission android:name="android.permission.CAMERA" />
   <uses-permission android:name="android.permission.RECORD_AUDIO" />
   <uses-permission android:name="android.permission.VIBRATE" />
-  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
-  <!--用于进行网络定位-->
-  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-  <!--用于访问GPS定位-->
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-  <!--用于获取运营商信息，用于支持提供运营商信息相关的接口-->
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-  <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
-  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-  <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-  <!--用于读取手机当前的状态-->
-  <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-  <!--用于写入缓存数据到扩展存储卡-->
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-  <!--用于申请调用A-GPS模块-->
-  <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-  <!--用于申请获取蓝牙信息进行室内定位-->
-  <uses-permission android:name="android.permission.BLUETOOTH"/>
-  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+  <!-- 用于进行网络定位 -->
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <!-- 用于访问GPS定位 -->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+  <!-- 用于读取手机当前的状态 -->
+  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+  <!-- 用于写入缓存数据到扩展存储卡 -->
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <!-- 用于申请调用A-GPS模块 -->
+  <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+  <!-- 用于申请获取蓝牙信息进行室内定位 -->
+  <uses-permission android:name="android.permission.BLUETOOTH" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
   <application
     android:name=".SmallExcellentApplication"
@@ -52,24 +52,24 @@
       </intent-filter>
     </activity>
 
-    <!--地图的密匙-->
+    <!-- 地图的密匙 -->
     <meta-data
-        android:name="com.amap.api.v2.apikey"
-        android:value="262d9dda71a1b5f74ae0455de5e811d7"/>
-    <!--定位需要的服务-->
-    <service android:name="com.amap.api.location.APSService"></service>
+      android:name="com.amap.api.v2.apikey"
+      android:value="262d9dda71a1b5f74ae0455de5e811d7" />
+    <!-- 定位需要的服务 -->
+    <service android:name="com.amap.api.location.APSService" />
 
-    <activity android:name=".view.RegisterActivity"></activity>
-    <activity android:name=".view.MainActivity"></activity>
-    <activity android:name=".view.ChangePasswordActivity"></activity>
-    <activity android:name=".view.JobsClassificationActivity"></activity>
-    <activity android:name=".view.MapActivity"></activity>
-    <activity android:name=".view.LoginActivity"/>
-
+    <activity android:name=".view.RegisterActivity" />
+    <activity android:name=".view.MainActivity" />
+    <activity android:name=".view.ChangePasswordActivity" />
+    <activity android:name=".view.JobsClassificationActivity" />
+    <activity android:name=".view.MapActivity" />
+    <activity android:name=".view.LoginActivity" />
     <activity
       android:name="com.yalantis.ucrop.UCropActivity"
       android:screenOrientation="portrait"
       android:theme="@style/AppTheme" />
+    <activity android:name=".view.SearchAddressActivity"></activity>
   </application>
 
 </manifest>

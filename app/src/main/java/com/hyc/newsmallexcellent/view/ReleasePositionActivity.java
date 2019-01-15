@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.TextView;
 import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.base.BaseMvpActivity;
 import com.hyc.newsmallexcellent.base.helper.ToastHelper;
@@ -35,10 +36,10 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
     @BindView(R.id.et_contact) EditText etContact;
     @BindView(R.id.et_deadline) EditText etDeadline;
     @BindView(R.id.et_contact_phone) EditText etContactPhone;
-    @BindView(R.id.et_work_place) EditText etWorkPlace;
+    @BindView(R.id.et_work_place) TextView etWorkPlace;
     @BindView(R.id.btn_release) Button btnRelease;
 
-    private final static int REQUESTCODE = 1; // 返回的结果码
+    private final static int REQUEST_CODE = 1001; // 返回的结果码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,9 +147,9 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == 1 && resultCode == RESULT_OK) {
-                String a = data.getStringExtra("Place");
-                etWorkPlace.setText(a);
+            if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+                String address = data.getStringExtra("address");
+                etWorkPlace.setText(address);
         }
     }
 }

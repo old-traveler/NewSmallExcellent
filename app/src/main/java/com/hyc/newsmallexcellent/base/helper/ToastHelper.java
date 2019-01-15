@@ -1,11 +1,13 @@
 package com.hyc.newsmallexcellent.base.helper;
 
+import android.util.Log;
 import android.widget.Toast;
 import com.hyc.newsmallexcellent.SmallExcellentApplication;
 
 public class ToastHelper {
 
   public static void toast(String msg){
+    Log.d("toastTAG",msg);
     Toast.makeText(SmallExcellentApplication.getContext(), msg, Toast.LENGTH_SHORT).show();
   }
 

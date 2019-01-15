@@ -52,7 +52,7 @@ public class ReleasePositionPresenter extends BasePresenter<ReleasePositionContr
                 .subscribe(granted -> {
                     if (granted) {
                         Intent intent = new Intent(activity,MapActivity.class);
-                        activity.startActivityForResult(intent,1);
+                        activity.startActivityForResult(intent,1001);
                     } else {
                         Toast.makeText(activity, "权限申请失败", Toast.LENGTH_SHORT).show();
                     }
