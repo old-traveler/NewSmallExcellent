@@ -14,244 +14,230 @@
       android:layout_height="wrap_content"
       android:layout_marginEnd="10dp"
       android:layout_marginStart="10dp"
-      android:layout_marginTop="70dp"
+      android:layout_marginTop="?attr/actionBarSize"
       android:orientation="vertical">
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:text="工作名字："
-          android:textSize="18sp" />
+          android:textSize="15sp" />
         <EditText
           android:id="@+id/et_work_name"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
+          android:layout_marginStart="70dp"
           android:maxLines="1" />
       </FrameLayout>
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:text="工作内容："
-          android:textSize="18sp" />
+          android:textSize="15sp" />
         <EditText
           android:id="@+id/et_work_content"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
-          android:maxLines="1" />
+          android:layout_marginStart="70dp" />
       </FrameLayout>
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:text="工作类别："
-          android:textSize="18sp" />
+          android:textSize="15sp" />
         <TextView
-          android:textColor="#333333"
-          android:textSize="15sp"
           android:id="@+id/et_work_category"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
+          android:layout_marginStart="70dp"
           android:maxLines="1"
-          android:text="点击选择" />
+          android:text="点击选择"
+          android:textColor="#333333"
+          android:textSize="15sp" />
       </FrameLayout>
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:text="工作薪水："
-          android:textSize="18sp" />
+          android:textSize="15sp" />
         <EditText
+          android:inputType="number"
           android:id="@+id/et_work_salary"
-          android:layout_width="match_parent"
+          android:layout_width="180dp"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
+          android:layout_marginStart="70dp"
           android:maxLines="1" />
-      </FrameLayout>
 
-      <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
         <TextView
+          android:id="@+id/tv_format"
+          android:layout_marginStart="260dp"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:text="薪水单位："
-          android:textSize="18sp" />
-        <EditText
-          android:id="@+id/et_salary_company"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
-          android:maxLines="1" />
+          android:text="选择薪资格式"
+          android:textSize="15sp" />
       </FrameLayout>
+
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:text="职位数量："
-          android:textSize="18sp" />
+          android:textSize="15sp" />
         <EditText
           android:id="@+id/et_position_number"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
+          android:layout_marginStart="70dp"
+          android:inputType="number"
           android:maxLines="1" />
       </FrameLayout>
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:text="工作时段："
-          android:textSize="18sp" />
+          android:textSize="15sp" />
         <EditText
           android:id="@+id/et_work_time_slot"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
+          android:layout_marginStart="70dp"
           android:maxLines="1" />
       </FrameLayout>
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:text="工作天数："
-          android:textSize="18sp" />
+          android:textSize="15sp" />
         <EditText
           android:id="@+id/et_work_heaven"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
+          android:layout_marginStart="70dp"
+          android:inputType="number"
           android:maxLines="1" />
       </FrameLayout>
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:text="联系人："
-          android:textSize="18sp" />
+          android:text="联系人员："
+          android:textSize="15sp" />
         <EditText
           android:id="@+id/et_contact"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="75dp"
+          android:layout_marginStart="70dp"
           android:maxLines="1" />
       </FrameLayout>
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:text="截止日期："
-          android:textSize="18sp" />
+          android:textSize="15sp" />
 
         <TextView
-          android:textColor="#333333"
-          android:textSize="15sp"
           android:id="@+id/tv_deadline"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
+          android:layout_marginStart="70dp"
           android:maxLines="1"
-          android:text="点击选择" />
+          android:text="点击选择"
+          android:textColor="#333333"
+          android:textSize="15sp" />
       </FrameLayout>
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:text="联系电话："
-          android:textSize="18sp" />
+          android:textSize="15sp" />
         <EditText
           android:id="@+id/et_contact_phone"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="95dp"
+          android:layout_marginStart="70dp"
+          android:inputType="number"
           android:maxLines="1" />
       </FrameLayout>
 
       <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:text="工作地："
-          android:textSize="18sp" />
+          android:text="工作地址："
+          android:textSize="15sp" />
         <TextView
           android:id="@+id/et_work_place"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="75dp"
+          android:layout_marginStart="70dp"
           android:maxLines="1"
-          android:text="点击选择地址" />
+          android:text="点击选择地址"
+          android:textColor="#333333"
+          android:textSize="15sp" />
       </FrameLayout>
 
-      <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <Button
-          android:id="@+id/btn_release"
-          android:layout_width="200dp"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:backgroundTint="@color/colorPrimary"
-          android:text="发布" />
-      </FrameLayout>
     </LinearLayout>
 
   </android.support.v4.widget.NestedScrollView>

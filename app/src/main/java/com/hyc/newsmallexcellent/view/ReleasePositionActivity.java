@@ -1,20 +1,18 @@
 package com.hyc.newsmallexcellent.view;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
 import android.widget.TextView;
-import android.widget.TimePicker;
+import com.amap.api.maps.model.LatLng;
 import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.base.BaseMvpActivity;
 import com.hyc.newsmallexcellent.base.helper.ToastHelper;
@@ -25,8 +23,12 @@ import com.hyc.newsmallexcellent.presenter.ReleasePositionPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.hyc.newsmallexcellent.util.BottomSelectDialogUtil;
 import com.hyc.newsmallexcellent.util.TimeUtil;
-import java.util.Calendar;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPresenter>
     implements ReleasePositionContract.View {
@@ -41,8 +43,6 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
   TextView etWorkCategory;
   @BindView(R.id.et_work_salary)
   EditText etWorkSalary;
-  @BindView(R.id.et_salary_company)
-  EditText etSalaryCompany;
   @BindView(R.id.et_position_number)
   EditText etPositionNumber;
   @BindView(R.id.et_work_time_slot)
@@ -57,8 +57,8 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
   EditText etContactPhone;
   @BindView(R.id.et_work_place)
   TextView etWorkPlace;
-  @BindView(R.id.btn_release)
-  Button btnRelease;
+  @BindView(R.id.tv_format)
+  TextView tvFormat;
 
   private final static int REQUEST_CODE = 1001; // 返回的结果码
 
@@ -71,86 +71,76 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
   }
 
   @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_publish_job,menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.item_publish){
+      presenter.releasePosition();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
+  @Override
   protected ReleasePositionPresenter createPresenter() {
     return new ReleasePositionPresenter();
   }
 
   @Override
-  public String getJobTitle() {
-    return etWorkName.getText().toString();
+  public Map<String, Object> getJobInfo() {
+    Map<String,Object> map = new HashMap<>();
+    map.put("jobTitle",etWorkName.getText().toString());
+    map.put("jobDescribe",etWorkContent.getText().toString());
+    map.put("jobCategory",etWorkCategory.getText().toString());
+    map.put("jobSalary",Integer.parseInt(etWorkSalary.getText().toString()));
+    map.put("jobSalaryUnit",tvFormat.getText().toString());
+    map.put("jobCount",Integer.parseInt(etPositionNumber.getText().toString()));
+    map.put("workingHours",etWorkTimeSlot.getText().toString());
+    map.put("workingDays",Integer.parseInt(etWorkHeaven.getText().toString()));
+    //TODO 服务器处理此字段有问题，待解决
+    //map.put("contact",etContact.getText().toString());
+    map.put("telephone",etContactPhone.getText().toString());
+    map.put("cDate",tvDeadline.getText().toString()+":00");
+    LatLng latLng = (LatLng) etWorkPlace.getTag();
+    map.put("issuePlace",etWorkPlace.getText().toString());
+    map.put("latitude",String.valueOf(latLng.latitude));
+    map.put("longitude",String.valueOf(latLng.longitude));
+    map.put("isAuthentication",0);
+    return map;
   }
 
-  @Override
-  public String getJobDescribe() {
-    return etWorkContent.getText().toString();
-  }
-
-  @Override
-  public String getJobCategory() {
-    return etWorkCategory.getText().toString();
-  }
-
-  @Override
-  public String getJobSalary() {
-    return etWorkSalary.getText().toString();
-  }
-
-  @Override
-  public String getJobSalaryUnit() {
-    return etSalaryCompany.getText().toString();
-  }
-
-  @Override
-  public int getJobCount() {
-    return etPositionNumber.getText().length();
-  }
-
-  @Override
-  public String getWorkingHours() {
-    return etWorkTimeSlot.getText().toString();
-  }
-
-  @Override
-  public String getWorkingDays() {
-    return etWorkHeaven.getText().toString();
-  }
-
-  @Override
-  public String getContact() {
-    return etContact.getText().toString();
-  }
-
-  @Override
-  public String getTelephone() {
-    return tvDeadline.getText().toString();
-  }
-
-  @Override
-  public String getCDate() {
-    return etContactPhone.getText().toString();
-  }
-
-  @Override
-  public String getIssuePlace() {
-    return etWorkPlace.getText().toString();
-  }
 
   @Override
   public boolean verificationInput() {
-    if (TextUtils.isEmpty(getJobTitle())
-        || TextUtils.isEmpty(getJobDescribe())
-        || TextUtils.isEmpty(getJobCategory())
-        || TextUtils.isEmpty(getJobSalary())
-        || TextUtils.isEmpty(getJobSalaryUnit())
-        || TextUtils.isEmpty(etPositionNumber.getText().toString())
-        || TextUtils.isEmpty(getWorkingHours())
-        || TextUtils.isEmpty(getWorkingDays())
-        || TextUtils.isEmpty(getContact())
-        || TextUtils.isEmpty(getTelephone())
-        || TextUtils.isEmpty(getCDate())
-        || TextUtils.isEmpty(getIssuePlace())) {
-      ToastHelper.toast("以上填写不能有任何一项为空");
-    } else {
+    if (TextUtils.isEmpty(etWorkName.getText().toString())){
+      ToastHelper.toast("工作名称为空");
+    }else if (TextUtils.isEmpty(etWorkContent.getText().toString())){
+      ToastHelper.toast("工作内容不能为空");
+    }else if (etWorkCategory.getText().toString().equals("点击选择")){
+      ToastHelper.toast("请选择工作类别");
+    }else if (TextUtils.isEmpty(etWorkSalary.getText().toString())){
+      ToastHelper.toast("工作薪水不能为空");
+    }else if (tvFormat.getText().toString().equals("选择薪资格式")){
+      ToastHelper.toast("请选择薪资格式");
+    }else if (TextUtils.isEmpty(etPositionNumber.getText().toString())){
+      ToastHelper.toast("职位数量不能为空");
+    }else if (TextUtils.isEmpty(etWorkTimeSlot.getText().toString())){
+      ToastHelper.toast("工作时段不能为空");
+    }else if (TextUtils.isEmpty((etWorkHeaven.getText().toString()))){
+      ToastHelper.toast("工作天数不能为空");
+    }else if (TextUtils.isEmpty(etContact.getText().toString())){
+      ToastHelper.toast("联系人员不能为空");
+    }else if (tvDeadline.getText().toString().equals("点击选择")){
+      ToastHelper.toast("请选择截止时间");
+    }else if (TextUtils.isEmpty(etContactPhone.getText().toString())){
+      ToastHelper.toast("请填写联系电话");
+    }else if (etWorkPlace.getText().toString().equals("点击选择地址")){
+      ToastHelper.toast("请选择工作地址");
+    }else {
       return true;
     }
     return false;
@@ -158,22 +148,42 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
 
   @Override
   public void onReleaseSuccess() {
-
+    ToastHelper.toast("发布成功");
   }
 
-  @OnClick({ R.id.btn_release, R.id.et_work_place, R.id.tv_deadline })
+  @Override
+  public void loadJobCategory(List<String> data) {
+    BottomSheetDialog dialog = new BottomSheetDialog(this);
+    BottomSelectDialogUtil.showSimpleListTextDialog(dialog,data, (itemData, view, position) -> {
+      dialog.dismiss();
+      etWorkCategory.setText(itemData);
+    });
+  }
+
+  @OnClick({ R.id.et_work_place, R.id.tv_deadline ,R.id.et_work_category ,R.id.tv_format })
   public void onViewClicked(View view) {
     switch (view.getId()) {
-      case R.id.btn_release:
-        presenter.releasePosition();
-        break;
       case R.id.et_work_place:
         presenter.accessRequest(this);
         break;
       case R.id.tv_deadline:
         selectDate();
         break;
+      case R.id.et_work_category:
+        presenter.fetchJobCategory();
+        break;
+      case R.id.tv_format:
+        showSalaryFormat();
+        break;
     }
+  }
+
+  private void showSalaryFormat() {
+    BottomSheetDialog dialog = new BottomSheetDialog(this);
+    BottomSelectDialogUtil.showSimpleListTextDialog(dialog,Arrays.asList(new String[]{"元/小时","元/日","元/月"}), (itemData, view, position) -> {
+      dialog.dismiss();
+      tvFormat.setText(itemData);
+    });
   }
 
   private void selectDate() {
@@ -190,6 +200,7 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
     if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
       String address = data.getStringExtra("address");
       etWorkPlace.setText(address);
+      etWorkPlace.setTag(new LatLng(data.getDoubleExtra("lat",0),data.getDoubleExtra("lon",0)));
     }
   }
 }

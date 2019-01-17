@@ -18,7 +18,7 @@ public class BasePresenter<V> {
   }
 
 
-  void detachView() {
+  public void detachView() {
     this.mvpView = null;
     onUnsubscribe();
   }

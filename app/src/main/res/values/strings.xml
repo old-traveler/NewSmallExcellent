@@ -1,5 +1,5 @@
 <resources>
   <string name="app_name">NewSmallExcellent</string>
   <string name="loading">Loading...</string>
-  <string name="date_select_format">%d-%d-%d %2d:%2d</string>
+  <string name="date_select_format">%d-%02d-%02d %02d:%02d</string>
 </resources>

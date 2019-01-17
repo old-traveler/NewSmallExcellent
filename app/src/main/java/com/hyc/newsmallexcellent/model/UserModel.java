@@ -59,17 +59,6 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<Object>>postJob(int id, String jobTitlem, String jobDescribe, String jobCategory,
-                                                     String jobSalary, String jobSalaryUnit, int jobCount,
-                                                     String workingHours, String workingDays, String contact,
-                                                     String telephone, String cDate, String issuePlace){
-    return RequestHelper.getRequestApi().release(id,jobTitlem,jobDescribe,
-            jobCategory,jobSalary,jobSalaryUnit,jobCount,workingHours,workingDays,
-            contact,telephone,cDate,issuePlace)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread());
-  }
-
 
 
   public boolean isCurUser(int id){

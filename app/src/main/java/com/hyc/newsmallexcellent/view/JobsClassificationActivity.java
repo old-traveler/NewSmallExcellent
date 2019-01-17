@@ -1,98 +1,104 @@
 package com.hyc.newsmallexcellent.view;
-import android.annotation.SuppressLint;
+
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.adapter.JobsClassificationAdapter;
+import com.hyc.newsmallexcellent.adapter.viewholder.SimpleTextViewHolder;
 import com.hyc.newsmallexcellent.base.BaseMvpActivity;
+import com.hyc.newsmallexcellent.base.adapter.BaseRecycleAdapter;
 import com.hyc.newsmallexcellent.base.helper.ToastHelper;
+import com.hyc.newsmallexcellent.base.interfaces.OnItemLongClickListener;
 import com.hyc.newsmallexcellent.interfaces.JobsClassificationContract;
 import com.hyc.newsmallexcellent.presenter.JobsClassificationPresenter;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class JobsClassificationActivity extends BaseMvpActivity<JobsClassificationPresenter>
-        implements JobsClassificationContract.View , View.OnClickListener {
+    implements JobsClassificationContract.View{
 
-    private RecyclerView classification_rv;
-    private ImageView classification__return , classification_add;
-    private EditText classification__et;
-    private JobsClassificationAdapter jobsClassificationAdapter;
-    private List<String> list = new ArrayList<String>();
+  @BindView(R.id.et_input)
+  EditText etInput;
+  @BindView(R.id.rv_category)
+  RecyclerView rvCategory;
+  private BaseRecycleAdapter<String,SimpleTextViewHolder> categoryAdapter;
+  private List<String> list = new ArrayList<String>();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_jobs_classification);
-        super.onCreate(savedInstanceState);
-        initView();
-        initialization();
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    setContentView(R.layout.activity_jobs_classification);
+    super.onCreate(savedInstanceState);
+    setToolBarTitle("工作分类管理");
+    initView();
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_categoty,menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.item_add){
+      presenter.jobsClassification();
+      return true;
     }
+    return super.onOptionsItemSelected(item);
+  }
 
-    @SuppressLint("WrongViewCast")
-    private void initView() {
-        classification_rv = findViewById(R.id.classification_rv);
-        classification__return = findViewById(R.id.classification__return);
-        classification_add = findViewById(R.id.classification_add);
-        classification__et = findViewById(R.id.classification__et);
+  private void initView() {
+    rvCategory.setLayoutManager(new LinearLayoutManager(this));
+    categoryAdapter = new BaseRecycleAdapter<>(R.layout.item_simple_text,SimpleTextViewHolder.class);
+    rvCategory.setAdapter(categoryAdapter);
+    categoryAdapter.setOnItemLongClickListener((itemData, view, position) -> {
+      presenter.deleteClassification(itemData);
+      return true;
+    });
+    presenter.queryCategory();
+  }
 
-        classification_rv.setLayoutManager(new GridLayoutManager(classification_rv.getContext(),2));
-        jobsClassificationAdapter = new JobsClassificationAdapter(this,list);
-        classification_rv.setAdapter(jobsClassificationAdapter);
-        classification_rv.setItemAnimator(new DefaultItemAnimator());
+  @Override
+  protected JobsClassificationPresenter createPresenter() {
+    return new JobsClassificationPresenter();
+  }
+
+  @Override
+  public String getCategory() {
+    return etInput.getText().toString();
+  }
+
+  @Override
+  public boolean verificationInput() {
+    if (TextUtils.isEmpty(getCategory())) {
+      ToastHelper.toast("请输入所需要的添加的分类");
+    } else {
+      return true;
     }
+    return false;
+  }
 
-    private void initialization() {
-        classification__return.setOnClickListener(this);
-        classification_add.setOnClickListener(this);
-    }
+  @Override
+  public void addClassificationSuccess() {
+    categoryAdapter.appendDataToList(etInput.getText().toString());
+    etInput.setText("");
+  }
 
+  @Override
+  public void onQuerySuccess(List<String> data) {
+    categoryAdapter.setDataList(data);
+  }
 
-    @Override
-    protected JobsClassificationPresenter createPresenter() {
-        return new JobsClassificationPresenter();
-    }
-
-    @Override
-    public String getCategory() {
-        return classification__et.getText().toString();
-    }
-
-    @Override
-    public boolean verificationInput() {
-        if (TextUtils.isEmpty(getCategory())){
-            ToastHelper.toast("请输入所需要的添加的分类");
-        }else {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void addClassificationSuccess() {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.classification__return:
-                break;
-            case R.id.classification_add:
-                jobsClassificationAdapter.appendDataToList(classification__et.getText().toString());
-                presenter.jobsClassification();
-                break;
-        }
-    }
-
-
-
+  @Override
+  public void deleteCategory(String category) {
+    categoryAdapter.removeItemFormList(category);
+  }
 }

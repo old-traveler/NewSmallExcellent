@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.hyc.newsmallexcellent.base.adapter.viewholder.BaseViewHolder;
 import com.hyc.newsmallexcellent.base.interfaces.OnItemClickListener;
+import com.hyc.newsmallexcellent.base.interfaces.OnItemLongClickListener;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class BaseRecycleAdapter<T, V extends BaseViewHolder<T>> extends Recycler
 
   private OnItemClickListener<T> onItemClickListener;
 
-  //private OnItemLongClickListener<T> onItemLongClickListener;
+  private OnItemLongClickListener<T> onItemLongClickListener;
 
   private Context mContext;
   private Class<V> vClass;
@@ -68,10 +69,10 @@ public class BaseRecycleAdapter<T, V extends BaseViewHolder<T>> extends Recycler
       baseViewHolder.setOnClickListener(v
           -> onItemClickListener.onItemClick(dataList.get(i), v, i));
     }
-    //if (onItemLongClickListener != null) {
-    //  baseViewHolder.itemView.setOnLongClickListener(v ->
-    //      onItemLongClickListener.onItemLongClick(dataList.get(i), i));
-    //}
+    if (onItemLongClickListener != null) {
+      baseViewHolder.itemView.setOnLongClickListener(v ->
+          onItemLongClickListener.onItemLongClick(dataList.get(i), v,i));
+    }
   }
 
   @Override
@@ -115,13 +116,17 @@ public class BaseRecycleAdapter<T, V extends BaseViewHolder<T>> extends Recycler
   }
 
   public void removeItemFormList(int position) {
-    if (position < getItemCount()) {
+    if (position < getItemCount() && position>=0) {
       dataList.remove(position);
       notifyItemRemoved(position);
       for (int i = position; i < dataList.size(); i++) {
         notifyItemChanged(i);
       }
     }
+  }
+
+  public void removeItemFormList(T data){
+    removeItemFormList(dataList.indexOf(data));
   }
 
   public List<T> getData() {
@@ -148,8 +153,8 @@ public class BaseRecycleAdapter<T, V extends BaseViewHolder<T>> extends Recycler
     this.onItemClickListener = onItemClickListener;
   }
 
-  //public void setOnItemLongClickListener(
-  //    OnItemLongClickListener<T> onItemLongClickListener) {
-  //  this.onItemLongClickListener = onItemLongClickListener;
-  //}
+  public void setOnItemLongClickListener(
+      OnItemLongClickListener<T> onItemLongClickListener) {
+    this.onItemLongClickListener = onItemLongClickListener;
+  }
 }

@@ -43,6 +43,7 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
+    android:networkSecurityConfig="@xml/network_security_config"
     tools:ignore="GoogleAppIndexingWarning">
     <activity android:name=".view.ReleasePositionActivity">
       <intent-filter>
@@ -62,14 +63,14 @@
     <activity android:name=".view.RegisterActivity" />
     <activity android:name=".view.MainActivity" />
     <activity android:name=".view.ChangePasswordActivity" />
-    <activity android:name=".view.JobsClassificationActivity" />
+    <!--<activity android:name=".view.JobsClassificationActivity" />-->
     <activity android:name=".view.MapActivity" />
     <activity android:name=".view.LoginActivity" />
     <activity
       android:name="com.yalantis.ucrop.UCropActivity"
       android:screenOrientation="portrait"
       android:theme="@style/AppTheme" />
-    <activity android:name=".view.SearchAddressActivity"></activity>
+    <activity android:name=".view.SearchAddressActivity"/>
   </application>
 
 </manifest>
