@@ -34,7 +34,6 @@ import com.hyc.newsmallexcellent.interfaces.MapLocationContract;
 import com.hyc.newsmallexcellent.presenter.MapPresenter;
 import java.util.List;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MapActivity extends BaseMvpActivity<MapPresenter> implements LocationSource,
     AMapLocationListener, MapLocationContract.IView {
@@ -54,12 +53,13 @@ public class MapActivity extends BaseMvpActivity<MapPresenter> implements Locati
   private Marker marker;
   private AMap navigationAMap;
 
+  private String cityName;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_map);
-    ButterKnife.bind(this);
-    mapMv.onCreate(savedInstanceState);
     super.onCreate(savedInstanceState);
+    mapMv.onCreate(savedInstanceState);
     setToolBarTitle("位置选择");
     initialization();
   }
@@ -106,7 +106,8 @@ public class MapActivity extends BaseMvpActivity<MapPresenter> implements Locati
       Intent intent = new Intent(this,ReleasePositionActivity.class)
           .putExtra("lat",itemData.getLatLonPoint().getLatitude())
           .putExtra("lon",itemData.getLatLonPoint().getLongitude())
-          .putExtra("address",itemData.getTitle());
+          .putExtra("address",itemData.getTitle())
+          .putExtra("city",MapActivity.this.cityName);
       setResult(RESULT_OK,intent);
       finish();
     });
@@ -138,6 +139,7 @@ public class MapActivity extends BaseMvpActivity<MapPresenter> implements Locati
     navigationAMap = mapMv.getMap();
     if (aMapLocation != null && mListener != null) {
       if (aMapLocation.getErrorCode() == 0) {
+        cityName = aMapLocation.getCity();
         mListener.onLocationChanged(aMapLocation);
       } else {
         ToastHelper.toast(aMapLocation.getErrorCode());

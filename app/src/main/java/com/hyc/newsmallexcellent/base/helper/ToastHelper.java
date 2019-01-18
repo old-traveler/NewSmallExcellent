@@ -2,6 +2,7 @@ package com.hyc.newsmallexcellent.base.helper;
 
 import android.util.Log;
 import android.widget.Toast;
+import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.SmallExcellentApplication;
 
 public class ToastHelper {
@@ -19,6 +20,10 @@ public class ToastHelper {
     if (throwable != null && throwable.getMessage()!= null){
       toast(throwable.getMessage());
     }
+  }
+
+  public static void longTimeToast(String string){
+    Toast.makeText(SmallExcellentApplication.getContext(),string, Toast.LENGTH_LONG).show();
   }
 
 }

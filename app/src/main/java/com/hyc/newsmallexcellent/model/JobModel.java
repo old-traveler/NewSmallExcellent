@@ -2,6 +2,7 @@ package com.hyc.newsmallexcellent.model;
 
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.CategoryBean;
+import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.helper.RequestHelper;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,6 +43,12 @@ public class JobModel {
   public Observable<BaseRequestBean<Object>> publishJob(int userId,Map<String,Object> map){
     map.put("userId",userId);
     return RequestHelper.getRequestApi().publishJob(map)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<JobBean>> queryNearbyJob(double latitude,double longitude){
+    return RequestHelper.getRequestApi().queryNearbyJob(longitude,latitude)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }

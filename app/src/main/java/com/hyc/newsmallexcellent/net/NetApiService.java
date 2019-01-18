@@ -2,6 +2,7 @@ package com.hyc.newsmallexcellent.net;
 
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.CategoryBean;
+import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.bean.UploadImageBean;
@@ -66,4 +67,7 @@ public interface NetApiService {
 
   @GET("category/findAllCategory.do")
   Observable<BaseRequestBean<List<CategoryBean>>> queryCategory();
+
+  @GET("job/findAllJobByPosition.do")
+  Observable<BaseRequestBean<JobBean>> queryNearbyJob(@Query("longitude") double lon,@Query("latitude")double lat);
 }

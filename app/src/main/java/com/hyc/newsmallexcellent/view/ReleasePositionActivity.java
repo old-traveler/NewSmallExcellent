@@ -61,6 +61,7 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
   TextView tvFormat;
 
   private final static int REQUEST_CODE = 1001; // 返回的结果码
+  private String cityCode;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +102,8 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
     map.put("jobCount",Integer.parseInt(etPositionNumber.getText().toString()));
     map.put("workingHours",etWorkTimeSlot.getText().toString());
     map.put("workingDays",Integer.parseInt(etWorkHeaven.getText().toString()));
-    //TODO 服务器处理此字段有问题，待解决
-    //map.put("contact",etContact.getText().toString());
+    map.put("city",cityCode);
+    map.put("contact",etContact.getText().toString());
     map.put("telephone",etContactPhone.getText().toString());
     map.put("cDate",tvDeadline.getText().toString()+":00");
     LatLng latLng = (LatLng) etWorkPlace.getTag();
@@ -200,6 +201,7 @@ public class ReleasePositionActivity extends BaseMvpActivity<ReleasePositionPres
     if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
       String address = data.getStringExtra("address");
       etWorkPlace.setText(address);
+      cityCode = data.getStringExtra("city");
       etWorkPlace.setTag(new LatLng(data.getDoubleExtra("lat",0),data.getDoubleExtra("lon",0)));
     }
   }

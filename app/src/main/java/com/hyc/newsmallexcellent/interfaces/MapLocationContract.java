@@ -14,7 +14,6 @@ public interface MapLocationContract {
   public interface IView{
 
     void loadNearPosition(List<PoiItem> poiItems);
-
   }
 
 

@@ -45,7 +45,7 @@
     android:theme="@style/AppTheme"
     android:networkSecurityConfig="@xml/network_security_config"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".view.ReleasePositionActivity">
+    <activity android:name=".view.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -61,7 +61,7 @@
     <service android:name="com.amap.api.location.APSService" />
 
     <activity android:name=".view.RegisterActivity" />
-    <activity android:name=".view.MainActivity" />
+    <!--<activity android:name=".view.MainActivity" />-->
     <activity android:name=".view.ChangePasswordActivity" />
     <!--<activity android:name=".view.JobsClassificationActivity" />-->
     <activity android:name=".view.MapActivity" />
