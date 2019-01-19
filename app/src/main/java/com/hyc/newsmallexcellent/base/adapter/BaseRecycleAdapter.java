@@ -92,6 +92,10 @@ public class BaseRecycleAdapter<T, V extends BaseViewHolder<T>> extends Recycler
    * 用于上拉加载更多更新界面
    */
   public void appendDataToList(List<T> data) {
+    if (dataList == null){
+      setDataList(data);
+      return;
+    }
     int firstPosition = getItemCount();
     dataList.addAll(data);
     int lastPosition = getItemCount();

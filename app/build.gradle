@@ -47,4 +47,5 @@ dependencies {
   implementation files('libs/Msc.jar')
   implementation files('libs/AMap_Search_V5.5.0_20171107.jar')
   implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+  implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-12'
 }

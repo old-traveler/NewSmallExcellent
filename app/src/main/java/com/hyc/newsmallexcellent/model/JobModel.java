@@ -47,8 +47,8 @@ public class JobModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<JobBean>> queryNearbyJob(double latitude,double longitude){
-    return RequestHelper.getRequestApi().queryNearbyJob(longitude,latitude)
+  public Observable<BaseRequestBean<JobBean>> queryNearbyJob(double latitude,double longitude,int pageNum){
+    return RequestHelper.getRequestApi().queryNearbyJob(longitude,latitude,pageNum,20)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }

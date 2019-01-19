@@ -55,9 +55,7 @@ public interface NetApiService {
 
   @FormUrlEncoded
   @POST("job/addJob.do")
-  Observable<BaseRequestBean<Object>> publishJob(@FieldMap Map<String,Object> params);
-
-
+  Observable<BaseRequestBean<Object>> publishJob(@FieldMap Map<String, Object> params);
 
   @GET("category/addCategory.do")
   Observable<BaseRequestBean<Object>> jobsClassification(@Query("category") String category);
@@ -69,5 +67,7 @@ public interface NetApiService {
   Observable<BaseRequestBean<List<CategoryBean>>> queryCategory();
 
   @GET("job/findAllJobByPosition.do")
-  Observable<BaseRequestBean<JobBean>> queryNearbyJob(@Query("longitude") double lon,@Query("latitude")double lat);
+  Observable<BaseRequestBean<JobBean>> queryNearbyJob(@Query("longitude") double lon,
+      @Query("latitude") double lat, @Query("pageNum") int pageNum,
+      @Query("pageSize") int pageSize);
 }

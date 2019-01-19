@@ -1,16 +1,24 @@
 package com.hyc.newsmallexcellent.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.amap.api.location.AMapLocation;
@@ -18,29 +26,31 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
-import com.amap.api.services.core.PoiItem;
 import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.adapter.viewholder.NearbyJobViewHolder;
-import com.hyc.newsmallexcellent.adapter.viewholder.SimpleTextViewHolder;
 import com.hyc.newsmallexcellent.base.BaseMvpActivity;
 import com.hyc.newsmallexcellent.base.adapter.BaseRecycleAdapter;
 import com.hyc.newsmallexcellent.base.helper.ToastHelper;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.helper.ImageRequestHelper;
 import com.hyc.newsmallexcellent.interfaces.MainContact;
-import com.hyc.newsmallexcellent.interfaces.MapLocationContract;
 import com.hyc.newsmallexcellent.model.UserModel;
 import com.hyc.newsmallexcellent.presenter.MainPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContact.IView ,
-    LocationSource,
-    AMapLocationListener, MapLocationContract.IView{
+public class MainActivity extends BaseMvpActivity<MainPresenter>
+    implements MainContact.IView, LocationSource, AMapLocationListener, AMap.OnMarkerClickListener {
 
   @BindView(R.id.nav_view)
   NavigationView navView;
@@ -50,19 +60,44 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
   RecyclerView rvBottom;
   @BindView(R.id.dl_main)
   DrawerLayout dlMain;
+  @BindView(R.id.ll_bottom)
+  LinearLayout llBottom;
+  @BindView(R.id.tv_title)
+  TextView tvTitle;
+  @BindView(R.id.tv_publisher)
+  TextView tvPublisher;
+  @BindView(R.id.tv_salary)
+  TextView tvSalary;
+  @BindView(R.id.tv_need_number)
+  TextView tvNeedNumber;
+  @BindView(R.id.tv_address)
+  TextView tvAddress;
+  @BindView(R.id.tv_publish_time)
+  TextView tvPublishTime;
+  @BindView(R.id.tv_deadline)
+  TextView tvDeadline;
+  @BindView(R.id.ll_job_info)
+  LinearLayout llJobInfo;
+  private LatLng latLng;
+  private int page = 1;
+  private boolean enableLoadMore = false;
 
   //定位
-  private LocationSource.OnLocationChangedListener mListener;
+  private OnLocationChangedListener mListener;
   private AMapLocationClient mLocationClient;
   private AMapLocationClientOption mLocationOption;
+  private BottomSheetBehavior behavior;
 
   private AMap aMap;
 
-  private BaseRecycleAdapter<JobBean.ListBean,NearbyJobViewHolder> adapter;
+  private List<Marker> markers = new ArrayList<>();
+
+  private BaseRecycleAdapter<JobBean.ListBean, NearbyJobViewHolder> adapter;
+  private boolean isTouchMap;
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_map,menu);
+    getMenuInflater().inflate(R.menu.menu_map, menu);
     return true;
   }
 
@@ -73,7 +108,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
       bundle.putInt("user_id", new UserModel().getCurUserId());
       Intent intent = new Intent(this, ResumeActivity.class);
       startActivity(intent.putExtras(bundle));
-    }else if (item.getItemId() == android.R.id.home){
+    } else if (item.getItemId() == android.R.id.home) {
       dlMain.openDrawer(GravityCompat.START);
     }
     return true;
@@ -82,6 +117,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_main);
+    ButterKnife.bind(this);
     super.onCreate(savedInstanceState);
     ImageView headImageView = navView.getHeaderView(0).findViewById(R.id.iv_main_head);
     ImageRequestHelper.loadHeadImage(this, new UserModel().getCurHeadUrl()
@@ -91,10 +127,55 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     setHomeResId(R.drawable.ic_more);
     setToolBarTitle("小优兼职");
     mvMap.onCreate(savedInstanceState);
-    adapter =  new BaseRecycleAdapter<>(R.layout.item_job_info,NearbyJobViewHolder.class);
+    adapter = new BaseRecycleAdapter<>(R.layout.item_job_info, NearbyJobViewHolder.class);
     rvBottom.setLayoutManager(new LinearLayoutManager(this));
     rvBottom.setAdapter(adapter);
     presenter.startLocation();
+    rvBottom.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      @Override
+      public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+        if (enableLoadMore && latLng != null && !recyclerView.canScrollVertically(1)) {
+          enableLoadMore = false;
+          presenter.fetchRecommendJob();
+        }
+      }
+    });
+    behavior = BottomSheetBehavior.from(llBottom);
+    behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+      @Override
+      public void onStateChanged(@NonNull View view, int i) {
+        if (i == BottomSheetBehavior.STATE_EXPANDED){
+          llJobInfo.setVisibility(View.GONE);
+        }
+      }
+
+      @Override
+      public void onSlide(@NonNull View view, float v) {
+      }
+    });
+    adapter.setOnItemClickListener((itemData, view, position) -> {
+      behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+      showJobDetail(itemData);
+    });
+    aMap.setOnMarkerClickListener(this);
+    aMap.setOnMapTouchListener(new AMap.OnMapTouchListener() {
+      @Override
+      public void onTouch(MotionEvent motionEvent) {
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+          if (motionEvent.getY() < llJobInfo.getY()) {
+            isTouchMap = false;
+          } else {
+            isTouchMap = true;
+          }
+        }
+        if (motionEvent.getAction() == MotionEvent.ACTION_MOVE && !isTouchMap) {
+          if (llJobInfo.getVisibility() == View.VISIBLE) {
+            llJobInfo.setVisibility(View.GONE);
+          }
+        }
+      }
+    });
   }
 
   @Override
@@ -106,8 +187,23 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     locationStyle.radiusFillColor(Color.argb(0, 0, 0, 0));
     aMap.setMyLocationStyle(locationStyle);
     aMap.setLocationSource(this);
-    aMap.moveCamera(CameraUpdateFactory.zoomTo(14));
+    aMap.moveCamera(CameraUpdateFactory.zoomTo(18));
     aMap.setMyLocationEnabled(true);
+  }
+
+  @Override
+  public void loadJobFail() {
+    enableLoadMore = true;
+  }
+
+  @Override
+  public void loadJobMapPoint(Pair<JobBean.ListBean, Bitmap> pair) {
+    Marker marker = aMap.addMarker(new MarkerOptions().position(
+        new LatLng(Double.parseDouble(pair.first.getLatitude()),
+            Double.parseDouble(pair.first.getLongitude())))
+        .icon(BitmapDescriptorFactory.fromBitmap(pair.second)));
+    marker.setObject(pair.first);
+    markers.add(marker);
   }
 
   @Override
@@ -117,15 +213,20 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 
   @Override
   public int getCurPager() {
-    return 0;
+    return page;
+  }
+
+  @Override
+  public LatLng getCurLocation() {
+    return latLng;
   }
 
   @Override
   public void loadJobInfo(JobBean jobBean) {
-    adapter.setDataList(jobBean.getList());
+    page++;
+    adapter.appendDataToList(jobBean.getList());
+    enableLoadMore = !jobBean.isIsLastPage();
   }
-
-
 
   /**
    * 加载地图的四个个必要方法
@@ -152,6 +253,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
   protected void onDestroy() {
     mvMap.onDestroy();
     super.onDestroy();
+    markers.clear();
   }
 
   @Override
@@ -159,7 +261,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     if (aMapLocation != null && mListener != null) {
       if (aMapLocation.getErrorCode() == 0) {
         mListener.onLocationChanged(aMapLocation);
-        presenter.fetchRecommendJob(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+        latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+        presenter.fetchRecommendJob();
       } else {
         ToastHelper.toast(aMapLocation.getErrorCode());
       }
@@ -180,6 +283,25 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     }
   }
 
+
+  private void showJobDetail(JobBean.ListBean bean){
+    tvTitle.setText(bean.getJobTitle());
+    tvPublisher.setText("联系人："+bean.getContact());
+    tvAddress.setText("工作地址："+bean.getIssuePlace());
+    tvNeedNumber.setText("招聘人数"+bean.getJobCount());
+    tvSalary.setText(bean.getJobSalary() +" " +bean.getJobSalaryUnit());
+    tvDeadline.setText("截止时间："+bean.getClosingDate());
+    tvPublishTime.setText("发布时间："+bean.getReleaseDate());
+    movePosition(Double.parseDouble(bean.getLatitude()),Double.parseDouble(bean.getLongitude()));
+    llJobInfo.setVisibility(View.VISIBLE);
+    llJobInfo.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+      }
+    });
+  }
+
   @Override
   public void deactivate() {
     mListener = null;
@@ -191,8 +313,18 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     mLocationOption = null;
   }
 
-  @Override
-  public void loadNearPosition(List<PoiItem> poiItems) {
+  private void movePosition(double lat,double lon){
+    CameraPosition cp = aMap.getCameraPosition();
+    CameraPosition cpNew = CameraPosition.fromLatLngZoom(new LatLng(lat,lon),cp.zoom);
+    CameraUpdate cu = CameraUpdateFactory.newCameraPosition(cpNew);
+    aMap.moveCamera(cu);
+  }
 
+  @Override
+  public boolean onMarkerClick(Marker marker) {
+    if (marker.getObject() instanceof JobBean.ListBean){
+      showJobDetail((JobBean.ListBean) marker.getObject());
+    }
+    return true;
   }
 }

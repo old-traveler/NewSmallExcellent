@@ -6,4 +6,5 @@
 
   <color name="bg_no">#a9a9a9</color>
   <color name="white">#f6f5f5</color>
+  <color name="circleColor">#27B8FA</color>
 </resources>
