@@ -2,6 +2,7 @@ package com.hyc.newsmallexcellent.interfaces;
 
 import android.graphics.Bitmap;
 import android.util.Pair;
+import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.model.LatLng;
 import com.hyc.newsmallexcellent.base.interfaces.ILoading;
 import com.hyc.newsmallexcellent.bean.JobBean;
@@ -13,6 +14,8 @@ public interface MainContact {
     void fetchRecommendJob();
 
     void startLocation();
+
+    void cacheLocationInfo(AMapLocation aMapLocation);
 
   }
 

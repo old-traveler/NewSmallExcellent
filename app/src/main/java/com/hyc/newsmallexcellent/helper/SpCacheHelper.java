@@ -31,6 +31,8 @@ public class SpCacheHelper {
       return this;
     }
 
+
+
     public EditorBuilder withBoolean(String key,boolean data){
       editor.putBoolean(key,data);
       return this;

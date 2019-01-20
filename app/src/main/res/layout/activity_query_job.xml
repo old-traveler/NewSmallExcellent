@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context=".view.QueryJobActivity">
+
+  <include layout="@layout/lib_layout_toolbar"/>
+
+
+  <LinearLayout
+    android:background="@color/white"
+    android:elevation="5dp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <TextView
+      android:text="衡阳"
+      android:padding="2dp"
+      android:drawableEnd="@drawable/ic_pull"
+      android:id="@+id/tv_city"
+      android:textColor="#333333"
+      android:textSize="12sp"
+      android:gravity="center"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:layout_weight="1"
+      android:layout_width="0dp"
+      android:layout_height="match_parent" />
+
+    <View
+      android:layout_marginTop="7dp"
+      android:background="@color/bg_no"
+      android:layout_width="1px"
+      android:layout_height="26dp"/>
+
+    <TextView
+      android:text="薪资不限"
+      android:padding="2dp"
+      android:drawableEnd="@drawable/ic_pull"
+      android:id="@+id/tv_salary"
+      android:textColor="#333333"
+      android:textSize="12sp"
+      android:gravity="center"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:layout_weight="1"
+      android:layout_width="0dp"
+      android:layout_height="match_parent" />
+
+    <View
+      android:layout_marginTop="7dp"
+      android:background="@color/bg_no"
+      android:layout_width="1px"
+      android:layout_height="26dp"/>
+
+    <TextView
+      android:text="类别不限"
+      android:padding="2dp"
+      android:drawableEnd="@drawable/ic_pull"
+      android:id="@+id/tv_category"
+      android:textColor="#333333"
+      android:textSize="12sp"
+      android:gravity="center"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:layout_weight="1"
+      android:layout_width="0dp"
+      android:layout_height="match_parent" />
+
+    <View
+      android:layout_marginTop="7dp"
+      android:background="@color/bg_no"
+      android:layout_width="1px"
+      android:layout_height="26dp"/>
+
+    <TextView
+      android:text="时长不限"
+      android:padding="2dp"
+      android:drawableEnd="@drawable/ic_pull"
+      android:id="@+id/tv_work_day"
+      android:textColor="#333333"
+      android:textSize="12sp"
+      android:gravity="center"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:layout_weight="1"
+      android:layout_width="0dp"
+      android:layout_height="match_parent" />
+
+  </LinearLayout>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/rv_job"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  </android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>

@@ -53,6 +53,13 @@ public class JobModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
+  public Observable<BaseRequestBean<JobBean>> queryJobByCondition(Map<String,Object> map){
+    return RequestHelper.getRequestApi().queryJobByCondition(map)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+
+  }
+
 
 
 }

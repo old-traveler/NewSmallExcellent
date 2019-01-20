@@ -47,6 +47,16 @@ public class UserModel {
         .commit();
   }
 
+  public void cacheUserLocation(String city,String address,double latitude,double longitude){
+    SpCacheHelper.withBuilder()
+        .withString("city",city)
+        .withString("address",address)
+        .withString("lat", String.valueOf(latitude))
+        .withString("lon", String.valueOf(longitude))
+        .commit();
+  }
+
+
   public Observable<BaseRequestBean<Object>> changePassword(int id, String oldPwd, String newPwd){
     return RequestHelper.getRequestApi().change(id,oldPwd,newPwd)
             .subscribeOn(Schedulers.io())

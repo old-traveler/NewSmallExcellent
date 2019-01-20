@@ -110,6 +110,9 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
       startActivity(intent.putExtras(bundle));
     } else if (item.getItemId() == android.R.id.home) {
       dlMain.openDrawer(GravityCompat.START);
+    } else if (item.getItemId() == R.id.item_search) {
+      Intent intent = new Intent(this, QueryJobActivity.class);
+      startActivity(intent);
     }
     return true;
   }
@@ -145,7 +148,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
       @Override
       public void onStateChanged(@NonNull View view, int i) {
-        if (i == BottomSheetBehavior.STATE_EXPANDED){
+        if (i == BottomSheetBehavior.STATE_EXPANDED) {
           llJobInfo.setVisibility(View.GONE);
         }
       }
@@ -260,6 +263,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
   public void onLocationChanged(AMapLocation aMapLocation) {
     if (aMapLocation != null && mListener != null) {
       if (aMapLocation.getErrorCode() == 0) {
+        presenter.cacheLocationInfo(aMapLocation);
         mListener.onLocationChanged(aMapLocation);
         latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
         presenter.fetchRecommendJob();
@@ -283,16 +287,15 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     }
   }
 
-
-  private void showJobDetail(JobBean.ListBean bean){
+  private void showJobDetail(JobBean.ListBean bean) {
     tvTitle.setText(bean.getJobTitle());
-    tvPublisher.setText("联系人："+bean.getContact());
-    tvAddress.setText("工作地址："+bean.getIssuePlace());
-    tvNeedNumber.setText("招聘人数"+bean.getJobCount());
-    tvSalary.setText(bean.getJobSalary() +" " +bean.getJobSalaryUnit());
-    tvDeadline.setText("截止时间："+bean.getClosingDate());
-    tvPublishTime.setText("发布时间："+bean.getReleaseDate());
-    movePosition(Double.parseDouble(bean.getLatitude()),Double.parseDouble(bean.getLongitude()));
+    tvPublisher.setText("联系人：" + bean.getContact());
+    tvAddress.setText("工作地址：" + bean.getIssuePlace());
+    tvNeedNumber.setText("招聘人数" + bean.getJobCount());
+    tvSalary.setText(bean.getJobSalary() + " " + bean.getJobSalaryUnit());
+    tvDeadline.setText("截止时间：" + bean.getClosingDate());
+    tvPublishTime.setText("发布时间：" + bean.getReleaseDate());
+    movePosition(Double.parseDouble(bean.getLatitude()), Double.parseDouble(bean.getLongitude()));
     llJobInfo.setVisibility(View.VISIBLE);
     llJobInfo.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -313,16 +316,16 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     mLocationOption = null;
   }
 
-  private void movePosition(double lat,double lon){
+  private void movePosition(double lat, double lon) {
     CameraPosition cp = aMap.getCameraPosition();
-    CameraPosition cpNew = CameraPosition.fromLatLngZoom(new LatLng(lat,lon),cp.zoom);
+    CameraPosition cpNew = CameraPosition.fromLatLngZoom(new LatLng(lat, lon), cp.zoom);
     CameraUpdate cu = CameraUpdateFactory.newCameraPosition(cpNew);
     aMap.moveCamera(cu);
   }
 
   @Override
   public boolean onMarkerClick(Marker marker) {
-    if (marker.getObject() instanceof JobBean.ListBean){
+    if (marker.getObject() instanceof JobBean.ListBean) {
       showJobDetail((JobBean.ListBean) marker.getObject());
     }
     return true;

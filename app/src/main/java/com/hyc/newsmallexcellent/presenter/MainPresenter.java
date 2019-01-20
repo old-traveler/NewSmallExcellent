@@ -4,6 +4,7 @@ import android.Manifest;
 import android.graphics.Bitmap;
 import android.support.v4.app.FragmentActivity;
 import android.util.Pair;
+import com.amap.api.location.AMapLocation;
 import com.hyc.newsmallexcellent.base.BasePresenter;
 import com.hyc.newsmallexcellent.base.helper.ToastHelper;
 import com.hyc.newsmallexcellent.base.rx.BaseErrorConsumer;
@@ -11,6 +12,7 @@ import com.hyc.newsmallexcellent.base.rx.BaseRequestConsumer;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.interfaces.MainContact;
 import com.hyc.newsmallexcellent.model.JobModel;
+import com.hyc.newsmallexcellent.model.UserModel;
 import com.hyc.newsmallexcellent.util.BitmapUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import io.reactivex.Scheduler;
@@ -23,6 +25,8 @@ public class MainPresenter extends BasePresenter<MainContact.IView>
     implements MainContact.IPresenter {
 
   private JobModel jobModel = new JobModel();
+
+  private UserModel userModel = new UserModel();
 
   @Override
   public void fetchRecommendJob() {
@@ -42,6 +46,12 @@ public class MainPresenter extends BasePresenter<MainContact.IView>
             mvpView.loadJobFail();
           }
         }));
+  }
+
+  @Override
+  public void cacheLocationInfo(AMapLocation aMapLocation){
+    userModel.cacheUserLocation(aMapLocation.getCity(), aMapLocation.getAddress(),
+        aMapLocation.getLatitude(), aMapLocation.getLongitude());
   }
 
   private void loadJobMapPoint(List<JobBean.ListBean> list) {

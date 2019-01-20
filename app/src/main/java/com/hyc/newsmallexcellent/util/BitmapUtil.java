@@ -16,7 +16,7 @@ import java.util.List;
 public class BitmapUtil {
 
   public static Observable<Pair<JobBean.ListBean, Bitmap>> loadMapMarker(
-      List<JobBean.ListBean> listBeans) {
+      List<JobBean.ListBean> listBeans)  {
     return Observable.create(emitter -> {
       Paint paint = new Paint();
       paint.setTextSize(80);

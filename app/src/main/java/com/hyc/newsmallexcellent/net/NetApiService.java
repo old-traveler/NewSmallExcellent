@@ -70,4 +70,9 @@ public interface NetApiService {
   Observable<BaseRequestBean<JobBean>> queryNearbyJob(@Query("longitude") double lon,
       @Query("latitude") double lat, @Query("pageNum") int pageNum,
       @Query("pageSize") int pageSize);
+
+  @FormUrlEncoded
+  @POST("job/findAllJobByCondition.do")
+  Observable<BaseRequestBean<JobBean>> queryJobByCondition(@FieldMap Map<String,Object> params);
+
 }
