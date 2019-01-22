@@ -228,7 +228,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
   public void loadJobInfo(JobBean jobBean) {
     page++;
     adapter.appendDataToList(jobBean.getList());
-    enableLoadMore = !jobBean.isIsLastPage();
+    enableLoadMore = !jobBean.isHasNextPage();
   }
 
   /**
