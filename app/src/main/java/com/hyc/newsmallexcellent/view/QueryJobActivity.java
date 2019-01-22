@@ -18,7 +18,6 @@ import com.hyc.newsmallexcellent.base.BaseMvpActivity;
 import com.hyc.newsmallexcellent.base.adapter.BaseRecycleAdapter;
 import com.hyc.newsmallexcellent.base.interfaces.OnItemClickListener;
 import com.hyc.newsmallexcellent.bean.AddressBean;
-import com.hyc.newsmallexcellent.bean.CategoryBean;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.helper.SpCacheHelper;
 import com.hyc.newsmallexcellent.interfaces.QueryJobContact;
@@ -53,6 +52,8 @@ public class QueryJobActivity extends BaseMvpActivity<QueryJobPresenter> impleme
     super.onCreate(savedInstanceState);
     setToolBarTitle("查询兼职");
     adapter = new BaseRecycleAdapter<>(R.layout.item_job_info, NearbyJobViewHolder.class);
+    adapter.setOnItemClickListener(
+        (itemData, view, position) -> JobDetailActivity.start(QueryJobActivity.this, itemData));
     rvJob.setLayoutManager(new LinearLayoutManager(this));
     rvJob.setAdapter(adapter);
     tvCity.setText(SpCacheHelper.getString("city"));
@@ -110,16 +111,16 @@ public class QueryJobActivity extends BaseMvpActivity<QueryJobPresenter> impleme
       String data = tvSalary.getText().toString();
       int length = data.length();
       int position = (int) tvSalary.getTag();
-      Pair<Integer,Integer> salary = null;
+      Pair<Integer, Integer> salary = null;
       if (data.charAt(length - 2) == '时') {
-        map.put("jobSalaryUnit","元/小时");
-        salary = new Pair<>(20,40);
+        map.put("jobSalaryUnit", "元/小时");
+        salary = new Pair<>(20, 40);
       } else if (data.charAt(length - 2) == '日') {
-        map.put("jobSalaryUnit","元/日");
-        salary = new Pair<>(60,100);
+        map.put("jobSalaryUnit", "元/日");
+        salary = new Pair<>(60, 100);
       } else {
-        salary = new Pair<>(1000,3000);
-        map.put("jobSalaryUnit","元/月");
+        salary = new Pair<>(1000, 3000);
+        map.put("jobSalaryUnit", "元/月");
       }
       map.put("minSalary", position == 0 ? 0 : (position == 1 ? salary.first : salary.second));
       if (position != 2) {

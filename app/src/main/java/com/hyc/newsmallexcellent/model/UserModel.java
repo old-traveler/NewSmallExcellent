@@ -76,7 +76,7 @@ public class UserModel {
   }
 
   public int getCurUserId(){
-    return SpCacheHelper.getInt("user_id");
+    return SpCacheHelper.getInt("user_id",2);
   }
 
   public String getCurHeadUrl(){

@@ -40,7 +40,7 @@ public class ReleasePositionPresenter extends BasePresenter<ReleasePositionContr
   public void releasePosition() {
     if (mvpView.verificationInput()) {
       mvpView.showLoadingView();
-      addDisposable(jobModel.publishJob(2, mvpView.getJobInfo()).subscribe(
+      addDisposable(jobModel.publishJob(userModel.getCurUserId(), mvpView.getJobInfo()).subscribe(
           new BaseRequestConsumer<Object>(mvpView) {
             @Override
             protected void onRequestSuccess(Object data) {

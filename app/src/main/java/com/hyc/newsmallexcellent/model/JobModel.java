@@ -57,7 +57,18 @@ public class JobModel {
     return RequestHelper.getRequestApi().queryJobByCondition(map)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
+  }
 
+  public Observable<BaseRequestBean<Object>> uploadFootprint(int userId,int jobId,String jobTitle){
+    return RequestHelper.getRequestApi().uploadFootprint(userId,jobId,jobTitle)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<Object>> applyJob(int userId,int jobId,String applyInfo){
+    return RequestHelper.getRequestApi().applyJob(jobId,userId,applyInfo)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
   }
 
 

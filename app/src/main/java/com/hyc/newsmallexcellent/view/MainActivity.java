@@ -81,6 +81,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
   private LatLng latLng;
   private int page = 1;
   private boolean enableLoadMore = false;
+  private JobBean.ListBean listBean;
 
   //定位
   private OnLocationChangedListener mListener;
@@ -162,20 +163,17 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
       showJobDetail(itemData);
     });
     aMap.setOnMarkerClickListener(this);
-    aMap.setOnMapTouchListener(new AMap.OnMapTouchListener() {
-      @Override
-      public void onTouch(MotionEvent motionEvent) {
-        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-          if (motionEvent.getY() < llJobInfo.getY()) {
-            isTouchMap = false;
-          } else {
-            isTouchMap = true;
-          }
+    aMap.setOnMapTouchListener(motionEvent -> {
+      if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+        if (motionEvent.getY() < llJobInfo.getY()) {
+          isTouchMap = false;
+        } else {
+          isTouchMap = true;
         }
-        if (motionEvent.getAction() == MotionEvent.ACTION_MOVE && !isTouchMap) {
-          if (llJobInfo.getVisibility() == View.VISIBLE) {
-            llJobInfo.setVisibility(View.GONE);
-          }
+      }
+      if (motionEvent.getAction() == MotionEvent.ACTION_MOVE && !isTouchMap) {
+        if (llJobInfo.getVisibility() == View.VISIBLE) {
+          llJobInfo.setVisibility(View.GONE);
         }
       }
     });
@@ -228,7 +226,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
   public void loadJobInfo(JobBean jobBean) {
     page++;
     adapter.appendDataToList(jobBean.getList());
-    enableLoadMore = !jobBean.isHasNextPage();
+    enableLoadMore = jobBean.isHasNextPage();
   }
 
   /**
@@ -297,12 +295,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     tvPublishTime.setText("发布时间：" + bean.getReleaseDate());
     movePosition(Double.parseDouble(bean.getLatitude()), Double.parseDouble(bean.getLongitude()));
     llJobInfo.setVisibility(View.VISIBLE);
-    llJobInfo.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-      }
-    });
+    llJobInfo.setOnClickListener(view -> JobDetailActivity.start(MainActivity.this,listBean));
   }
 
   @Override

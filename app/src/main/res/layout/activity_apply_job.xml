@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".view.ApplyJobActivity">
+
+  <include layout="@layout/lib_layout_toolbar"/>
+
+  <EditText
+    android:id="@+id/et_apply_info"
+    android:gravity="start"
+    android:hint="请输入您的申请理由"
+    android:background="#F0EFEF"
+    android:padding="5dp"
+    android:layout_marginTop="?actionBarSize"
+    android:layout_width="match_parent"
+    android:layout_height="200dp" />
+
+  <Button
+    android:id="@+id/btn_apply"
+    android:layout_gravity="center_horizontal"
+    android:backgroundTint="@color/colorPrimary"
+    android:layout_marginTop="300dp"
+    android:text="申请兼职"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content" />
+
+</FrameLayout>

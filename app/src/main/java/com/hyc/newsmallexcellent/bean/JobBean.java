@@ -1,5 +1,7 @@
 package com.hyc.newsmallexcellent.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.List;
 
 public class JobBean {
@@ -198,7 +200,7 @@ public class JobBean {
     this.navigatepageNums = navigatepageNums;
   }
 
-  public static class ListBean {
+  public static class ListBean implements Parcelable {
     /**
      * id : 10
      * userId : 2
@@ -244,6 +246,70 @@ public class JobBean {
     private String longitude;
     private String latitude;
     private String city;
+
+    protected ListBean(Parcel in) {
+      id = in.readInt();
+      userId = in.readInt();
+      jobTitle = in.readString();
+      jobDescribe = in.readString();
+      jobCategory = in.readString();
+      jobSalary = in.readDouble();
+      jobSalaryUnit = in.readString();
+      jobCount = in.readInt();
+      workingHours = in.readString();
+      workingDays = in.readString();
+      contact = in.readString();
+      telephone = in.readString();
+      isAuthentication = in.readInt();
+      releaseDate = in.readString();
+      closingDate = in.readString();
+      issuePlace = in.readString();
+      status = in.readInt();
+      longitude = in.readString();
+      latitude = in.readString();
+      city = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+      dest.writeInt(id);
+      dest.writeInt(userId);
+      dest.writeString(jobTitle);
+      dest.writeString(jobDescribe);
+      dest.writeString(jobCategory);
+      dest.writeDouble(jobSalary);
+      dest.writeString(jobSalaryUnit);
+      dest.writeInt(jobCount);
+      dest.writeString(workingHours);
+      dest.writeString(workingDays);
+      dest.writeString(contact);
+      dest.writeString(telephone);
+      dest.writeInt(isAuthentication);
+      dest.writeString(releaseDate);
+      dest.writeString(closingDate);
+      dest.writeString(issuePlace);
+      dest.writeInt(status);
+      dest.writeString(longitude);
+      dest.writeString(latitude);
+      dest.writeString(city);
+    }
+
+    @Override
+    public int describeContents() {
+      return 0;
+    }
+
+    public static final Creator<ListBean> CREATOR = new Creator<ListBean>() {
+      @Override
+      public ListBean createFromParcel(Parcel in) {
+        return new ListBean(in);
+      }
+
+      @Override
+      public ListBean[] newArray(int size) {
+        return new ListBean[size];
+      }
+    };
 
     public int getId() {
       return id;

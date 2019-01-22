@@ -73,6 +73,13 @@ public interface NetApiService {
 
   @FormUrlEncoded
   @POST("job/findAllJobByCondition.do")
-  Observable<BaseRequestBean<JobBean>> queryJobByCondition(@FieldMap Map<String,Object> params);
+  Observable<BaseRequestBean<JobBean>> queryJobByCondition(@FieldMap Map<String, Object> params);
 
+  @GET("footprint/addFootprint.do")
+  Observable<BaseRequestBean<Object>> uploadFootprint(@Query("userId") int userId,
+      @Query("jobId") int id, @Query("jobTitle") String jobTitle);
+
+  @GET("apply/addApply.do")
+  Observable<BaseRequestBean<Object>> applyJob(@Query("jobId") int jobId, @Query("applyUserId")
+      int userId, @Query("applyInformation") String applyInformation);
 }
