@@ -77,6 +77,12 @@ public class JobModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
+  public Observable<BaseRequestBean<JobBean.ListBean>> findJobById(int id){
+    return RequestHelper.getRequestApi().findJobById(id)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
 
 
 }

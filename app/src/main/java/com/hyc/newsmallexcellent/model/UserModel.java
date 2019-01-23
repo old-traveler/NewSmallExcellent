@@ -1,5 +1,6 @@
 package com.hyc.newsmallexcellent.model;
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
+import com.hyc.newsmallexcellent.bean.FootPrintBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.bean.UploadImageBean;
@@ -96,6 +97,12 @@ public class UserModel {
 
   public Observable<BaseRequestBean<Object>> updateUserResume(Map<String,Object> map,int id,int userId){
     return RequestHelper.getRequestApi().updateResume(id,userId,map)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(int userId,int pageSize,int pageNum){
+    return RequestHelper.getRequestApi().findAllFootprint(userId,pageSize,pageNum)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }

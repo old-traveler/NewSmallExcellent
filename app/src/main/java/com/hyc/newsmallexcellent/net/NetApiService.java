@@ -2,6 +2,7 @@ package com.hyc.newsmallexcellent.net;
 
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.CategoryBean;
+import com.hyc.newsmallexcellent.bean.FootPrintBean;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
@@ -87,6 +88,10 @@ public interface NetApiService {
   Observable<BaseRequestBean<Object>> reportUser(@Query("reportUserId") int reportUserId,
       @Query("bereportUserId") int bereportUserId, @Query("reportContent") String reportContent);
 
-  //@GET("footprint/findAllFootprint.do")
-  //Observable<BaseRequestBean<Object>>
+  @GET("footprint/findAllFootprint.do")
+  Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(@Query("userId") int userId,
+      @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
+
+  @GET("job/findJobById.do")
+  Observable<BaseRequestBean<JobBean.ListBean>> findJobById(@Query("id")int id);
 }
