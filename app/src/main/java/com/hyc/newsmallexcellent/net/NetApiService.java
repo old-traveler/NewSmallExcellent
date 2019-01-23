@@ -82,4 +82,11 @@ public interface NetApiService {
   @GET("apply/addApply.do")
   Observable<BaseRequestBean<Object>> applyJob(@Query("jobId") int jobId, @Query("applyUserId")
       int userId, @Query("applyInformation") String applyInformation);
+
+  @GET("report/addReport.do")
+  Observable<BaseRequestBean<Object>> reportUser(@Query("reportUserId") int reportUserId,
+      @Query("bereportUserId") int bereportUserId, @Query("reportContent") String reportContent);
+
+  //@GET("footprint/findAllFootprint.do")
+  //Observable<BaseRequestBean<Object>>
 }

@@ -286,6 +286,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
   }
 
   private void showJobDetail(JobBean.ListBean bean) {
+    this.listBean = bean;
     tvTitle.setText(bean.getJobTitle());
     tvPublisher.setText("联系人：" + bean.getContact());
     tvAddress.setText("工作地址：" + bean.getIssuePlace());

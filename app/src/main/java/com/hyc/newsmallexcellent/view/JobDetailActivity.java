@@ -3,6 +3,8 @@ package com.hyc.newsmallexcellent.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -46,6 +48,7 @@ public class JobDetailActivity extends BaseMvpActivity<JobDetailPresenter> imple
   Button btnApplyJob;
 
   private int jobId;
+  private int publisherId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,22 +58,38 @@ public class JobDetailActivity extends BaseMvpActivity<JobDetailPresenter> imple
     initViewWithBundle(Objects.requireNonNull(getIntent().getExtras()));
   }
 
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_job_detail,menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.item_report){
+      ReportActivity.start(this,publisherId);
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
   private void initViewWithBundle(Bundle bundle) {
     JobBean.ListBean listBean = bundle.getParcelable("job_info");
     assert listBean != null;
     tvJobName.setText(listBean.getJobTitle());
     tvJobSalary.setText(String.format("%s %s", listBean.getJobSalary(), listBean.getJobSalaryUnit()));
-    tvJobCount.setText(listBean.getJobCount());
+    tvJobCount.setText(String.format("%d人", listBean.getJobCount()));
     tvJobArea.setText(listBean.getCity());
     tvDeadline.setText(listBean.getClosingDate());
     tvWorkHour.setText(listBean.getWorkingHours());
-    tvWorkDay.setText(listBean.getWorkingDays());
+    tvWorkDay.setText(String.format("%s天", listBean.getWorkingDays()));
     tvPublisher.setText(listBean.getContact());
     tvContactPhone.setText(listBean.getTelephone());
     tvAddress.setText(listBean.getIssuePlace());
     tvJobDescribe.setText(listBean.getJobDescribe());
     presenter.uploadFootprint(listBean.getId(),listBean.getJobTitle());
     jobId = listBean.getId();
+    publisherId = listBean.getUserId();
   }
 
   public static void start(Context context, JobBean.ListBean listBean) {

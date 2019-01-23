@@ -71,6 +71,12 @@ public class JobModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
+  public Observable<BaseRequestBean<Object>> reportUser(int reportUserId,int bereportUserId,String reportContent){
+    return RequestHelper.getRequestApi().reportUser(reportUserId,bereportUserId,reportContent)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
 
 
 }

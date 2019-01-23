@@ -16,6 +16,7 @@ public class ApplyJobPresenter extends BasePresenter<ApplyJobContact.IView>
 
   @Override
   public void applyJob() {
+    mvpView.showLoadingView();
     addDisposable(
         jobModel.applyJob(userModel.getCurUserId(), mvpView.getJobId(), mvpView.getApplyInfo())
             .subscribe(new BaseRequestConsumer<Object>(mvpView) {

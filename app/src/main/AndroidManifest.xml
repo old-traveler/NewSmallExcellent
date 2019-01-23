@@ -35,7 +35,8 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".view.ApplyJobActivity"></activity>
+    <activity android:name=".view.ReportActivity"></activity>
+    <activity android:name=".view.ApplyJobActivity" />
     <activity android:name=".view.JobDetailActivity" />
     <activity android:name=".view.QueryJobActivity" />
     <activity android:name=".view.MainActivity">
