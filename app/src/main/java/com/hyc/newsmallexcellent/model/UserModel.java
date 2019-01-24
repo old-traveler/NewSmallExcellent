@@ -1,4 +1,6 @@
 package com.hyc.newsmallexcellent.model;
+
+import com.amap.api.maps.model.LatLng;
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.FootPrintBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
@@ -25,66 +27,69 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<Object>> register(String account, String password, String code) {
+  public Observable<BaseRequestBean<Object>> register(String account, String password,
+      String code) {
     return RequestHelper.getRequestApi().register(account, password, code)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<LoginActionBean>> login(String account,String password){
-    return RequestHelper.getRequestApi().login(account,password)
+  public Observable<BaseRequestBean<LoginActionBean>> login(String account, String password) {
+    return RequestHelper.getRequestApi().login(account, password)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public void cacheUserInfo(LoginActionBean bean){
+  public void cacheUserInfo(LoginActionBean bean) {
     SpCacheHelper.withBuilder()
-        .withInt("user_id",bean.getId())
-        .withString("accountname",bean.getAccountname())
-        .withString("nickname",bean.getNickname())
-        .withInt("isAuthentication",bean.getIsAuthentication())
-        .withInt("status",bean.getStatus())
-        .withString("headUrl",bean.getHeadUrl())
+        .withInt("user_id", bean.getId())
+        .withString("accountname", bean.getAccountname())
+        .withString("nickname", bean.getNickname())
+        .withInt("isAuthentication", bean.getIsAuthentication())
+        .withInt("status", bean.getStatus())
+        .withString("headUrl", bean.getHeadUrl())
         .commit();
   }
 
-  public void cacheUserLocation(String city,String address,double latitude,double longitude){
+  public void cacheUserLocation(String city, String address, double latitude, double longitude) {
     SpCacheHelper.withBuilder()
-        .withString("city",city)
-        .withString("address",address)
+        .withString("city", city)
+        .withString("address", address)
         .withString("lat", String.valueOf(latitude))
         .withString("lon", String.valueOf(longitude))
         .commit();
   }
 
-
-  public Observable<BaseRequestBean<Object>> changePassword(int id, String oldPwd, String newPwd){
-    return RequestHelper.getRequestApi().change(id,oldPwd,newPwd)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread());
+  public LatLng getUserLatLng() {
+    return new LatLng(Double.parseDouble(SpCacheHelper.getString("lat")),
+        Double.parseDouble(SpCacheHelper.getString("lon")));
   }
 
-  public Observable<BaseRequestBean<ResumeInfoBean>> getUserResumeInfo(int id){
+  public Observable<BaseRequestBean<Object>> changePassword(int id, String oldPwd, String newPwd) {
+    return RequestHelper.getRequestApi().change(id, oldPwd, newPwd)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<ResumeInfoBean>> getUserResumeInfo(int id) {
     return RequestHelper.getRequestApi().getUserResumeInfo(id)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-
-
-  public boolean isCurUser(int id){
+  public boolean isCurUser(int id) {
     return getCurUserId() == id;
   }
 
-  public int getCurUserId(){
-    return SpCacheHelper.getInt("user_id",2);
+  public int getCurUserId() {
+    return SpCacheHelper.getInt("user_id", 2);
   }
 
-  public String getCurHeadUrl(){
+  public String getCurHeadUrl() {
     return SpCacheHelper.getString("headUrl");
   }
 
-  public Observable<BaseRequestBean<UploadImageBean>> uploadImage(Map<String,Object> map){
+  public Observable<BaseRequestBean<UploadImageBean>> uploadImage(Map<String, Object> map) {
     File file = new File((String) map.get("headPhoto"));
     RequestBody requestFile =
         RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -95,17 +100,17 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<Object>> updateUserResume(Map<String,Object> map,int id,int userId){
-    return RequestHelper.getRequestApi().updateResume(id,userId,map)
+  public Observable<BaseRequestBean<Object>> updateUserResume(Map<String, Object> map, int id,
+      int userId) {
+    return RequestHelper.getRequestApi().updateResume(id, userId, map)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(int userId,int pageSize,int pageNum){
-    return RequestHelper.getRequestApi().findAllFootprint(userId,pageSize,pageNum)
+  public Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(int userId, int pageSize,
+      int pageNum) {
+    return RequestHelper.getRequestApi().findAllFootprint(userId, pageSize, pageNum)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
-
-
 }

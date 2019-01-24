@@ -12,10 +12,14 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.services.core.LatLonPoint;
 import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.base.BaseMvpActivity;
 import com.hyc.newsmallexcellent.bean.JobBean;
+import com.hyc.newsmallexcellent.helper.SpCacheHelper;
 import com.hyc.newsmallexcellent.interfaces.JobDetailContact;
+import com.hyc.newsmallexcellent.other.route.RouteActivity;
 import com.hyc.newsmallexcellent.presenter.JobDetailPresenter;
 import java.util.Objects;
 
@@ -49,6 +53,7 @@ public class JobDetailActivity extends BaseMvpActivity<JobDetailPresenter> imple
 
   private int jobId;
   private int publisherId;
+  private LatLonPoint latLonPoint;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +105,17 @@ public class JobDetailActivity extends BaseMvpActivity<JobDetailPresenter> imple
     presenter.uploadFootprint(listBean.getId(), listBean.getJobTitle());
     jobId = listBean.getId();
     publisherId = listBean.getUserId();
+    latLonPoint = new LatLonPoint(Double.parseDouble(listBean.getLatitude()),Double.parseDouble(listBean.getLongitude()));
+  }
+
+  @Override
+  public void onGoToRoutePlan() {
+    startActivity(new Intent(this,RouteActivity.class));
+  }
+
+  @Override
+  public LatLonPoint getEndLatlng() {
+    return latLonPoint;
   }
 
   public static void start(Context context, JobBean.ListBean listBean) {
@@ -123,6 +139,7 @@ public class JobDetailActivity extends BaseMvpActivity<JobDetailPresenter> imple
   public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.tv_path_plan:
+        presenter.startRoutePlan();
         break;
       case R.id.btn_apply_job:
         ApplyJobActivity.start(this, jobId);
