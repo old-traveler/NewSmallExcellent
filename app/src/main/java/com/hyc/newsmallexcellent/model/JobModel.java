@@ -1,6 +1,7 @@
 package com.hyc.newsmallexcellent.model;
 
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
+import com.hyc.newsmallexcellent.bean.ApplyBean;
 import com.hyc.newsmallexcellent.bean.CategoryBean;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.helper.RequestHelper;
@@ -83,6 +84,17 @@ public class JobModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
+  public Observable<BaseRequestBean<ApplyBean>> findAllApply(int userId,int pageSize,int pageNum){
+    return RequestHelper.getRequestApi().findAllApply(userId,pageSize,pageNum)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<Object>> cancelApply(int id){
+    return RequestHelper.getRequestApi().cancelApply(id)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
 
 
 }

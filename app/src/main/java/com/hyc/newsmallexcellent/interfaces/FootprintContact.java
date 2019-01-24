@@ -8,6 +8,8 @@ public interface FootprintContact {
   public interface IPresenter{
 
     void fetchFootPrint();
+
+    void deleteFootprint(int id,int position);
   }
 
   public interface IView extends ILoading {
@@ -15,6 +17,8 @@ public interface FootprintContact {
     void loadFootPrint(FootPrintBean footPrintBean);
 
     int getCurPage();
+
+    void onSuccessDeleteFootPrint(int position);
 
   }
 

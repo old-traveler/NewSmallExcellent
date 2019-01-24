@@ -111,6 +111,13 @@ public class UserModel {
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
+
+  public Observable<BaseRequestBean<Object>> deleteFootprint(int id){
+    return RequestHelper.getRequestApi().deleteFootprint(id)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
   /**
    * 认证Model
    */

@@ -37,7 +37,7 @@ public class FootprintActivity extends BaseMvpActivity<FootprintPresenter> imple
     setContentView(R.layout.activity_footprint);
     super.onCreate(savedInstanceState);
     setToolBarTitle("我的足迹");
-    adapter = new BaseRecycleAdapter<>(R.layout.item_footprint,FootprintViewHolder.class);
+    adapter = new BaseRecycleAdapter<>(R.layout.item_footprint, FootprintViewHolder.class);
     rvFootprint.setLayoutManager(new LinearLayoutManager(this));
     rvFootprint.setAdapter(adapter);
     srlFootprint.setOnRefreshListener(this);
@@ -46,7 +46,11 @@ public class FootprintActivity extends BaseMvpActivity<FootprintPresenter> imple
     rvFootprint.addItemDecoration(
         new RecycleViewDivider(this, LinearLayoutManager.VERTICAL, 1, Color.GRAY));
     adapter.setOnItemClickListener((itemData, view, position) -> {
-      JobDetailActivity.start(this,itemData.getJobId());
+      JobDetailActivity.start(this, itemData.getJobId());
+    });
+    adapter.setOnItemLongClickListener((itemData, view, position) -> {
+      presenter.deleteFootprint(itemData.getId(), position);
+      return true;
     });
   }
 
@@ -57,21 +61,25 @@ public class FootprintActivity extends BaseMvpActivity<FootprintPresenter> imple
 
   @Override
   public void loadFootPrint(FootPrintBean footPrintBean) {
-    if (srlFootprint.getState() == RefreshState.Refreshing){
+    if (srlFootprint.getState() == RefreshState.Refreshing) {
       adapter.setDataList(footPrintBean.getList());
       srlFootprint.finishRefresh();
-    }else {
+    } else {
       adapter.appendDataToList(footPrintBean.getList());
       srlFootprint.finishLoadMore();
     }
     page++;
     srlFootprint.setEnableLoadMore(footPrintBean.isHasNextPage());
-
   }
 
   @Override
   public int getCurPage() {
     return page;
+  }
+
+  @Override
+  public void onSuccessDeleteFootPrint(int position) {
+    adapter.removeItemFormList(position);
   }
 
   @Override
@@ -84,6 +92,4 @@ public class FootprintActivity extends BaseMvpActivity<FootprintPresenter> imple
   public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
     presenter.fetchFootPrint();
   }
-
-
 }

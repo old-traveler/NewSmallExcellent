@@ -1,6 +1,7 @@
 package com.hyc.newsmallexcellent.net;
 
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
+import com.hyc.newsmallexcellent.bean.ApplyBean;
 import com.hyc.newsmallexcellent.bean.CategoryBean;
 import com.hyc.newsmallexcellent.bean.FootPrintBean;
 import com.hyc.newsmallexcellent.bean.JobBean;
@@ -90,19 +91,27 @@ public interface NetApiService {
 
   @GET("footprint/findAllFootprint.do")
   Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(@Query("userId") int userId,
-                                                              @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
+      @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
 
   @GET("job/findJobById.do")
-  Observable<BaseRequestBean<JobBean.ListBean>> findJobById(@Query("id")int id);
+  Observable<BaseRequestBean<JobBean.ListBean>> findJobById(@Query("id") int id);
 
   /**
    * 认证模块接口
    */
   @GET
   Observable<BaseRequestBean<Object>> authentication(
-          @Query("userId") int userId, @Query("userName") String userName,
-          @Query("authenticationType") int authenticationType, @Query("photoOne") String photoOne,
-          @Query("photoTwo") String photoTwo);
-  //@GET("footprint/findAllFootprint.do")
-  //Observable<BaseRequestBean<Object>>
+      @Query("userId") int userId, @Query("userName") String userName,
+      @Query("authenticationType") int authenticationType, @Query("photoOne") String photoOne,
+      @Query("photoTwo") String photoTwo);
+
+  @GET("footprint/delFootprint.do")
+  Observable<BaseRequestBean<Object>> deleteFootprint(@Query("id") int id);
+
+  @GET("apply/findAllApply.do")
+  Observable<BaseRequestBean<ApplyBean>> findAllApply(@Query("applyUserId") int id,
+      @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
+
+  @GET("apply/delApply.do")
+  Observable<BaseRequestBean<Object>> cancelApply(@Query("id")int id);
 }
