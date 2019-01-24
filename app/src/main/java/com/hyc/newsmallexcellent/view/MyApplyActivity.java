@@ -20,6 +20,7 @@ import com.hyc.newsmallexcellent.presenter.MyApplyPresenter;
 import com.hyc.newsmallexcellent.widget.RecycleViewDivider;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
@@ -39,14 +40,14 @@ public class MyApplyActivity extends BaseMvpActivity<MyApplyPresenter>
     setContentView(R.layout.activity_my_apply);
     super.onCreate(savedInstanceState);
     rvMyApply.setLayoutManager(new LinearLayoutManager(this));
-    rvMyApply.addItemDecoration(new RecycleViewDivider(this, LinearLayout.VERTICAL,1, Color.GRAY));
+    rvMyApply.addItemDecoration(new RecycleViewDivider(this, LinearLayout.VERTICAL, 1, Color.GRAY));
     rvMyApply.setAdapter(
         adapter = new BaseRecycleAdapter<>(R.layout.item_my_apply, MyApplyViewHolder.class));
     srlMyApply.setOnRefreshListener(this);
     srlMyApply.setOnLoadMoreListener(this);
     adapter.setOnItemLongClickListener((itemData, view, position) -> {
-      if (itemData.getHandleStatus() == 0){
-        presenter.cancelApply(itemData.getId(),position);
+      if (itemData.getHandleStatus() == 0) {
+        presenter.cancelApply(itemData.getId(), position);
       }
       return true;
     });
@@ -66,15 +67,25 @@ public class MyApplyActivity extends BaseMvpActivity<MyApplyPresenter>
     if (isLoadMore) {
       adapter.appendDataToList(applyBean.getList());
       srlMyApply.finishLoadMore();
-    }else {
+    } else {
       adapter.setDataList(applyBean.getList());
       srlMyApply.finishRefresh();
     }
   }
 
   @Override
+  public void closeLoadingView() {
+    super.closeLoadingView();
+    if (srlMyApply.getState() == RefreshState.Refreshing) {
+      srlMyApply.finishRefresh();
+    } else if (srlMyApply.getState() == RefreshState.Loading) {
+      srlMyApply.finishLoadMore();
+    }
+  }
+
+  @Override
   public void onSuccessCancelApply(int position) {
-   adapter.removeItemFormList(position);
+    adapter.removeItemFormList(position);
   }
 
   @Override

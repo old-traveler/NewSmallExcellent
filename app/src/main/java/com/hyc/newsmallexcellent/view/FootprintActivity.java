@@ -73,6 +73,16 @@ public class FootprintActivity extends BaseMvpActivity<FootprintPresenter> imple
   }
 
   @Override
+  public void closeLoadingView() {
+    super.closeLoadingView();
+    if (srlFootprint.getState() == RefreshState.Refreshing){
+      srlFootprint.finishRefresh();
+    }else if (srlFootprint.getState() == RefreshState.Loading){
+      srlFootprint.finishLoadMore();
+    }
+  }
+
+  @Override
   public int getCurPage() {
     return page;
   }
