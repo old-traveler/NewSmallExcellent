@@ -35,7 +35,8 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".view.MyApplyActivity"/>
+    <activity android:name=".view.PersonalPublishActivity"></activity>
+    <activity android:name=".view.MyApplyActivity" />
     <activity android:name=".view.AuthenticationActivity" />
     <activity android:name=".view.FootprintActivity" />
     <activity android:name=".view.ReportActivity" />

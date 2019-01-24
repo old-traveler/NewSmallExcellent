@@ -2,6 +2,7 @@ package com.hyc.newsmallexcellent.model;
 import com.amap.api.maps.model.LatLng;
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.FootPrintBean;
+import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.bean.UploadImageBean;
@@ -114,6 +115,18 @@ public class UserModel {
 
   public Observable<BaseRequestBean<Object>> deleteFootprint(int id){
     return RequestHelper.getRequestApi().deleteFootprint(id)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<JobBean>> findUserJob(int userId,int pageSize,int pageNum){
+    return RequestHelper.getRequestApi().findUserPublishJob(userId,pageSize,pageNum)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<Object>> revokeJob(int jobId){
+    return RequestHelper.getRequestApi().revokeJob(jobId)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
