@@ -1,5 +1,4 @@
 package com.hyc.newsmallexcellent.model;
-
 import com.amap.api.maps.model.LatLng;
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.FootPrintBean;
@@ -107,10 +106,19 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(int userId, int pageSize,
-      int pageNum) {
+  public Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(int userId, int pageSize, int pageNum) {
     return RequestHelper.getRequestApi().findAllFootprint(userId, pageSize, pageNum)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
+  /**
+   * 认证Model
+   */
+  public Observable<BaseRequestBean<Object>> userAuthentication(int userId, String userName, int authenticationType,
+                                                                String photoOne, String photoTwo){
+    return RequestHelper.getRequestApi().authentication(userId,userName,authenticationType,photoOne,photoTwo)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread());
+  }
+
 }

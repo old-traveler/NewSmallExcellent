@@ -90,8 +90,19 @@ public interface NetApiService {
 
   @GET("footprint/findAllFootprint.do")
   Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(@Query("userId") int userId,
-      @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
+                                                              @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
 
   @GET("job/findJobById.do")
   Observable<BaseRequestBean<JobBean.ListBean>> findJobById(@Query("id")int id);
+
+  /**
+   * 认证模块接口
+   */
+  @GET
+  Observable<BaseRequestBean<Object>> authentication(
+          @Query("userId") int userId, @Query("userName") String userName,
+          @Query("authenticationType") int authenticationType, @Query("photoOne") String photoOne,
+          @Query("photoTwo") String photoTwo);
+  //@GET("footprint/findAllFootprint.do")
+  //Observable<BaseRequestBean<Object>>
 }

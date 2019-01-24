@@ -61,11 +61,6 @@
       android:screenOrientation="portrait"
       android:theme="@style/AppTheme" />
     <activity android:name=".view.SearchAddressActivity" />
-    <activity android:name=".other.route.RouteActivity"/>
-    <activity android:name=".other.route.BusRouteDetailActivity"/>
-    <activity android:name=".other.route.DriveRouteDetailActivity"/>
-    <activity android:name=".other.route.RideRouteDetailActivity"/>
-    <activity android:name=".other.route.WalkRouteDetailActivity"/>
   </application>
 
 </manifest>
