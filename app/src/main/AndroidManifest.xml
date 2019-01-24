@@ -35,7 +35,8 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".view.FootprintActivity"/>
+    <activity android:name=".view.AuthenticationActivity" />
+    <activity android:name=".view.FootprintActivity" />
     <activity android:name=".view.ReportActivity" />
     <activity android:name=".view.ApplyJobActivity" />
     <activity android:name=".view.JobDetailActivity" />
@@ -61,6 +62,11 @@
       android:screenOrientation="portrait"
       android:theme="@style/AppTheme" />
     <activity android:name=".view.SearchAddressActivity" />
+    <activity android:name=".other.route.RouteActivity" />
+    <activity android:name=".other.route.WalkRouteDetailActivity" />
+    <activity android:name=".other.route.RideRouteDetailActivity" />
+    <activity android:name=".other.route.DriveRouteDetailActivity" />
+    <activity android:name=".other.route.BusRouteDetailActivity" />
   </application>
 
 </manifest>

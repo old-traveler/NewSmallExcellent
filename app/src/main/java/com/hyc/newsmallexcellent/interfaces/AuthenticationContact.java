@@ -8,7 +8,7 @@ public interface AuthenticationContact {
 
     interface Authentication{
         void authentication();
-        void requestPermission(FragmentActivity fragmentActivity);
+        void requestPermission(FragmentActivity fragmentActivity,boolean isFirst);
     }
 
     interface View extends ILoading {
@@ -21,7 +21,7 @@ public interface AuthenticationContact {
         boolean verificationInput();
         void onChangeSuccess();
 
-        void requestPermissionSuccess();
+        void requestPermissionSuccess(boolean isFirst);
 
         void requestPermissionFail();
     }

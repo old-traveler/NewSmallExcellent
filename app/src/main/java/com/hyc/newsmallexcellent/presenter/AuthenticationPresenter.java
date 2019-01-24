@@ -31,12 +31,12 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationContact
     }
 
     @Override
-    public void requestPermission(FragmentActivity fragmentActivity) {
+    public void requestPermission(FragmentActivity fragmentActivity,boolean isFirst) {
         addDisposable(new RxPermissions(fragmentActivity)
                 .request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(granted -> {
                     if (granted) {
-                        mvpView.requestPermissionSuccess();
+                        mvpView.requestPermissionSuccess(isFirst);
                     } else {
                         mvpView.requestPermissionFail();
                     }
