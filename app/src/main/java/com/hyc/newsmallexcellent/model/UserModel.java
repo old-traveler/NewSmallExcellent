@@ -1,6 +1,8 @@
 package com.hyc.newsmallexcellent.model;
+
 import com.amap.api.maps.model.LatLng;
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
+import com.hyc.newsmallexcellent.bean.ApplyBean;
 import com.hyc.newsmallexcellent.bean.FootPrintBean;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
@@ -107,38 +109,50 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(int userId, int pageSize, int pageNum) {
+  public Observable<BaseRequestBean<FootPrintBean>> findAllFootprint(int userId, int pageSize,
+      int pageNum) {
     return RequestHelper.getRequestApi().findAllFootprint(userId, pageSize, pageNum)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<Object>> deleteFootprint(int id){
+  public Observable<BaseRequestBean<Object>> deleteFootprint(int id) {
     return RequestHelper.getRequestApi().deleteFootprint(id)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<JobBean>> findUserJob(int userId,int pageSize,int pageNum){
-    return RequestHelper.getRequestApi().findUserPublishJob(userId,pageSize,pageNum)
+  public Observable<BaseRequestBean<JobBean>> findUserJob(int userId, int pageSize, int pageNum) {
+    return RequestHelper.getRequestApi().findUserPublishJob(userId, pageSize, pageNum)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<Object>> revokeJob(int jobId){
+  public Observable<BaseRequestBean<Object>> revokeJob(int jobId) {
     return RequestHelper.getRequestApi().revokeJob(jobId)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  /**
-   * 认证Model
-   */
-  public Observable<BaseRequestBean<Object>> userAuthentication(int userId, String userName, int authenticationType,
-                                                                String photoOne, String photoTwo){
-    return RequestHelper.getRequestApi().authentication(userId,userName,authenticationType,photoOne,photoTwo)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread());
+  public Observable<BaseRequestBean<Object>> userAuthentication(int userId, String userName,
+      int authenticationType,
+      String photoOne, String photoTwo) {
+    return RequestHelper.getRequestApi()
+        .authentication(userId, userName, authenticationType, photoOne, photoTwo)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<ApplyBean>> findApplyByUserId(int userId,int pageSize,int pageNum){
+    return RequestHelper.getRequestApi().findApplyByAddId(userId,pageSize,pageNum)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<Object>> handleApply(int id,int resultStatus){
+    return RequestHelper.getRequestApi().handleApply(id,resultStatus)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
   }
 
 }

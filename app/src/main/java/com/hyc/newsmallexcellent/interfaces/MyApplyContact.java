@@ -11,6 +11,8 @@ public interface MyApplyContact {
 
     void cancelApply(int id,int position);
 
+    void dealApply(int id,boolean isOk);
+
   }
 
   public interface IView extends ILoading {
@@ -20,6 +22,10 @@ public interface MyApplyContact {
     void onSuccessCancelApply(int position);
 
     int getCurPage();
+
+    boolean isDealer();
+
+    void onDealSuccess();
 
   }
 

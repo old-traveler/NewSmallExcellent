@@ -13,7 +13,11 @@ import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.adapter.viewholder.MyApplyViewHolder;
 import com.hyc.newsmallexcellent.base.BaseMvpActivity;
 import com.hyc.newsmallexcellent.base.adapter.BaseRecycleAdapter;
+import com.hyc.newsmallexcellent.base.helper.ToastHelper;
+import com.hyc.newsmallexcellent.base.interfaces.OnDialogClickListener;
+import com.hyc.newsmallexcellent.base.interfaces.OnItemClickListener;
 import com.hyc.newsmallexcellent.base.interfaces.OnItemLongClickListener;
+import com.hyc.newsmallexcellent.base.widger.CommonDialog;
 import com.hyc.newsmallexcellent.bean.ApplyBean;
 import com.hyc.newsmallexcellent.interfaces.MyApplyContact;
 import com.hyc.newsmallexcellent.presenter.MyApplyPresenter;
@@ -32,6 +36,8 @@ public class MyApplyActivity extends BaseMvpActivity<MyApplyPresenter>
   @BindView(R.id.srl_my_apply)
   SmartRefreshLayout srlMyApply;
 
+  private boolean isDeal = true;
+
   private int page = 1;
   private BaseRecycleAdapter<ApplyBean.ListBean, MyApplyViewHolder> adapter;
 
@@ -45,12 +51,25 @@ public class MyApplyActivity extends BaseMvpActivity<MyApplyPresenter>
         adapter = new BaseRecycleAdapter<>(R.layout.item_my_apply, MyApplyViewHolder.class));
     srlMyApply.setOnRefreshListener(this);
     srlMyApply.setOnLoadMoreListener(this);
-    adapter.setOnItemLongClickListener((itemData, view, position) -> {
-      if (itemData.getHandleStatus() == 0) {
-        presenter.cancelApply(itemData.getId(), position);
-      }
-      return true;
-    });
+    if (isDeal) {
+      adapter.setOnItemClickListener((itemData, view, position) -> {
+        CommonDialog.showDialog(MyApplyActivity.this, "是否同意申请",
+            "不同意", "同意", itemData.getApplyInformation(), isPosition -> {
+              presenter.dealApply(itemData.getId(), isPosition);
+            });
+      });
+    } else {
+      adapter.setOnItemClickListener((itemData, view, position) -> {
+        if (itemData.getHandleStatus() == 0) {
+          CommonDialog.showDialog(MyApplyActivity.this, "是否撤销此条申请？", isPosition -> {
+            if (isPosition) {
+              presenter.cancelApply(itemData.getId(), position);
+            }
+          });
+        }
+      });
+    }
+
     setToolBarTitle("我的申请");
     srlMyApply.autoRefresh();
   }
@@ -91,6 +110,16 @@ public class MyApplyActivity extends BaseMvpActivity<MyApplyPresenter>
   @Override
   public int getCurPage() {
     return page;
+  }
+
+  @Override
+  public boolean isDealer() {
+    return isDeal;
+  }
+
+  @Override
+  public void onDealSuccess() {
+    ToastHelper.toast("处理成功");
   }
 
   @Override

@@ -35,15 +35,15 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".view.PersonalPublishActivity"></activity>
-    <activity android:name=".view.MyApplyActivity" />
+    <activity android:name=".view.PersonalPublishActivity"/>
+    <!--<activity android:name=".view.MyApplyActivity" />-->
     <activity android:name=".view.AuthenticationActivity" />
     <activity android:name=".view.FootprintActivity" />
     <activity android:name=".view.ReportActivity" />
     <activity android:name=".view.ApplyJobActivity" />
     <activity android:name=".view.JobDetailActivity" />
     <activity android:name=".view.QueryJobActivity" />
-    <activity android:name=".view.MainActivity">
+    <activity android:name=".view.MyApplyActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

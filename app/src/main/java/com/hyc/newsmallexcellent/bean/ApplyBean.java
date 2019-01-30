@@ -214,8 +214,8 @@ public class ApplyBean {
     private int jobId;
     private int applyUserId;
     private String applyInformation;
-    private long applyData;
-    private long handleData;
+    private String applyData;
+    private String handleData;
     private int handleStatus;
     private String remark;
 
@@ -251,19 +251,19 @@ public class ApplyBean {
       this.applyInformation = applyInformation;
     }
 
-    public long getApplyData() {
+    public String getApplyData() {
       return applyData;
     }
 
-    public void setApplyData(long applyData) {
+    public void setApplyData(String applyData) {
       this.applyData = applyData;
     }
 
-    public long getHandleData() {
+    public String getHandleData() {
       return handleData;
     }
 
-    public void setHandleData(long handleData) {
+    public void setHandleData(String handleData) {
       this.handleData = handleData;
     }
 

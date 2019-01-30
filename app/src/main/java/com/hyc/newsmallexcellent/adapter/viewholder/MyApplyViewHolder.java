@@ -9,8 +9,7 @@ import butterknife.ButterKnife;
 import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.base.adapter.viewholder.BaseViewHolder;
 import com.hyc.newsmallexcellent.bean.ApplyBean;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 public class MyApplyViewHolder extends BaseViewHolder<ApplyBean.ListBean> {
 
@@ -29,8 +28,7 @@ public class MyApplyViewHolder extends BaseViewHolder<ApplyBean.ListBean> {
   @Override
   public void loadItemData(Context context, ApplyBean.ListBean data, int position) {
     tvJobName.setText(data.getRemark());
-    tvState.setText(data.getHandleStatus() == 0 ? "申请中":(data.getHandleStatus() == 2 ? "已同意":"未同意"));
-    SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-    tvApplyTime.setText(format.format(new Date(data.getApplyData())));
+    tvState.setText(data.getHandleStatus() == 2 ? "已同意":(data.getHandleStatus() == 3 ? "未同意":"待处理"));
+    tvApplyTime.setText(data.getApplyData());
   }
 }

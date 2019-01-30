@@ -120,5 +120,12 @@ public interface NetApiService {
       @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
 
   @GET("job/delJob.do")
-  Observable<BaseRequestBean<Object>> revokeJob(@Query("id")int jobId);
+  Observable<BaseRequestBean<Object>> revokeJob(@Query("id") int jobId);
+
+  @GET("apply/findAllApplyByAddId.do")
+  Observable<BaseRequestBean<ApplyBean>> findApplyByAddId(@Query("addId") int userId,
+      @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
+
+  @GET("apply/handleApply.do")
+  Observable<BaseRequestBean<Object>> handleApply(@Query("id")int id,@Query("resultStatu")int resultStatu);
 }

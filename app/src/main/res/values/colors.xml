@@ -28,6 +28,8 @@
   <color name="color666">#661B85FF</color>
   <color name="color_1B85FF">#1B85FF</color>
   <color name="text_color_black">#212020</color>
+  <color name="bg_common_select">#d5e7e7e7</color>
+  <color name="bg_common_selected">#c1c8c8c8</color>
 
   <color name="start_background_ll">#deffffff</color>
   <color name="end_background_ll">#f7f7f7</color>
@@ -48,5 +50,6 @@
   <color name="colorPageBg">#f2f4f5</color>
   <color name="itemBackground">#DD7D7D7D</color>
   <color name="itemLowBackground">#d9d9d9</color>
+  <color name="font_cancel">#777575</color>
 
 </resources>
