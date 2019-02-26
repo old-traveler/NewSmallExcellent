@@ -172,4 +172,10 @@ public class UserModel {
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
+
+  public Observable<BaseRequestBean<Object>> dealAuthentication(int id,int userId,int type,int state,String result){
+    return RequestHelper.getRequestApi().dealAuthentication(id,userId,type,state,result)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
 }

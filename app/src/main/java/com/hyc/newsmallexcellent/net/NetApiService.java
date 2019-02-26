@@ -134,4 +134,9 @@ public interface NetApiService {
   @GET("authentication/findAllAuthentication.do")
   Observable<BaseRequestBean<AuthenticationBean>> findAllAuthentication(
       @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
+
+  @GET("authentication/handleAuthentication.do")
+  Observable<BaseRequestBean<Object>> dealAuthentication(@Query("id") int id,
+      @Query("userId") int userId, @Query("authenticationType") int type,
+      @Query("status") int status, @Query("result") String result);
 }

@@ -1,5 +1,6 @@
 package com.hyc.newsmallexcellent.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class AuthenticationBean {
@@ -198,7 +199,7 @@ public class AuthenticationBean {
     this.navigatepageNums = navigatepageNums;
   }
 
-  public static class ListBean {
+  public static class ListBean implements Serializable {
     /**
      * id : 1
      * userId : 2
@@ -218,7 +219,7 @@ public class AuthenticationBean {
     private int authenticationType;
     private String photoOne;
     private String photoTwo;
-    private String authenticationData;
+    private long authenticationData;
     private Object result;
     private int status;
     private Object remark;
@@ -271,11 +272,11 @@ public class AuthenticationBean {
       this.photoTwo = photoTwo;
     }
 
-    public String getAuthenticationData() {
+    public long getAuthenticationData() {
       return authenticationData;
     }
 
-    public void setAuthenticationData(String authenticationData) {
+    public void setAuthenticationData(long authenticationData) {
       this.authenticationData = authenticationData;
     }
 

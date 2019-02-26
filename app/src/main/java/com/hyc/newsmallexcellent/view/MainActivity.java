@@ -116,6 +116,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
       Intent intent = new Intent(this, QueryJobActivity.class);
       startActivity(intent);
     }else if (item.getItemId() == R.id.item_setting){
+      startActivity(new Intent(this,SeeAuthenticationActivity.class));
+    }else if (item.getItemId() == R.id.item_footprint){
       startActivity(new Intent(this,AuthenticationActivity.class));
     }
     return true;

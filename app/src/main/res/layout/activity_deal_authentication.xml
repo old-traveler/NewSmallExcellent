@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:orientation="vertical"
+  android:layout_height="match_parent"
+  tools:context=".view.DealAuthenticationActivity">
+
+  <include layout="@layout/lib_layout_toolbar"/>
+
+  <EditText
+    android:id="@+id/et_result"
+    android:hint="处理理由"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+  <ImageView
+    android:id="@+id/iv_one"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+  <ImageView
+    android:id="@+id/iv_two"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+  <FrameLayout
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+      android:id="@+id/btn_pass"
+      android:layout_marginStart="40dp"
+      android:textColor="@color/white"
+      android:text="同意"
+      android:backgroundTint="@color/blue"
+      android:layout_width="120dp"
+      android:layout_height="wrap_content" />
+
+    <Button
+      android:id="@+id/btn_un_pass"
+      android:layout_marginEnd="40dp"
+      android:layout_gravity="end"
+      android:textColor="@color/white"
+      android:text="不同意"
+      android:backgroundTint="@color/red"
+      android:layout_width="120dp"
+      android:layout_height="wrap_content" />
+  </FrameLayout>
+</LinearLayout>
