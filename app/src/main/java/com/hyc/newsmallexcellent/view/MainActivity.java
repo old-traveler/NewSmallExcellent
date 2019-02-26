@@ -115,6 +115,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     } else if (item.getItemId() == R.id.item_search) {
       Intent intent = new Intent(this, QueryJobActivity.class);
       startActivity(intent);
+    }else if (item.getItemId() == R.id.item_setting){
+      startActivity(new Intent(this,AuthenticationActivity.class));
     }
     return true;
   }

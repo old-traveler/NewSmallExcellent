@@ -1,8 +1,10 @@
 package com.hyc.newsmallexcellent.model;
 
+import android.text.TextUtils;
 import com.amap.api.maps.model.LatLng;
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.ApplyBean;
+import com.hyc.newsmallexcellent.bean.AuthenticationBean;
 import com.hyc.newsmallexcellent.bean.FootPrintBean;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
@@ -40,6 +42,10 @@ public class UserModel {
     return RequestHelper.getRequestApi().login(account, password)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public boolean isLogin(){
+    return !TextUtils.isEmpty(SpCacheHelper.getString("accountname"));
   }
 
   public void cacheUserInfo(LoginActionBean bean) {
@@ -92,7 +98,11 @@ public class UserModel {
   }
 
   public Observable<BaseRequestBean<UploadImageBean>> uploadImage(Map<String, Object> map) {
-    File file = new File((String) map.get("headPhoto"));
+    return uploadImage((String) map.get("headPhoto"));
+  }
+
+  public Observable<BaseRequestBean<UploadImageBean>> uploadImage(String imagePath){
+    File file = new File(imagePath);
     RequestBody requestFile =
         RequestBody.create(MediaType.parse("multipart/form-data"), file);
     MultipartBody.Part body =
@@ -143,16 +153,23 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<ApplyBean>> findApplyByUserId(int userId,int pageSize,int pageNum){
-    return RequestHelper.getRequestApi().findApplyByAddId(userId,pageSize,pageNum)
+  public Observable<BaseRequestBean<ApplyBean>> findApplyByUserId(int userId, int pageSize,
+      int pageNum) {
+    return RequestHelper.getRequestApi().findApplyByAddId(userId, pageSize, pageNum)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<Object>> handleApply(int id,int resultStatus){
-    return RequestHelper.getRequestApi().handleApply(id,resultStatus)
+  public Observable<BaseRequestBean<Object>> handleApply(int id, int resultStatus) {
+    return RequestHelper.getRequestApi().handleApply(id, resultStatus)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
 
+  public Observable<BaseRequestBean<AuthenticationBean>> findAllAuthentication(int pageSize,
+      int pageNum) {
+    return RequestHelper.getRequestApi().findAllAuthentication(pageSize, pageNum)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
 }

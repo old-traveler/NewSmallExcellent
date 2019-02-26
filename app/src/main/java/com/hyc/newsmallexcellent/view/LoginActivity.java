@@ -26,6 +26,10 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     setContentView(R.layout.activity_login);
     super.onCreate(savedInstanceState);
     setToolBarTitle("登录");
+    if (presenter.isLogin()){
+      startActivity(new Intent(this,MainActivity.class));
+      finish();
+    }
   }
 
   @Override

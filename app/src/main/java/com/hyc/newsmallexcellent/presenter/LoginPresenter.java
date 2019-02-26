@@ -20,9 +20,15 @@ public class LoginPresenter extends BasePresenter<LoginContract.View>
           .subscribe(new BaseRequestConsumer<LoginActionBean>(mvpView) {
             @Override
             protected void onRequestSuccess(LoginActionBean data) {
+              userModel.cacheUserInfo(data);
               mvpView.onLoginSuccess();
             }
           }, new BaseErrorConsumer(mvpView)));
     }
+  }
+
+  @Override
+  public boolean isLogin() {
+    return userModel.isLogin();
   }
 }

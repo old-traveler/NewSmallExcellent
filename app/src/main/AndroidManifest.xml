@@ -36,14 +36,14 @@
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
     <activity android:name=".view.PersonalPublishActivity"/>
-    <!--<activity android:name=".view.MyApplyActivity" />-->
+    <activity android:name=".view.MyApplyActivity" />
     <activity android:name=".view.AuthenticationActivity" />
     <activity android:name=".view.FootprintActivity" />
     <activity android:name=".view.ReportActivity" />
     <activity android:name=".view.ApplyJobActivity" />
     <activity android:name=".view.JobDetailActivity" />
     <activity android:name=".view.QueryJobActivity" />
-    <activity android:name=".view.MyApplyActivity">
+    <activity android:name=".view.LoginActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -58,7 +58,7 @@
     <activity android:name=".view.RegisterActivity" /> <!-- <activity android:name=".view.MainActivity" /> -->
     <activity android:name=".view.ChangePasswordActivity" /> <!-- <activity android:name=".view.JobsClassificationActivity" /> -->
     <activity android:name=".view.MapActivity" />
-    <activity android:name=".view.LoginActivity" />
+    <activity android:name=".view.MainActivity" />
     <activity
       android:name="com.yalantis.ucrop.UCropActivity"
       android:screenOrientation="portrait"
@@ -69,6 +69,7 @@
     <activity android:name=".other.route.RideRouteDetailActivity" />
     <activity android:name=".other.route.DriveRouteDetailActivity" />
     <activity android:name=".other.route.BusRouteDetailActivity" />
+    <activity android:name=".view.ResumeActivity"/>
   </application>
 
 </manifest>

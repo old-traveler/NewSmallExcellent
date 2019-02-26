@@ -6,6 +6,7 @@ public interface LoginContract {
 
   interface Presenter{
     void login();
+    boolean isLogin();
   }
 
   interface View extends ILoading {

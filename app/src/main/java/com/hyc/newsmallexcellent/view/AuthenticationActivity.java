@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import android.widget.RadioGroup;
 
 import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.base.BaseMvpActivity;
+import com.hyc.newsmallexcellent.base.helper.ToastHelper;
 import com.hyc.newsmallexcellent.base.helper.UiHelper;
 import com.hyc.newsmallexcellent.helper.ImageRequestHelper;
 import com.hyc.newsmallexcellent.interfaces.AuthenticationContact;
@@ -42,18 +44,20 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
   @BindView(R.id.et_username)
   EditText etUsername;
   @BindView(R.id.authentication_radio_student)
-  RadioButton authenticationRadioStudent;
+  RadioButton rbStudent;
   @BindView(R.id.authentication_radio_realName)
   RadioButton authenticationRadioRealName;
   @BindView(R.id.radiogroup)
   RadioGroup radiogroup;
   @BindView(R.id.authentication_img_photoOne)
-  ImageView authenticationImgPhotoOne;
+  ImageView ivOne;
   @BindView(R.id.authentication_img_photoTwo)
-  ImageView authenticationImgPhotoTwo;
+  ImageView ivTwo;
   @BindView(R.id.authentication_but)
   Button authenticationBut;
 
+  private String imageUrlOne;
+  private String imageUrlTwo;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -70,32 +74,41 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
 
   @Override
   public String userName() {
-    return null;
+    return etUsername.getText().toString();
   }
 
   @Override
   public int authenticationType() {
-    return 0;
+    return rbStudent.isChecked() ? 0 : 1;
   }
 
   @Override
   public String photoOne() {
-    return null;
+    return imageUrlOne;
   }
 
   @Override
   public String photoTwo() {
-    return null;
+    return imageUrlTwo;
   }
 
   @Override
   public boolean verificationInput() {
+    if (TextUtils.isEmpty(userName())){
+      ToastHelper.toast("请填写姓名");
+    }else if (TextUtils.isEmpty(photoOne())){
+      ToastHelper.toast("请选择第一个图片");
+    }else if (TextUtils.isEmpty(photoTwo())){
+      ToastHelper.toast("请选择第二张图片");
+    }else {
+      return true;
+    }
     return false;
   }
 
   @Override
   public void onChangeSuccess() {
-
+    ToastHelper.toast("发送成功");
   }
 
   @Override
@@ -107,9 +120,8 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
         .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
         .thumbnailScale(0.85f)
         .imageEngine(new Glide4Engine())
-        .forResult(isFirst ? Constans.CHOICE_JUDGMENT_ONE:Constans.CHOICE_JUDGMENT_TWO);
+        .forResult(isFirst ? Constans.CHOICE_JUDGMENT_ONE : Constans.CHOICE_JUDGMENT_TWO);
   }
-
 
   @Override
   public void requestPermissionFail() {
@@ -117,20 +129,19 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
   }
 
   @OnClick({
-      R.id.radiogroup, R.id.authentication_img_photoOne, R.id.authentication_img_photoTwo,
+      R.id.authentication_img_photoOne, R.id.authentication_img_photoTwo,
       R.id.authentication_but
   })
   public void onViewClicked(View view) {
     switch (view.getId()) {
-      case R.id.radiogroup:
-        break;
       case R.id.authentication_img_photoOne:
-        presenter.requestPermission(this,true);
+        presenter.requestPermission(this, true);
         break;
       case R.id.authentication_img_photoTwo:
-        presenter.requestPermission(this,false);
+        presenter.requestPermission(this, false);
         break;
       case R.id.authentication_but:
+        presenter.authentication();
         break;
     }
   }
@@ -143,18 +154,32 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
     }
 
     if (requestCode == Constans.CHOICE_JUDGMENT_ONE && resultCode == RESULT_OK) {
-      //List<Uri> result = Matisse.obtainResult(data);
-      //if (result != null && result.size() > 0) {
-      //  if (requestCode == Constans.CHOICE_JUDGMENT_TWO) {
-      //    FileUtil.getFilePath(this, result.get(0));
-      //    ImageRequestHelper.loadImage(this,result.get(0), authenticationImgPhotoOne);
-      //  } else if (requestCode == Constans.CHOICE_JUDGMENT_TWO) {
-      //    FileUtil.getFilePath(this, result.get(0));
-      //    ImageRequestHelper.loadImage(this, UCrop.getOutput(data), authenticationImgPhotoTwo);
-      //  }
-      //}
-    }else if (requestCode == Constans.CHOICE_JUDGMENT_TWO && resultCode == RESULT_OK){
-
+      crop(true, Matisse.obtainResult(data).get(0));
+    } else if (requestCode == Constans.CHOICE_JUDGMENT_TWO && resultCode == RESULT_OK) {
+      crop(false, Matisse.obtainResult(data).get(0));
+    } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+      ImageRequestHelper.loadImage(this, imageUrlOne, ivOne);
+      ImageRequestHelper.loadImage(this, imageUrlTwo, ivTwo);
     }
+  }
+
+  public void crop(boolean isFirst, Uri sourceUri) {
+    String headImageFilePath = String.format("image%d.jpg", System.currentTimeMillis());
+    File file = new File(getCacheDir(), headImageFilePath);
+    if (isFirst) {
+      imageUrlOne = file.getAbsolutePath();
+    } else {
+      imageUrlTwo = file.getAbsolutePath();
+    }
+    Uri destinationUri = Uri.fromFile(file);
+    UCrop.Options options = new UCrop.Options();
+    options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL);
+    options.setToolbarColor(UiHelper.getColor(R.color.colorPrimary));
+    options.setStatusBarColor(UiHelper.getColor(R.color.colorPrimary));
+    options.withAspectRatio(85.6f, 54f);
+    options.withMaxResultSize(1080, 1080);
+    UCrop.of(sourceUri, destinationUri)
+        .withOptions(options)
+        .start(this);
   }
 }

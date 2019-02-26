@@ -23,7 +23,7 @@ public class BasePresenter<V> {
     onUnsubscribe();
   }
 
-  private void onUnsubscribe(){
+  protected void onUnsubscribe(){
     if (disposableManager != null){
       disposableManager.cancelAllDisposable();
     }

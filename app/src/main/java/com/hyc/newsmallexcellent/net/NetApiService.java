@@ -2,6 +2,7 @@ package com.hyc.newsmallexcellent.net;
 
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean;
 import com.hyc.newsmallexcellent.bean.ApplyBean;
+import com.hyc.newsmallexcellent.bean.AuthenticationBean;
 import com.hyc.newsmallexcellent.bean.CategoryBean;
 import com.hyc.newsmallexcellent.bean.FootPrintBean;
 import com.hyc.newsmallexcellent.bean.JobBean;
@@ -99,7 +100,7 @@ public interface NetApiService {
   /**
    * 认证模块接口
    */
-  @GET
+  @GET("authentication/addAuthentication.do")
   Observable<BaseRequestBean<Object>> authentication(
       @Query("userId") int userId, @Query("userName") String userName,
       @Query("authenticationType") int authenticationType, @Query("photoOne") String photoOne,
@@ -127,5 +128,10 @@ public interface NetApiService {
       @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
 
   @GET("apply/handleApply.do")
-  Observable<BaseRequestBean<Object>> handleApply(@Query("id")int id,@Query("resultStatu")int resultStatu);
+  Observable<BaseRequestBean<Object>> handleApply(@Query("id") int id,
+      @Query("resultStatu") int resultStatu);
+
+  @GET("authentication/findAllAuthentication.do")
+  Observable<BaseRequestBean<AuthenticationBean>> findAllAuthentication(
+      @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
 }
