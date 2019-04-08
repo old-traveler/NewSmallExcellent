@@ -12,6 +12,9 @@ public class BaseErrorConsumer implements Consumer<Throwable> {
   public BaseErrorConsumer(ILoading iLoading){
     this.iLoading = iLoading;
   }
+  public BaseErrorConsumer(){
+
+  }
 
   @Override
   public void accept(Throwable throwable) throws Exception {

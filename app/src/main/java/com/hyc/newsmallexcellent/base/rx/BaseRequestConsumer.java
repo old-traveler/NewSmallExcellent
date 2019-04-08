@@ -17,6 +17,10 @@ public abstract class BaseRequestConsumer<D> implements Consumer<BaseRequestBean
     this.iLoading = iLoading;
   }
 
+
+  public BaseRequestConsumer(){
+  }
+
   public static final int REQUEST_OK = 0;
 
   @Override

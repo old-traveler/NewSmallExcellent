@@ -7,6 +7,7 @@ import com.hyc.newsmallexcellent.bean.CategoryBean;
 import com.hyc.newsmallexcellent.bean.FootPrintBean;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
+import com.hyc.newsmallexcellent.bean.ReportBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.bean.UploadImageBean;
 import io.reactivex.Observable;
@@ -135,8 +136,19 @@ public interface NetApiService {
   Observable<BaseRequestBean<AuthenticationBean>> findAllAuthentication(
       @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
 
+  @GET("report/findAllReportByUserId.do")
+  Observable<BaseRequestBean<ReportBean>> findAllReportByUserId(@Query("reportUserId") int id,
+      @Query("pageSize") int pageSize, @Query("pageNum") int pageNum);
+
+  @GET("report/findAllReport.do")
+  Observable<BaseRequestBean<ReportBean>> findAllReport(@Query("pageSize") int pageSize,
+      @Query("pageNum") int pageNum);
+
   @GET("authentication/handleAuthentication.do")
   Observable<BaseRequestBean<Object>> dealAuthentication(@Query("id") int id,
       @Query("userId") int userId, @Query("authenticationType") int type,
       @Query("status") int status, @Query("result") String result);
+
+  @GET("report/delReport.do")
+  Observable<BaseRequestBean<Object>> deleteReport(@Query("id")int id);
 }

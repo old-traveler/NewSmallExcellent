@@ -8,6 +8,7 @@ import com.hyc.newsmallexcellent.bean.AuthenticationBean;
 import com.hyc.newsmallexcellent.bean.FootPrintBean;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.bean.LoginActionBean;
+import com.hyc.newsmallexcellent.bean.ReportBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.bean.UploadImageBean;
 import com.hyc.newsmallexcellent.helper.RequestHelper;
@@ -44,7 +45,7 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public boolean isLogin(){
+  public boolean isLogin() {
     return !TextUtils.isEmpty(SpCacheHelper.getString("accountname"));
   }
 
@@ -101,7 +102,7 @@ public class UserModel {
     return uploadImage((String) map.get("headPhoto"));
   }
 
-  public Observable<BaseRequestBean<UploadImageBean>> uploadImage(String imagePath){
+  public Observable<BaseRequestBean<UploadImageBean>> uploadImage(String imagePath) {
     File file = new File(imagePath);
     RequestBody requestFile =
         RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -173,8 +174,28 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<Object>> dealAuthentication(int id,int userId,int type,int state,String result){
-    return RequestHelper.getRequestApi().dealAuthentication(id,userId,type,state,result)
+  public Observable<BaseRequestBean<Object>> dealAuthentication(int id, int userId, int type,
+      int state, String result) {
+    return RequestHelper.getRequestApi().dealAuthentication(id, userId, type, state, result)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<ReportBean>> findAllReport(int pageSize, int pageNum) {
+    return RequestHelper.getRequestApi().findAllReport(pageSize, pageNum)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<ReportBean>> findAllReportByUserId(int id, int pageSize,
+      int pageNum) {
+    return RequestHelper.getRequestApi().findAllReportByUserId(id, pageSize, pageNum)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<Object>> deleteReport(int id){
+    return RequestHelper.getRequestApi().deleteReport(id)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }

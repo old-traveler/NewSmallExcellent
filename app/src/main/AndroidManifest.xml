@@ -74,6 +74,7 @@
     <activity android:name=".other.route.BusRouteDetailActivity" />
     <activity android:name=".view.ResumeActivity" />
     <activity android:name=".view.DealApplyActivity"/>
+    <activity android:name=".view.ReportListActivity"/>
   </application>
 
 </manifest>

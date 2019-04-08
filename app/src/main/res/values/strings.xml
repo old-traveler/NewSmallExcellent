@@ -249,5 +249,6 @@
 
   <!-- 自定义样式 -->
   <string name="style_custom_on">开启个性化地图</string>
+  <string name="year">yyyy-MM-dd</string>
 
 </resources>

@@ -122,7 +122,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     }else if (item.getItemId() == R.id.item_wages){
       startActivity(new Intent(this,ReleasePositionActivity.class));
     }else if (item.getItemId() == R.id.item_message){
-      startActivity(new Intent(this,MyApplyActivity.class));
+      startActivity(new Intent(this,ReportListActivity.class));
     }
     return true;
   }
