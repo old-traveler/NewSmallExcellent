@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  tools:context=".view.DealApplyActivity"
+  android:layout_height="match_parent"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <include layout="@layout/lib_layout_toolbar"/>
+
+
+  <LinearLayout
+    android:orientation="horizontal"
+    android:paddingStart="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <TextView
+      android:textSize="15sp"
+      android:textColor="@color/black"
+      android:text="申请工作： "
+      android:layout_gravity="center_vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+    <TextView
+      android:id="@+id/tv_job_name"
+      android:textSize="15sp"
+      android:textColor="@color/blue"
+      android:text="家教"
+      android:layout_gravity="center_vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:orientation="horizontal"
+    android:paddingStart="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <TextView
+      android:textSize="15sp"
+      android:textColor="@color/black"
+      android:text="申请人员： "
+      android:layout_gravity="center_vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+    <TextView
+      android:id="@+id/tv_see_resume"
+      android:textSize="15sp"
+      android:textColor="@color/blue"
+      android:text="查看简历"
+      android:layout_gravity="center_vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+  </LinearLayout>
+
+  <FrameLayout
+    android:id="@+id/fl_deal"
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+      android:id="@+id/btn_pass"
+      android:layout_marginStart="40dp"
+      android:textColor="@color/white"
+      android:text="同意"
+      android:backgroundTint="@color/blue"
+      android:layout_width="120dp"
+      android:layout_height="wrap_content" />
+
+    <Button
+      android:id="@+id/btn_un_pass"
+      android:layout_marginEnd="40dp"
+      android:layout_gravity="end"
+      android:textColor="@color/white"
+      android:text="不同意"
+      android:backgroundTint="@color/red"
+      android:layout_width="120dp"
+      android:layout_height="wrap_content" />
+  </FrameLayout>
+
+  <LinearLayout
+    android:id="@+id/ll_result"
+    android:visibility="gone"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+      android:id="@+id/iv_result"
+      android:src="@drawable/ic_passed"
+      android:layout_gravity="center_horizontal"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:contentDescription="@null" />
+
+    <TextView
+      android:id="@+id/tv_result"
+      android:layout_marginTop="10dp"
+      android:layout_gravity="center_horizontal"
+      android:textSize="15sp"
+      android:textColor="@color/black"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+  </LinearLayout>
+
+</LinearLayout>

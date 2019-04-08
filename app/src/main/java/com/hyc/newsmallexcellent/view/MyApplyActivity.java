@@ -5,18 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.LinearLayout;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.adapter.viewholder.MyApplyViewHolder;
 import com.hyc.newsmallexcellent.base.BaseMvpActivity;
 import com.hyc.newsmallexcellent.base.adapter.BaseRecycleAdapter;
 import com.hyc.newsmallexcellent.base.helper.ToastHelper;
-import com.hyc.newsmallexcellent.base.interfaces.OnDialogClickListener;
-import com.hyc.newsmallexcellent.base.interfaces.OnItemClickListener;
-import com.hyc.newsmallexcellent.base.interfaces.OnItemLongClickListener;
 import com.hyc.newsmallexcellent.base.widger.CommonDialog;
 import com.hyc.newsmallexcellent.bean.ApplyBean;
 import com.hyc.newsmallexcellent.interfaces.MyApplyContact;
@@ -51,25 +46,22 @@ public class MyApplyActivity extends BaseMvpActivity<MyApplyPresenter>
         adapter = new BaseRecycleAdapter<>(R.layout.item_my_apply, MyApplyViewHolder.class));
     srlMyApply.setOnRefreshListener(this);
     srlMyApply.setOnLoadMoreListener(this);
-    if (isDeal) {
-      adapter.setOnItemClickListener((itemData, view, position) -> {
-        CommonDialog.showDialog(MyApplyActivity.this, "是否同意申请",
-            "不同意", "同意", itemData.getApplyInformation(), isPosition -> {
-              presenter.dealApply(itemData.getId(), isPosition);
-            });
-      });
-    } else {
-      adapter.setOnItemClickListener((itemData, view, position) -> {
-        if (itemData.getHandleStatus() == 0) {
-          CommonDialog.showDialog(MyApplyActivity.this, "是否撤销此条申请？", isPosition -> {
-            if (isPosition) {
-              presenter.cancelApply(itemData.getId(), position);
-            }
-          });
-        }
-      });
-    }
 
+    adapter.setOnItemLongClickListener((itemData, view, position) -> {
+      if (itemData.getHandleStatus() == 0 && !isDeal) {
+        CommonDialog.showDialog(MyApplyActivity.this, "是否撤销此条申请？", isPosition -> {
+          if (isPosition) {
+            presenter.cancelApply(itemData.getId(), position);
+          }
+        });
+        return true;
+      }
+      return false;
+    });
+
+    adapter.setOnItemClickListener(
+        (itemData, view, position) -> DealApplyActivity.Companion.start(MyApplyActivity.this,
+            itemData, isDeal));
     setToolBarTitle("我的申请");
     srlMyApply.autoRefresh();
   }

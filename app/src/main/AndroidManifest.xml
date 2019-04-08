@@ -35,7 +35,8 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".view.DealAuthenticationActivity"></activity>
+    <activity android:name=".view.ReleasePositionActivity"/>
+    <activity android:name=".view.DealAuthenticationActivity"/>
     <activity android:name=".view.SeeAuthenticationActivity" />
     <activity android:name=".view.PersonalPublishActivity" />
     <activity android:name=".view.MyApplyActivity" />
@@ -72,6 +73,7 @@
     <activity android:name=".other.route.DriveRouteDetailActivity" />
     <activity android:name=".other.route.BusRouteDetailActivity" />
     <activity android:name=".view.ResumeActivity" />
+    <activity android:name=".view.DealApplyActivity"/>
   </application>
 
 </manifest>

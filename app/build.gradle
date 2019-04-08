@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
   compileSdkVersion 28
@@ -48,4 +50,8 @@ dependencies {
   implementation files('libs/AMap_Search_V5.5.0_20171107.jar')
   implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
   implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-12'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+  mavenCentral()
 }

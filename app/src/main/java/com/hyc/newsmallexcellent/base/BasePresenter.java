@@ -7,7 +7,7 @@ import android.view.View;
 import com.hyc.newsmallexcellent.base.rx.DisposableManager;
 import io.reactivex.disposables.Disposable;
 
-public class BasePresenter<V> {
+public abstract class BasePresenter<V> {
 
   private DisposableManager disposableManager;
 

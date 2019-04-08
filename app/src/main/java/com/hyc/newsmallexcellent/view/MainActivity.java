@@ -99,7 +99,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_map, menu);
+    getMenuInflater().inflate(R.menu.menu_main, menu);
     return true;
   }
 
@@ -108,7 +108,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     if (item.getItemId() == R.id.item_resume) {
       Bundle bundle = new Bundle();
       bundle.putInt("user_id", new UserModel().getCurUserId());
-      Intent intent = new Intent(this, ResumeActivity.class);
+      Intent intent = new Intent(this, AuthenticationActivity.class);
       startActivity(intent.putExtras(bundle));
     } else if (item.getItemId() == android.R.id.home) {
       dlMain.openDrawer(GravityCompat.START);
@@ -118,10 +118,15 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     }else if (item.getItemId() == R.id.item_setting){
       startActivity(new Intent(this,SeeAuthenticationActivity.class));
     }else if (item.getItemId() == R.id.item_footprint){
-      startActivity(new Intent(this,AuthenticationActivity.class));
+      startActivity(new Intent(this,MyApplyActivity.class));
+    }else if (item.getItemId() == R.id.item_wages){
+      startActivity(new Intent(this,ReleasePositionActivity.class));
+    }else if (item.getItemId() == R.id.item_message){
+      startActivity(new Intent(this,MyApplyActivity.class));
     }
     return true;
   }
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

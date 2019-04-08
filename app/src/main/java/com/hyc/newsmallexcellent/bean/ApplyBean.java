@@ -1,5 +1,7 @@
 package com.hyc.newsmallexcellent.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.List;
 
 public class ApplyBean {
@@ -198,7 +200,7 @@ public class ApplyBean {
     this.navigatepageNums = navigatepageNums;
   }
 
-  public static class ListBean {
+  public static class ListBean implements Parcelable {
     /**
      * id : 1
      * jobId : 47
@@ -218,6 +220,29 @@ public class ApplyBean {
     private String handleData;
     private int handleStatus;
     private String remark;
+
+    protected ListBean(Parcel in) {
+      id = in.readInt();
+      jobId = in.readInt();
+      applyUserId = in.readInt();
+      applyInformation = in.readString();
+      applyData = in.readString();
+      handleData = in.readString();
+      handleStatus = in.readInt();
+      remark = in.readString();
+    }
+
+    public static final Creator<ListBean> CREATOR = new Creator<ListBean>() {
+      @Override
+      public ListBean createFromParcel(Parcel in) {
+        return new ListBean(in);
+      }
+
+      @Override
+      public ListBean[] newArray(int size) {
+        return new ListBean[size];
+      }
+    };
 
     public int getId() {
       return id;
@@ -281,6 +306,23 @@ public class ApplyBean {
 
     public void setRemark(String remark) {
       this.remark = remark;
+    }
+
+    @Override
+    public int describeContents() {
+      return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+      dest.writeInt(id);
+      dest.writeInt(jobId);
+      dest.writeInt(applyUserId);
+      dest.writeString(applyInformation);
+      dest.writeString(applyData);
+      dest.writeString(handleData);
+      dest.writeInt(handleStatus);
+      dest.writeString(remark);
     }
   }
 }
