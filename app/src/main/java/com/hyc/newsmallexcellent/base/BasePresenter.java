@@ -4,10 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import com.hyc.newsmallexcellent.base.interfaces.ILoading;
 import com.hyc.newsmallexcellent.base.rx.DisposableManager;
 import io.reactivex.disposables.Disposable;
 
-public abstract class BasePresenter<V> {
+public abstract class BasePresenter<V extends ILoading> {
 
   private DisposableManager disposableManager;
 

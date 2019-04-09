@@ -1,5 +1,7 @@
 package com.hyc.newsmallexcellent.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.List;
 
 /**
@@ -203,7 +205,7 @@ public class ReportBean  {
     this.navigatepageNums = navigatepageNums;
   }
 
-  public static class ListBean {
+  public static class ListBean implements Parcelable {
     /**
      * id : 1
      * reportUserId : 2
@@ -222,7 +224,29 @@ public class ReportBean  {
     private long reportData;
     private int status;
     private Object remark;
-    private Object result;
+    private String result;
+
+    protected ListBean(Parcel in) {
+      id = in.readInt();
+      reportUserId = in.readInt();
+      bereportUserId = in.readInt();
+      reportContent = in.readString();
+      reportData = in.readLong();
+      status = in.readInt();
+      result = in.readString();
+    }
+
+    public static final Creator<ListBean> CREATOR = new Creator<ListBean>() {
+      @Override
+      public ListBean createFromParcel(Parcel in) {
+        return new ListBean(in);
+      }
+
+      @Override
+      public ListBean[] newArray(int size) {
+        return new ListBean[size];
+      }
+    };
 
     public int getId() {
       return id;
@@ -280,12 +304,28 @@ public class ReportBean  {
       this.remark = remark;
     }
 
-    public Object getResult() {
+    public String getResult() {
       return result;
     }
 
-    public void setResult(Object result) {
+    public void setResult(String result) {
       this.result = result;
+    }
+
+    @Override
+    public int describeContents() {
+      return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+      dest.writeInt(id);
+      dest.writeInt(reportUserId);
+      dest.writeInt(bereportUserId);
+      dest.writeString(reportContent);
+      dest.writeLong(reportData);
+      dest.writeInt(status);
+      dest.writeString(result);
     }
   }
 }

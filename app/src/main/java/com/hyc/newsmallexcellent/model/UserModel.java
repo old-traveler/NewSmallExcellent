@@ -194,8 +194,14 @@ public class UserModel {
         .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<BaseRequestBean<Object>> deleteReport(int id){
+  public Observable<BaseRequestBean<Object>> deleteReport(int id) {
     return RequestHelper.getRequestApi().deleteReport(id)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<Object>> dealReport(int id, int result, String resultText) {
+    return RequestHelper.getRequestApi().dealReport(id, result, resultText)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }

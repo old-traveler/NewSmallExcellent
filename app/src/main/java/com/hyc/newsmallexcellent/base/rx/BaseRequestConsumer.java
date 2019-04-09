@@ -15,6 +15,9 @@ public abstract class BaseRequestConsumer<D> implements Consumer<BaseRequestBean
 
   public BaseRequestConsumer(ILoading iLoading){
     this.iLoading = iLoading;
+    if (this.iLoading != null){
+      this.iLoading.showLoadingView();
+    }
   }
 
 

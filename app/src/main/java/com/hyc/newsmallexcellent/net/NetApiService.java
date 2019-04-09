@@ -150,5 +150,9 @@ public interface NetApiService {
       @Query("status") int status, @Query("result") String result);
 
   @GET("report/delReport.do")
-  Observable<BaseRequestBean<Object>> deleteReport(@Query("id")int id);
+  Observable<BaseRequestBean<Object>> deleteReport(@Query("id") int id);
+
+  @GET("report/handleReport.do")
+  Observable<BaseRequestBean<Object>> dealReport(@Query("id") int id,
+      @Query("resultNum") int resultNum, @Query("resultText") String resultText);
 }
