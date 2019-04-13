@@ -221,7 +221,7 @@ public class ReportBean  {
     private int reportUserId;
     private int bereportUserId;
     private String reportContent;
-    private long reportData;
+    private String reportData;
     private int status;
     private Object remark;
     private String result;
@@ -231,7 +231,7 @@ public class ReportBean  {
       reportUserId = in.readInt();
       bereportUserId = in.readInt();
       reportContent = in.readString();
-      reportData = in.readLong();
+      reportData = in.readString();
       status = in.readInt();
       result = in.readString();
     }
@@ -280,11 +280,11 @@ public class ReportBean  {
       this.reportContent = reportContent;
     }
 
-    public long getReportData() {
+    public String getReportData() {
       return reportData;
     }
 
-    public void setReportData(long reportData) {
+    public void setReportData(String reportData) {
       this.reportData = reportData;
     }
 
@@ -323,7 +323,7 @@ public class ReportBean  {
       dest.writeInt(reportUserId);
       dest.writeInt(bereportUserId);
       dest.writeString(reportContent);
-      dest.writeLong(reportData);
+      dest.writeString(reportData);
       dest.writeInt(status);
       dest.writeString(result);
     }

@@ -36,7 +36,7 @@ public class RetrofitClient {
     return isExist ? weakReference.get() : getNewRetrofit(baseUrl);
   }
 
-  public Retrofit getNewRetrofit(String baseUrl) {
+  private Retrofit getNewRetrofit(String baseUrl) {
     if (okHttpClient == null) {
       initOkHttpClient();
     }

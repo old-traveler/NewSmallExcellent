@@ -213,7 +213,7 @@ public class FootPrintBean {
     private int userId;
     private int jobId;
     private String jobTitle;
-    private long viewingData;
+    private String viewingData;
     private int status;
     private Object remark;
 
@@ -249,11 +249,11 @@ public class FootPrintBean {
       this.jobTitle = jobTitle;
     }
 
-    public long getViewingData() {
+    public String getViewingData() {
       return viewingData;
     }
 
-    public void setViewingData(long viewingData) {
+    public void setViewingData(String viewingData) {
       this.viewingData = viewingData;
     }
 

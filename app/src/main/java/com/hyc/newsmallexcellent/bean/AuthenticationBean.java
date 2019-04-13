@@ -219,7 +219,7 @@ public class AuthenticationBean {
     private int authenticationType;
     private String photoOne;
     private String photoTwo;
-    private long authenticationData;
+    private String authenticationData;
     private Object result;
     private int status;
     private Object remark;
@@ -272,11 +272,11 @@ public class AuthenticationBean {
       this.photoTwo = photoTwo;
     }
 
-    public long getAuthenticationData() {
+    public String getAuthenticationData() {
       return authenticationData;
     }
 
-    public void setAuthenticationData(long authenticationData) {
+    public void setAuthenticationData(String authenticationData) {
       this.authenticationData = authenticationData;
     }
 

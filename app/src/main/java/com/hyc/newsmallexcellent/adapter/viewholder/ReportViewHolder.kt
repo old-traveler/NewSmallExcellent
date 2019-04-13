@@ -6,9 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.hyc.newsmallexcellent.R
 import com.hyc.newsmallexcellent.base.adapter.viewholder.BaseViewHolder
-import com.hyc.newsmallexcellent.base.helper.UiHelper
 import com.hyc.newsmallexcellent.bean.ReportBean
-import java.text.SimpleDateFormat
 
 /**
  * 作者: 贺宇成
@@ -24,8 +22,7 @@ class ReportViewHolder(itemView: View) : BaseViewHolder<ReportBean.ListBean>(ite
   @SuppressLint("SimpleDateFormat")
   override fun loadItemData(context: Context?, data: ReportBean.ListBean?, position: Int) {
     tvReportName.text = data?.reportContent
-    val template = SimpleDateFormat(UiHelper.getString(R.string.year))
-    val timeStr = template.format(data?.reportData)
+    val timeStr = data?.reportData
     tvTime.text = timeStr
     tvState.text = when (data?.status) {
       0 -> "未处理"

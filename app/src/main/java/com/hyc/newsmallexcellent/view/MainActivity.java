@@ -45,7 +45,6 @@ import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.helper.ImageRequestHelper;
 import com.hyc.newsmallexcellent.interfaces.MainContact;
 import com.hyc.newsmallexcellent.model.UserModel;
-import com.hyc.newsmallexcellent.other.route.RouteActivity;
 import com.hyc.newsmallexcellent.presenter.MainPresenter;
 import java.util.ArrayList;
 import java.util.List;

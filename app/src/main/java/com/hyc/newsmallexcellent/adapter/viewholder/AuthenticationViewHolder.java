@@ -38,6 +38,6 @@ public class AuthenticationViewHolder extends BaseViewHolder<AuthenticationBean.
     ImageRequestHelper.loadImage(context,data.getPhotoOne(),ivAuthentication);
     tvName.setText(data.getUserName());
     tvType.setText(data.getAuthenticationType() == 0 ? "学生认证" : "实名认证");
-    tvTime.setText(simpleDateFormat.format(new Date(data.getAuthenticationData())));
+    tvTime.setText(data.getAuthenticationData());
   }
 }

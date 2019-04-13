@@ -1,17 +1,10 @@
 package com.hyc.newsmallexcellent.presenter;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-import com.alibaba.idst.nls.internal.protocol.Content;
-import com.hyc.newsmallexcellent.SmallExcellentApplication;
 import com.hyc.newsmallexcellent.base.BasePresenter;
 import com.hyc.newsmallexcellent.base.rx.BaseErrorConsumer;
 import com.hyc.newsmallexcellent.base.rx.BaseRequestConsumer;
@@ -20,10 +13,8 @@ import com.hyc.newsmallexcellent.interfaces.ReleasePositionContract;
 import com.hyc.newsmallexcellent.model.JobModel;
 import com.hyc.newsmallexcellent.model.UserModel;
 import com.hyc.newsmallexcellent.view.MapActivity;
-import com.hyc.newsmallexcellent.view.ReleasePositionActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import io.reactivex.functions.Consumer;
 import java.util.ArrayList;
 import java.util.List;
 

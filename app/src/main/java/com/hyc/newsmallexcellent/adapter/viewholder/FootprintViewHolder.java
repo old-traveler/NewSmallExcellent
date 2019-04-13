@@ -26,7 +26,6 @@ public class FootprintViewHolder extends BaseViewHolder<FootPrintBean.ListBean> 
   @Override
   public void loadItemData(Context context, FootPrintBean.ListBean data, int position) {
     tvJobName.setText(data.getJobTitle());
-    SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-    tvViewTime.setText(format.format(new Date(data.getViewingData())));
+    tvViewTime.setText(data.getViewingData());
   }
 }

@@ -1,9 +1,7 @@
 package com.hyc.newsmallexcellent.presenter;
 
 import android.Manifest;
-import android.graphics.Bitmap;
 import android.support.v4.app.FragmentActivity;
-import android.util.Pair;
 import com.amap.api.location.AMapLocation;
 import com.hyc.newsmallexcellent.base.BasePresenter;
 import com.hyc.newsmallexcellent.base.helper.ToastHelper;
@@ -15,9 +13,7 @@ import com.hyc.newsmallexcellent.model.JobModel;
 import com.hyc.newsmallexcellent.model.UserModel;
 import com.hyc.newsmallexcellent.util.BitmapUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 
