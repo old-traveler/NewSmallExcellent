@@ -76,6 +76,7 @@
     <activity android:name=".view.DealApplyActivity" />
     <activity android:name=".view.ReportListActivity" />
     <activity android:name=".view.DealReportActivity" />
+    <activity android:name=".view.WorkRecordActivity"/>
   </application>
 
 </manifest>

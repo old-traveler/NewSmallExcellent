@@ -113,4 +113,8 @@ abstract class BaseMvpListActivity<P : BaseListPresenter<*>, D, V : BaseViewHold
     presenter.fetchData(pageIndex)
   }
 
+  override fun accept(t: Throwable?) {
+    fetchDataFail(t)
+  }
+
 }

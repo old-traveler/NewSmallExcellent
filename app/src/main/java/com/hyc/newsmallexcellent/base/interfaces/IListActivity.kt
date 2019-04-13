@@ -1,11 +1,13 @@
 package com.hyc.newsmallexcellent.base.interfaces
 
+import io.reactivex.functions.Consumer
+
 /**
  * 作者: 贺宇成
  * 时间: 2019/4/8
  * 描述:
  */
-interface IListActivity<D> : ILoading {
+interface IListActivity<D> : ILoading , Consumer<Throwable> {
 
   fun appendData(list: List<D>?, hasNextPage: Boolean)
 

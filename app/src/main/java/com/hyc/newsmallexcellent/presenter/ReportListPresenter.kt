@@ -36,6 +36,6 @@ class ReportListPresenter : ReportListContract.Presenter() {
       override fun onRequestSuccess(data: ReportBean?) {
         mvpView.smartAppendData(data?.list, data?.isHasNextPage!!)
       }
-    }, BaseErrorConsumer()))
+    }, mvpView))
   }
 }

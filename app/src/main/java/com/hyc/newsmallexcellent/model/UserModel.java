@@ -11,12 +11,11 @@ import com.hyc.newsmallexcellent.bean.LoginActionBean;
 import com.hyc.newsmallexcellent.bean.ReportBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.bean.UploadImageBean;
+import com.hyc.newsmallexcellent.bean.WorkRecordBean;
 import com.hyc.newsmallexcellent.helper.RequestHelper;
 import com.hyc.newsmallexcellent.helper.SpCacheHelper;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.util.Map;
@@ -202,6 +201,13 @@ public class UserModel {
 
   public Observable<BaseRequestBean<Object>> dealReport(int id, int result, String resultText) {
     return RequestHelper.getRequestApi().dealReport(id, result, resultText)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread());
+  }
+
+  public Observable<BaseRequestBean<WorkRecordBean>> findWorkRecord(int userId, int pageSize,
+      int pageNum) {
+    return RequestHelper.getRequestApi().findWordRecord(userId, pageSize, pageNum)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }

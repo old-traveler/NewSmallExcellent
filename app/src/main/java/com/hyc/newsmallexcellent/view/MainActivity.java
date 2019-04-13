@@ -115,18 +115,19 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     } else if (item.getItemId() == R.id.item_search) {
       Intent intent = new Intent(this, QueryJobActivity.class);
       startActivity(intent);
-    }else if (item.getItemId() == R.id.item_setting){
-      startActivity(new Intent(this,SeeAuthenticationActivity.class));
-    }else if (item.getItemId() == R.id.item_footprint){
-      startActivity(new Intent(this,MyApplyActivity.class));
-    }else if (item.getItemId() == R.id.item_wages){
-      startActivity(new Intent(this,ReleasePositionActivity.class));
-    }else if (item.getItemId() == R.id.item_message){
-      startActivity(new Intent(this,ReportListActivity.class));
+    } else if (item.getItemId() == R.id.item_setting) {
+      startActivity(new Intent(this, SeeAuthenticationActivity.class));
+    } else if (item.getItemId() == R.id.item_footprint) {
+      startActivity(new Intent(this, MyApplyActivity.class));
+    } else if (item.getItemId() == R.id.item_wages) {
+      startActivity(new Intent(this, ReleasePositionActivity.class));
+    } else if (item.getItemId() == R.id.item_message) {
+      startActivity(new Intent(this, ReportListActivity.class));
+    } else if (item.getItemId() == R.id.item_word_record) {
+      startActivity(new Intent(this, WorkRecordActivity.class));
     }
     return true;
   }
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -306,7 +307,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     tvPublishTime.setText("发布时间：" + bean.getReleaseDate());
     movePosition(Double.parseDouble(bean.getLatitude()), Double.parseDouble(bean.getLongitude()));
     llJobInfo.setVisibility(View.VISIBLE);
-    llJobInfo.setOnClickListener(view -> JobDetailActivity.start(MainActivity.this,listBean));
+    llJobInfo.setOnClickListener(view -> JobDetailActivity.start(MainActivity.this, listBean));
   }
 
   @Override

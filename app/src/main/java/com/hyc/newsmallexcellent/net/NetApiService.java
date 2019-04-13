@@ -10,6 +10,7 @@ import com.hyc.newsmallexcellent.bean.LoginActionBean;
 import com.hyc.newsmallexcellent.bean.ReportBean;
 import com.hyc.newsmallexcellent.bean.ResumeInfoBean;
 import com.hyc.newsmallexcellent.bean.UploadImageBean;
+import com.hyc.newsmallexcellent.bean.WorkRecordBean;
 import io.reactivex.Observable;
 import java.util.List;
 import java.util.Map;
@@ -155,4 +156,9 @@ public interface NetApiService {
   @GET("report/handleReport.do")
   Observable<BaseRequestBean<Object>> dealReport(@Query("id") int id,
       @Query("resultNum") int resultNum, @Query("resultText") String resultText);
+
+  @GET("apply/findAllPayroll.do")
+  Observable<BaseRequestBean<WorkRecordBean>> findWordRecord(@Query("userId") int userId,
+      @Query("pageSize") int pageSize,
+      @Query("pageNum") int pageNum);
 }
