@@ -116,7 +116,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
       Intent intent = new Intent(this, QueryJobActivity.class);
       startActivity(intent);
     } else if (item.getItemId() == R.id.item_setting) {
-
+      startActivity(new Intent(this, SettingActivity.class));
     } else if (item.getItemId() == R.id.item_footprint) {
       startActivity(new Intent(this, FootprintActivity.class));
     } else if (item.getItemId() == R.id.item_wages) {
@@ -138,7 +138,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     TextView textView = navView.getHeaderView(0).findViewById(R.id.tv_main_name);
     ImageRequestHelper.loadHeadImage(this, new UserModel().getCurHeadUrl()
         , headImageView);
-    textView.setText(SpCacheHelper.getString("accountName"));
+    textView.setText(SpCacheHelper.getString("accountName".toLowerCase()));
     navView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
     setNoBackToolBar();
     setHomeResId(R.drawable.ic_more);
@@ -248,6 +248,9 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
   @Override
   protected void onResume() {
     super.onResume();
+    if (!new UserModel().isLogin()) {
+      finish();
+    }
     mvMap.onResume();
   }
 

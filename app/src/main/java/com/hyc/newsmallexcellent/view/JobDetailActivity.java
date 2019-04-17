@@ -135,7 +135,7 @@ public class JobDetailActivity extends BaseMvpActivity<JobDetailPresenter> imple
     return new JobDetailPresenter();
   }
 
-  @OnClick({ R.id.tv_path_plan, R.id.btn_apply_job })
+  @OnClick({ R.id.tv_path_plan, R.id.btn_apply_job ,R.id.tv_publisher})
   public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.tv_path_plan:
@@ -143,6 +143,9 @@ public class JobDetailActivity extends BaseMvpActivity<JobDetailPresenter> imple
         break;
       case R.id.btn_apply_job:
         ApplyJobActivity.start(this, jobId);
+        break;
+      case R.id.tv_publisher:
+        PersonalPublishActivity.start(this, publisherId);
         break;
     }
   }

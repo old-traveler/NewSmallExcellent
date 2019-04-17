@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <include layout="@layout/lib_layout_toolbar" />
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:text="手机号码"
+      android:textColor="@color/black" />
+    <TextView
+      android:id="@+id/tv_phone"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical|end"
+      android:text="15273311295" />
+  </FrameLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:background="@color/bg_no" />
+
+  <FrameLayout
+    android:id="@+id/fl_change_pwd"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:text="修改密码"
+      android:textColor="@color/black" />
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="15dp"
+      android:layout_gravity="center_vertical|end"
+      android:background="@drawable/arrow_right_blue"
+      android:backgroundTint="@color/black" />
+  </FrameLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:background="@color/bg_no" />
+
+
+  <FrameLayout
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/fl_update"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:text="版本升级"
+      android:textColor="@color/black" />
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="15dp"
+      android:layout_gravity="center_vertical|end"
+      android:background="@drawable/arrow_right_blue"
+      android:backgroundTint="@color/black" />
+  </FrameLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:background="@color/bg_no" />
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:text="当前版本"
+      android:textColor="@color/black" />
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical|end"
+      android:text="1.0.0" />
+  </FrameLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/bg_no" />
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:layout_marginTop="40dp"
+    android:background="@color/bg_no" />
+  <TextView
+    android:id="@+id/tv_out"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center"
+    android:text="退出登陆"
+    android:textColor="@color/red"
+    android:textSize="16sp" />
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/bg_no" />
+
+</LinearLayout>

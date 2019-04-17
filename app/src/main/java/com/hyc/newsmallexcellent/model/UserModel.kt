@@ -65,6 +65,10 @@ class UserModel {
       .observeOn(AndroidSchedulers.mainThread())
   }
 
+  fun logout(){
+    SpCacheHelper.getEditor().clear().commit()
+  }
+
   fun cacheUserInfo(bean: LoginActionBean) {
     SpCacheHelper.withBuilder()
       .withInt("user_id", bean.id)

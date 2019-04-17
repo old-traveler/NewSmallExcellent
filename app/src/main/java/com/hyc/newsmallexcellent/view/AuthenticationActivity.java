@@ -108,9 +108,9 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
     BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
     List<String> strings;
     if (userType == 2) {
-      strings = Arrays.asList("发布职位", "查看申请");
+      strings = Arrays.asList("发布职位", "查看申请", "我的发布");
     } else {
-      strings = Arrays.asList("发布职位", "查看申请", "查看工作分类", "查看认证信息", "查看举报信息");
+      strings = Arrays.asList("发布职位", "查看申请", "我的发布", "查看工作分类", "查看认证信息", "查看举报信息");
     }
     BottomSelectDialogUtil.showSimpleListTextDialog(bottomSheetDialog, strings,
         (itemData, view, position) -> {
@@ -119,18 +119,20 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
             startActivity(new Intent(AuthenticationActivity.this, ReleasePositionActivity.class));
           } else if (position == 1) {
             MyApplyActivity.start(AuthenticationActivity.this, true);
-          } else if (position == 2) {
+          } else if (position == 2){
+            PersonalPublishActivity.start(AuthenticationActivity.this , new UserModel().getCurUserId());
+          } else if (position == 3) {
             startActivity(new Intent(AuthenticationActivity.this,
                 JobsClassificationActivity.class));
-          } else if (position == 3) {
+          } else if (position == 4) {
             startActivity(
                 new Intent(AuthenticationActivity.this, SeeAuthenticationActivity.class));
-          } else if (position == 4) {
+          } else if (position == 5) {
             startActivity(
                 new Intent(AuthenticationActivity.this, ReportListActivity.class).putExtra(
                     "isMaster", true));
           }
-          if (position < 5){
+          if (position < 5) {
             finish();
           }
         });
@@ -138,7 +140,7 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
 
   private void initView() {
     userType = SpCacheHelper.getInt("isAuthentication", 0);
-    if (new UserModel().getCurUserId() == 2){
+    if (new UserModel().getCurUserId() == 2) {
       userType = 3;
     }
     if (userType > 0 && userType <= 3) {
