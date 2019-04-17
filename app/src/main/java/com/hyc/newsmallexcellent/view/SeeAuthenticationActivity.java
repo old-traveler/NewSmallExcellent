@@ -2,17 +2,14 @@ package com.hyc.newsmallexcellent.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.LinearLayout;
 import butterknife.BindView;
 import com.hyc.newsmallexcellent.R;
 import com.hyc.newsmallexcellent.adapter.viewholder.AuthenticationViewHolder;
 import com.hyc.newsmallexcellent.base.BaseMvpActivity;
 import com.hyc.newsmallexcellent.base.adapter.BaseRecycleAdapter;
-import com.hyc.newsmallexcellent.base.interfaces.OnItemClickListener;
 import com.hyc.newsmallexcellent.bean.AuthenticationBean;
 import com.hyc.newsmallexcellent.interfaces.SeeAuthentication;
 import com.hyc.newsmallexcellent.presenter.SeeAuthenticationPresenter;

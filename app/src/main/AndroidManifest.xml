@@ -58,8 +58,8 @@
       android:value="262d9dda71a1b5f74ae0455de5e811d7" /> <!-- 定位需要的服务 -->
     <service android:name="com.amap.api.location.APSService" />
 
-    <activity android:name=".view.RegisterActivity" /> <!-- <activity android:name=".view.MainActivity" /> -->
-    <activity android:name=".view.ChangePasswordActivity" /> <!-- <activity android:name=".view.JobsClassificationActivity" /> -->
+    <activity android:name=".view.RegisterActivity" />
+    <activity android:name=".view.ChangePasswordActivity" />
     <activity android:name=".view.MapActivity" />
     <activity android:name=".view.MainActivity" />
     <activity
@@ -77,6 +77,7 @@
     <activity android:name=".view.ReportListActivity" />
     <activity android:name=".view.DealReportActivity" />
     <activity android:name=".view.WorkRecordActivity"/>
+    <activity android:name=".view.JobsClassificationActivity"/>
   </application>
 
 </manifest>

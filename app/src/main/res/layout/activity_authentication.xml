@@ -38,10 +38,11 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginLeft="10dp"
-      android:text="实名认证" />
+      android:text="企业认证" />
   </RadioGroup>
 
   <FrameLayout
+    android:id="@+id/fl_image"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp">
@@ -68,5 +69,28 @@
     android:layout_marginTop="10dp"
     android:backgroundTint="@color/colorPrimary"
     android:text="认证" />
+
+  <FrameLayout
+    android:id="@+id/fl_show"
+    android:layout_width="match_parent"
+    android:layout_height="300dp">
+
+    <ImageView
+      android:layout_gravity="center"
+      android:src="@drawable/ic_passed"
+      android:layout_width="60dp"
+      android:layout_height="60dp" />
+
+    <TextView
+      android:id="@+id/tv_user_type"
+      android:textColor="@color/black"
+      android:text="管理员用户"
+      android:layout_marginTop="50dp"
+      android:layout_gravity="center"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+
+  </FrameLayout>
 
 </LinearLayout>

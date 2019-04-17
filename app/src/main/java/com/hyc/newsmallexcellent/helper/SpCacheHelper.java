@@ -115,7 +115,7 @@ public class SpCacheHelper {
   }
 
   public static String getString(String key){
-    return getSharedPreferences().getString(key,null);
+    return getSharedPreferences().getString(key,"");
   }
 
   public static boolean getBoolean(String key) {

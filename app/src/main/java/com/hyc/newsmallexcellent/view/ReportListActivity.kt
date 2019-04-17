@@ -48,7 +48,7 @@ class ReportListActivity :
   }
 
   override fun isMaster(): Boolean {
-    return false
+    return intent.getBooleanExtra("isMaster",false)
   }
 
   override fun getAdapterClass(): BaseRecycleAdapter<ReportBean.ListBean, ReportViewHolder> {

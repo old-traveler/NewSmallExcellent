@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
-    android:icon="@drawable/ic_wages"
+    android:icon="@drawable/ic_authentication"
     android:id="@+id/item_wages"
-    android:title="工资单" />
+    android:title="我的认证" />
   <item
     android:icon="@drawable/ic_resume"
     android:id="@+id/item_resume"

@@ -1,5 +1,7 @@
 package com.hyc.newsmallexcellent.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,15 +33,20 @@ public class MyApplyActivity extends BaseMvpActivity<MyApplyPresenter>
   @BindView(R.id.srl_my_apply)
   SmartRefreshLayout srlMyApply;
 
-  private boolean isDeal = true;
+  private boolean isDeal = false;
 
   private int page = 1;
   private BaseRecycleAdapter<ApplyBean.ListBean, MyApplyViewHolder> adapter;
+
+  public static void start(Context context, boolean isDeal) {
+    context.startActivity(new Intent(context, MyApplyActivity.class).putExtra("isDeal", isDeal));
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_my_apply);
     super.onCreate(savedInstanceState);
+    isDeal = getIntent().getBooleanExtra("isDeal",false);
     rvMyApply.setLayoutManager(new LinearLayoutManager(this));
     rvMyApply.addItemDecoration(new RecycleViewDivider(this, LinearLayout.VERTICAL, 1, Color.GRAY));
     rvMyApply.setAdapter(

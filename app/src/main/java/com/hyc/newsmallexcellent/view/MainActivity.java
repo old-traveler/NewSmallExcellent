@@ -43,6 +43,7 @@ import com.hyc.newsmallexcellent.base.adapter.BaseRecycleAdapter;
 import com.hyc.newsmallexcellent.base.helper.ToastHelper;
 import com.hyc.newsmallexcellent.bean.JobBean;
 import com.hyc.newsmallexcellent.helper.ImageRequestHelper;
+import com.hyc.newsmallexcellent.helper.SpCacheHelper;
 import com.hyc.newsmallexcellent.interfaces.MainContact;
 import com.hyc.newsmallexcellent.model.UserModel;
 import com.hyc.newsmallexcellent.presenter.MainPresenter;
@@ -107,7 +108,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     if (item.getItemId() == R.id.item_resume) {
       Bundle bundle = new Bundle();
       bundle.putInt("user_id", new UserModel().getCurUserId());
-      Intent intent = new Intent(this, AuthenticationActivity.class);
+      Intent intent = new Intent(this, ResumeActivity.class);
       startActivity(intent.putExtras(bundle));
     } else if (item.getItemId() == android.R.id.home) {
       dlMain.openDrawer(GravityCompat.START);
@@ -115,13 +116,13 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
       Intent intent = new Intent(this, QueryJobActivity.class);
       startActivity(intent);
     } else if (item.getItemId() == R.id.item_setting) {
-      startActivity(new Intent(this, SeeAuthenticationActivity.class));
+
     } else if (item.getItemId() == R.id.item_footprint) {
-      startActivity(new Intent(this, MyApplyActivity.class));
+      startActivity(new Intent(this, FootprintActivity.class));
     } else if (item.getItemId() == R.id.item_wages) {
-      startActivity(new Intent(this, ReleasePositionActivity.class));
+      startActivity(new Intent(this, AuthenticationActivity.class));
     } else if (item.getItemId() == R.id.item_message) {
-      startActivity(new Intent(this, ReportListActivity.class));
+      MyApplyActivity.start(MainActivity.this, false);
     } else if (item.getItemId() == R.id.item_word_record) {
       startActivity(new Intent(this, WorkRecordActivity.class));
     }
@@ -134,8 +135,10 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
     ButterKnife.bind(this);
     super.onCreate(savedInstanceState);
     ImageView headImageView = navView.getHeaderView(0).findViewById(R.id.iv_main_head);
+    TextView textView = navView.getHeaderView(0).findViewById(R.id.tv_main_name);
     ImageRequestHelper.loadHeadImage(this, new UserModel().getCurHeadUrl()
         , headImageView);
+    textView.setText(SpCacheHelper.getString("accountName"));
     navView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
     setNoBackToolBar();
     setHomeResId(R.drawable.ic_more);
