@@ -16,7 +16,10 @@ class WorkRecordBean {
    * endRow : 1
    * total : 1
    * pages : 1
-   * list : [{"id":6,"jobId":55,"applyUserId":2,"applyInformation":"111","applyData":"2019-04-08 14:45:42","handleData":"2019-04-08 14:48:55","handleStatus":2,"remark":"研发工程师","jobSalary":30,"jobSalaryUnit":"元/小时"}]
+   * list : [
+   * {"id":6,"jobId":55,"applyUserId":2,"applyInformation":"111","applyData":"2019-04-08 14:45:42"
+   * ,"handleData":"2019-04-08 14:48:55","handleStatus":2,"remark":"研发工程师","jobSalary":30
+   * ,"jobSalaryUnit":"元/小时"}]
    * firstPage : 1
    * prePage : 0
    * nextPage : 0

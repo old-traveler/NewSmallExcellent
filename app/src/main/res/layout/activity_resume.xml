@@ -3,6 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="@color/WHITE"
   tools:context=".view.ResumeActivity">
 
   <include layout="@layout/lib_layout_toolbar"/>
@@ -17,7 +18,7 @@
 
   <ScrollView
     android:id="@+id/sv_content"
-    android:visibility="gone"
+    android:visibility="visible"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -38,190 +39,166 @@
           android:layout_height="100dp" />
 
         <EditText
+          android:drawableLeft="@drawable/xingming"
           android:paddingStart="10dp"
           android:paddingEnd="10dp"
           android:enabled="false"
           android:id="@+id/et_resume_name"
-          android:layout_marginStart="120dp"
+          android:layout_marginStart="110dp"
           android:textSize="18sp"
-          android:hint="姓名"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
+          android:hint="  姓名"
+          android:layout_marginTop="10dp"
+          android:background="@color/WHITE"
+          android:layout_width="match_parent"
+          android:layout_height="30dp" />
 
         <EditText
+          android:background="@color/WHITE"
+          android:drawableLeft="@drawable/shouji"
           android:inputType="number"
           android:paddingStart="10dp"
           android:paddingEnd="10dp"
           android:enabled="false"
           android:id="@+id/et_resume_phone"
-          android:hint="电话号码"
-          android:layout_marginTop="50dp"
-          android:layout_marginStart="120dp"
+          android:hint="  电话号码"
+          android:layout_marginTop="60dp"
+          android:layout_marginStart="110dp"
           android:textSize="18sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
+          android:layout_width="match_parent"
+          android:layout_height="30dp" />
 
       </FrameLayout>
 
       <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-          android:layout_gravity="center_vertical"
-          android:text="性别："
-          android:textSize="18sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
         <EditText
+          android:hint="  请输入性别"
+          android:drawableLeft="@drawable/xingbie"
           android:enabled="false"
           android:id="@+id/et_sex"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="60dp"
           android:maxLines="1"
+          android:background="@color/WHITE"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="30dp" />
 
       </FrameLayout>
 
       <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-          android:layout_gravity="center_vertical"
-          android:text="身高："
-          android:textSize="18sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content">
         <EditText
+          android:background="@color/WHITE"
+          android:hint="  请输入身高"
+          android:drawableLeft="@drawable/shengao"
           android:inputType="number"
           android:enabled="false"
           android:id="@+id/et_height"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="60dp"
           android:maxLines="1"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="30dp" />
       </FrameLayout>
 
       <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-          android:inputType="number"
-          android:layout_gravity="center_vertical"
-          android:text="年龄："
-          android:textSize="18sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content">
         <EditText
+          android:drawableLeft="@drawable/nianling"
+          android:hint="  请输入年龄"
+          android:background="@color/WHITE"
           android:enabled="false"
           android:id="@+id/et_age"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="60dp"
           android:maxLines="1"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="30dp" />
       </FrameLayout>
 
       <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-          android:layout_gravity="center_vertical"
-          android:text="学校："
-          android:textSize="18sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content">
         <EditText
+          android:hint="  请输入学校"
+          android:drawableLeft="@drawable/xuexiao"
           android:enabled="false"
           android:id="@+id/et_school"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="60dp"
           android:maxLines="1"
+          android:background="@color/WHITE"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="30dp" />
       </FrameLayout>
 
       <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-          android:layout_gravity="center_vertical"
-          android:text="地址："
-          android:textSize="18sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
         <EditText
+          android:hint="  请输入地址"
+          android:drawableLeft="@drawable/dizhi"
           android:enabled="false"
           android:id="@+id/et_address"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="60dp"
           android:maxLines="1"
+          android:background="@color/WHITE"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="30dp" />
       </FrameLayout>
 
       <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-          android:layout_gravity="center_vertical"
-          android:text="工作经验："
-          android:textSize="18sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
 
         <EditText
+          android:drawableLeft="@drawable/jingyan"
+          android:hint="  请输入工作经验"
+          android:background="@color/WHITE"
           android:enabled="false"
           android:id="@+id/et_work_express"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="90dp"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="30dp" />
       </FrameLayout>
 
       <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-          android:layout_gravity="center_vertical"
-          android:text="工作意向："
-          android:textSize="18sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
 
         <EditText
+          android:drawableLeft="@drawable/yixiang"
+          android:hint="  请输入工作意向"
+          android:background="@color/WHITE"
           android:enabled="false"
           android:id="@+id/et_intent"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="90dp"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="30dp" />
       </FrameLayout>
 
       <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-          android:layout_gravity="center_vertical"
-          android:text="自我介绍："
-          android:textSize="18sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
 
         <EditText
+          android:hint="  请输入自我介绍"
+          android:background="@color/WHITE"
+          android:drawableLeft="@drawable/jieshao"
           android:id="@+id/et_introduce"
           android:enabled="false"
           android:layout_gravity="center_vertical"
-          android:layout_marginStart="90dp"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="30dp" />
       </FrameLayout>
 
     </LinearLayout>

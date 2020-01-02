@@ -3,8 +3,6 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
-
-
   <include layout="@layout/lib_layout_toolbar" />
 
 
@@ -38,28 +36,33 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginLeft="10dp"
-      android:text="企业认证" />
+      android:text="实名认证" />
   </RadioGroup>
 
-  <FrameLayout
+  <LinearLayout
     android:id="@+id/fl_image"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp">
     <ImageView
       android:id="@+id/authentication_img_photoOne"
-      android:layout_width="171.2dp"
+      android:layout_width="0dp"
+      android:layout_weight="1"
       android:layout_height="108dp"
-      android:layout_marginStart="20dp"
+      android:layout_marginStart="10dp"
       android:background="#DBD9D9" />
+    <View
+      android:layout_width="10dp"
+      android:layout_height="match_parent"/>
     <ImageView
       android:id="@+id/authentication_img_photoTwo"
-      android:layout_width="171.2dp"
+      android:layout_width="0dp"
+      android:layout_weight="1"
       android:layout_height="108dp"
       android:layout_gravity="end"
-      android:layout_marginEnd="20dp"
+      android:layout_marginEnd="10dp"
       android:background="#DBD9D9" />
-  </FrameLayout>
+  </LinearLayout>
 
   <Button
     android:id="@+id/authentication_but"

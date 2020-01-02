@@ -135,21 +135,21 @@ public class ResumeActivity extends BaseMvpActivity<ResumePresenter>
   @Override
   public Map<String, Object> getResumeInfo() {
     Map<String, Object> map = new HashMap<>();
-    map.put("userName", etResumeName.getText());
+    map.put("userName", etResumeName.getText().toString().trim());
     map.put("headPhoto",imageUrl);
-    if (etSex.getText().toString().equals("女")){
+    if (etSex.getText().toString().trim().equals("女")){
       map.put("gender",1);
     }else {
       map.put("gender",0);
     }
-    map.put("age",Integer.parseInt(etAge.getText().toString()));
-    map.put("height",Integer.parseInt(etHeight.getText().toString()));
-    map.put("address",etAddress.getText().toString());
-    map.put("intention",etIntent.getText().toString());
-    map.put("introduction",etIntroduce.getText().toString());
-    map.put("experience",etWorkExpress.getText().toString());
-    map.put("telephone",etResumePhone.getText().toString());
-    map.put("school",etSchool.getText().toString());
+    map.put("age",Integer.parseInt(etAge.getText().toString().trim()));
+    map.put("height",Integer.parseInt(etHeight.getText().toString().trim()));
+    map.put("address",etAddress.getText().toString().trim());
+    map.put("intention",etIntent.getText().toString().trim());
+    map.put("introduction",etIntroduce.getText().toString().trim());
+    map.put("experience",etWorkExpress.getText().toString().trim());
+    map.put("telephone",etResumePhone.getText().toString().trim());
+    map.put("school",etSchool.getText().toString().trim());
     return map;
   }
 

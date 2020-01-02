@@ -28,7 +28,7 @@ public class MyApplyPresenter extends BasePresenter<MyApplyContact.IView>
     };
     BaseErrorConsumer baseErrorConsumer = new BaseErrorConsumer(mvpView);
     Observable<BaseRequestBean<ApplyBean>> observable;
-    if (mvpView.isDealer()) {
+    if (!mvpView.isDealer()) {
       observable = jobModel.findAllApply(userModel.getCurUserId(), 20, mvpView.getCurPage());
     } else {
       observable = userModel.findApplyByUserId(userModel.getCurUserId(), 20, mvpView.getCurPage());

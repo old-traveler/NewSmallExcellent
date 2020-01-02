@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -71,7 +72,7 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
   @BindView(R.id.tv_user_type)
   TextView tvUserType;
   @BindView(R.id.fl_image)
-  FrameLayout flImage;
+  LinearLayout flImage;
   private int userType = 0;
 
   private String imageUrlOne;
@@ -88,7 +89,7 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    if (userType > 1 && userType <= 3) {
+    if (userType >= 1 && userType <= 3) {
       getMenuInflater().inflate(R.menu.menu_authentication, menu);
       return true;
     }
@@ -107,7 +108,7 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
   private void showMoreSelect() {
     BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
     List<String> strings;
-    if (userType == 2) {
+    if (userType == 2||userType==1) {
       strings = Arrays.asList("发布职位", "查看申请", "我的发布");
     } else {
       strings = Arrays.asList("发布职位", "查看申请", "我的发布", "查看工作分类", "查看认证信息", "查看举报信息");
@@ -146,6 +147,8 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
     if (userType > 0 && userType <= 3) {
       showUserType(userType);
     } else {
+      ivOne.setImageResource(R.drawable.xueshengzheng1);
+      ivTwo.setImageResource(R.drawable.xueshengzheng2);
       flShow.setVisibility(View.GONE);
     }
   }
@@ -158,7 +161,7 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
     if (userType == 1) {
       tvUserType.setText("学生认证");
     } else if (userType == 2) {
-      tvUserType.setText("企业认证");
+      tvUserType.setText("实名认证");
     } else if (userType == 3) {
       tvUserType.setText("管理员认证");
     }
@@ -227,7 +230,7 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
 
   @OnClick({
       R.id.authentication_img_photoOne, R.id.authentication_img_photoTwo,
-      R.id.authentication_but
+      R.id.authentication_but,R.id.authentication_radio_realName,R.id.authentication_radio_student
   })
   public void onViewClicked(View view) {
     switch (view.getId()) {
@@ -239,6 +242,14 @@ public class AuthenticationActivity extends BaseMvpActivity<AuthenticationPresen
         break;
       case R.id.authentication_but:
         presenter.authentication();
+        break;
+      case R.id.authentication_radio_student:
+        ivOne.setImageResource(R.drawable.xueshengzheng1);
+        ivTwo.setImageResource(R.drawable.xueshengzheng2);
+        break;
+      case R.id.authentication_radio_realName:
+        ivOne.setImageResource(R.drawable.shenfenzheng1);
+        ivTwo.setImageResource(R.drawable.shenfenzheng2);
         break;
     }
   }

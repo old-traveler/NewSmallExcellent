@@ -45,8 +45,8 @@ public class MyApplyActivity extends BaseMvpActivity<MyApplyPresenter>
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_my_apply);
-    super.onCreate(savedInstanceState);
     isDeal = getIntent().getBooleanExtra("isDeal",false);
+    super.onCreate(savedInstanceState);
     rvMyApply.setLayoutManager(new LinearLayoutManager(this));
     rvMyApply.addItemDecoration(new RecycleViewDivider(this, LinearLayout.VERTICAL, 1, Color.GRAY));
     rvMyApply.setAdapter(

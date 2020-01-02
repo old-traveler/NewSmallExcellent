@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+  <item
+    android:icon="@drawable/fabu"
+    android:id="@+id/item_publish"
+    android:title="发布兼职" />
+
   <item
     android:icon="@drawable/ic_authentication"
     android:id="@+id/item_wages"
@@ -13,6 +19,18 @@
     android:icon="@drawable/ic_word_record"
     android:id="@+id/item_word_record"
     android:title="兼职纪录" />
+
+  <item
+    android:icon="@drawable/ic_word_record"
+    android:id="@+id/item_apply"
+    android:title="查看申请" />
+
+
+  <item
+    android:icon="@drawable/ic_word_record"
+    android:id="@+id/item_my_publish"
+    android:title="我的发布" />
+
   <item
     android:icon="@drawable/ic_footprint"
     android:id="@+id/item_footprint"
@@ -22,5 +40,7 @@
     android:icon="@drawable/ic_setting"
     android:id="@+id/item_setting"
     android:title="设置" />
+
+
 
 </menu>

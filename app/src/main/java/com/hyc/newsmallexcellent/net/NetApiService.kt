@@ -1,5 +1,6 @@
 package com.hyc.newsmallexcellent.net
 
+import android.webkit.JavascriptInterface
 import com.hyc.newsmallexcellent.base.bean.BaseRequestBean
 import com.hyc.newsmallexcellent.bean.ApplyBean
 import com.hyc.newsmallexcellent.bean.AuthenticationBean
@@ -71,12 +72,12 @@ interface NetApiService {
   fun updateResume(
     @Query("id") id: Int,
     @Query("userId") userId: Int, @FieldMap
-    params: Map<String, Any>
+    params:@JvmSuppressWildcards Map<String, Any>
   ): Observable<BaseRequestBean<Any>>
 
   @FormUrlEncoded
   @POST("job/addJob.do")
-  fun publishJob(@FieldMap params: Map<String, Any>): Observable<BaseRequestBean<Any>>
+  fun publishJob(@FieldMap params:@JvmSuppressWildcards Map<String, Any>): Observable<BaseRequestBean<Any>>
 
   @GET("category/addCategory.do")
   fun jobsClassification(@Query("category") category: String): Observable<BaseRequestBean<Any>>

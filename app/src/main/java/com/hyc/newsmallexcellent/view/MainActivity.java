@@ -125,6 +125,16 @@ public class MainActivity extends BaseMvpActivity<MainPresenter>
       MyApplyActivity.start(MainActivity.this, false);
     } else if (item.getItemId() == R.id.item_word_record) {
       startActivity(new Intent(this, WorkRecordActivity.class));
+    }else if (item.getItemId() == R.id.item_publish){
+      if (SpCacheHelper.getInt("isAuthentication", 0)>0){
+        startActivity(new Intent(this, ReleasePositionActivity.class));
+      }else {
+        ToastHelper.toast("请先进行身份认证");
+      }
+    }else if (item.getItemId() == R.id.item_my_publish){
+      PersonalPublishActivity.start(this , new UserModel().getCurUserId());
+    }else if (item.getItemId() == R.id.item_apply){
+      MyApplyActivity.start(this, true);
     }
     return true;
   }

@@ -84,7 +84,7 @@ public class UiHelper {
 
   public static void loadNotEmptyString(EditText editText,String data){
     if (!TextUtils.isEmpty(data)){
-      editText.setText(data);
+      editText.setText("  "+data);
     }
   }
 
