@@ -1,2 +1,2 @@
 # NewSmallExcellent
-新版兼职信息平台app
+新版兼职信息平台App
